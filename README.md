@@ -8,3 +8,7 @@ Installation
 
 After cloning the repo, install all dependencies with `npm install` in the repo's root directory.
 
+Building
+--------
+
+Build the minified and compiled version of the banners with `grunt` in the repo's root directory.
