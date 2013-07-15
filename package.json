@@ -1,0 +1,13 @@
+{
+  "name": "dotHIV-banner",
+  "version": "1.0.0",
+  "repository" : { 
+    "type" : "git",
+    "url" : "https://github.com/dothiv/banner.git"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.2"
+  }
+}
+
