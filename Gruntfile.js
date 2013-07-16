@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             development: {
                 options: {},
                 files: {
-                    "build/dothiv.css": "src/css/main.less"
+                    "tmp/css/main.css": "src/css/main.less"
         }}},
         uglify: {
             options: {
@@ -17,6 +17,21 @@ module.exports = function(grunt) {
                 src: 'src/js/banner.js',
                 dest: 'build/banner.min.js'
         }},
+        copy: {
+            development: {
+                files: [
+                    {expand: true, cwd: 'src/', src: ['*.html'], dest: 'build/'},
+                    {expand: true, cwd: 'src/img/', src: ['*'], dest: 'tmp/img/'},
+                    ]
+        }},
+        imageEmbed: {
+            dist: {
+                src: [ "tmp/css/main.css" ],
+                dest: "build/dothiv.css",
+        options: {
+            deleteAfterEncoding : false
+        }
+        }},
     });
 
     // Load the plugin that provides the "less" task.
@@ -25,6 +40,12 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-contrib-uglify');
 
-    // Default tasks    .
-    grunt.registerTask('default', ['less','uglify']);
+    // Load the plugin that provides the "copy" task.
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
+    // Load the plugin that provides the "imageEmbed" task.
+    grunt.loadNpmTasks("grunt-image-embed");
+
+    // Default tasks.
+    grunt.registerTask('default', ['less','uglify','copy','imageEmbed']);
 };
