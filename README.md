@@ -6,7 +6,7 @@ The dotHIV banners, to be shown on dotHIV domains
 Installation
 ------------
 
-After cloning the repo, install all dependencies with `npm install` in the repo's root directory.
+After cloning the repo, install all dependencies with `npm install` in the repo's root directory. You need to have *grunt* installed (`npm install -g grunt-cli` for system-wide installation).
 
 Building
 --------

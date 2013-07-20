@@ -28,6 +28,7 @@ div.dothiv-content {
     height: 116px - 25px;
     width: 960px - 83px;
     background: url('../img/groschen.png') left bottom no-repeat;
+    position: relative;
 
     & .left {
         float: left;
@@ -46,16 +47,21 @@ div.dothiv-content {
             width: 39px;
             height: 24px;
             background: url('../img/dothiv.png');
-            margin: 0;
+            margin: 0 0 0 5px;
         }
         & a {
             margin-right: 14px;
         }
         & > span:first-child {
             padding-top: 30px;
+            background: url('../img/arrow.png') no-repeat 605px 40px;
         }
         & span {
             display: block;
+        }
+        & span.links {
+            line-height: 20px;
+            margin-top: 11px;
         }
     }
 }
@@ -69,6 +75,23 @@ div.dothiv-pinkbar {
     background-color: #E00073;
     height: 36px;
     width: 57%;
+    float: left;
+}
+
+span.dothiv-status-left {
+    text-align: right;
+    line-height: 36px;
+    font-style: normal;
+    display: block;
+    color: white;
+    padding-right: 20px;
+}
+
+span.dothiv-status-right {
+    line-height: 36px;
+    font-style: normal;
+    display: inline-block;
+    padding-left: 20px;
 }
 
 a.icon {
@@ -83,6 +106,16 @@ a.icon {
     &.tw {
         background: url('../img/twitter.png');
     }
+}
+
+a.dothiv-close {
+    background: url('../img/x.png');
+    width: 34px;
+    height: 34px;
+    top: -5px;
+    right: -40px;
+    position: absolute;
+    display: block;
 }
 
 // mixin for multi browser box-shadow support
