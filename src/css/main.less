@@ -1,4 +1,4 @@
-div.dothiv-container {
+#dothiv-container {
     font-family: Tahoma, sans-serif;
     font-size: 14px;
     font-style: italic;
@@ -12,76 +12,80 @@ div.dothiv-container {
     border-top: 1px solid #E4E4E4;
     background: url('../img/squairy-small.png');
     .box-shadow(~"0 -2px 4px #ECECEC, 0 2px 2px #ECECEC");
-    & h1 {
-        margin: 0;
-        padding-top: 20px;
-        font-size: 34px;
-        font-style: normal;
-    }
     & a, a:visited {
         color: #333333;
     }
 }
 
-div.dothiv-content {
+#dothiv-h1 {
+    margin: 0;
+    padding-top: 20px;
+    font-size: 34px;
+    font-style: normal;
+}
+
+#dothiv-content {
     text-align: left;
     margin: 0 auto 25px auto;
     height: 116px - 25px;
     width: 960px;
     background: url('../img/groschen.png') left bottom no-repeat;
     position: relative;
+}
 
-    & .left {
-        float: left;
-        width: 650px;
-	margin-left: 83px;
+#dothiv-left {
+    float: left;
+    width: 650px;
+    margin-left: 83px;
 
-        & span {
-            line-height: 20px;
-            display: block;
-            margin-top: 6px;
-        }
-    }
-
-    & .right {
-        & a.logo {
-            display: inline-block;
-            width: 39px;
-            height: 24px;
-            background: url('../img/dothiv.png');
-            margin: 0 0 0 5px;
-        }
-        & a {
-            margin-right: 14px;
-        }
-        & > span:first-child {
-            padding-top: 30px;
-            background: url('../img/arrow.png') no-repeat 685px 40px;
-        }
-        & span {
-            display: block;
-        }
-        & span.links {
-            line-height: 20px;
-            margin-top: 11px;
-        }
+    & span {
+        line-height: 20px;
+        display: block;
+        margin-top: 6px;
     }
 }
 
-div.dothiv-statusbar {
+#dothiv-logo {
+    display: inline-block;
+    width: 39px;
+    height: 24px;
+    background: url('../img/dothiv.png');
+    margin-left: 5px;
+    margin-right: 0;
+}
+
+#dothiv-right {
+    & > span:first-child {
+        padding-top: 30px;
+        background: url('../img/arrow.png') no-repeat 685px 40px;
+    }
+    & span {
+        display: block;
+    }
+}
+
+#dothiv-links {
+    line-height: 20px;
+    margin-top: 11px;
+    & a {
+        margin-right: 14px;
+    }
+}
+
+#dothiv-statusbar {
     background-color: #FCE5F1;
     height: 36px;
     text-align: left;
 }
 
-div.dothiv-pinkbar {
+#dothiv-pinkbar {
     background-color: #E00073;
     height: 36px;
     width: 57%;
     float: left;
 }
 
-span.dothiv-status-left {
+#dothiv-status-left {
     text-align: right;
     line-height: 36px;
     font-style: normal;
@@ -90,28 +94,30 @@ span.dothiv-status-left {
     padding-right: 20px;
 }
 
-span.dothiv-status-right {
+#dothiv-status-right {
     line-height: 36px;
     font-style: normal;
     display: inline-block;
     padding-left: 20px;
 }
 
-a.icon {
+.dothiv-icon {
     width: 24px;
     height: 24px;
     display: inline-block;
     margin-left: 10px;
     vertical-align: bottom;
-    &.fb {
-        background: url('../img/facebook.png');
-    }
-    &.tw {
-        background: url('../img/twitter.png');
-    }
 }
 
-a.dothiv-close {
+#dothiv-fb-icon {
+    background: url('../img/facebook.png');
+}
+
+#dothiv-tw-icon {
+    background: url('../img/twitter.png');
+}
+
+#dothiv-close {
     background: url('../img/x.png');
     width: 34px;
     height: 34px;
