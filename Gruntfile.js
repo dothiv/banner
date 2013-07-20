@@ -28,10 +28,16 @@ module.exports = function(grunt) {
             dist: {
                 src: [ "tmp/css/main.css" ],
                 dest: "build/dothiv.css",
-        options: {
-            deleteAfterEncoding : false
-        }
+            options: {
+                deleteAfterEncoding : false
+            }
         }},
+        cssmin: {
+            minify: {
+                src: ['build/dothiv.css'],
+                dest: 'build/dothiv.css',
+            }
+        },
     });
 
     // Load the plugin that provides the "less" task.
@@ -46,6 +52,9 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "imageEmbed" task.
     grunt.loadNpmTasks("grunt-image-embed");
 
+    // Load the plugin that provides the "cssmin" task.
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+
     // Default tasks.
-    grunt.registerTask('default', ['less','uglify','copy','imageEmbed']);
+    grunt.registerTask('default', ['less','uglify','copy','imageEmbed','cssmin']);
 };
