@@ -194,7 +194,8 @@
 
         // Include styles for banner
         var styleElement = document.createElement('style');
-        styleElement.innerHTML = ""; //TODO: inculde css!
+        styleElement.type = 'text/css'
+        styleElement.innerHTML = "@@include('../css/main.css')";
         document.head.appendChild(styleElement);
     });
 })();

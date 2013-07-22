@@ -17,27 +17,29 @@ module.exports = function(grunt) {
         copy: {
             development: {
                 files: [
-                    {expand: true, cwd: 'src/', src: ['*.html'], dest: 'build/'},
+                    {expand: true, cwd: 'src/', src: ['page.html'], dest: 'build/'},
+                    {expand: true, cwd: 'src/', src: ['banner.html'], dest: 'tmp/'},
                     {expand: true, cwd: 'src/img/', src: ['*'], dest: 'tmp/img/'},
+                    {expand: true, cwd: 'src/js/', src: ['*'], dest: 'tmp/js/'},
                     ]
         }},
         imageEmbed: {
             dist: {
                 src: [ "tmp/css/main.css" ],
-                dest: "build/dothiv.css",
+                dest: "tmp/css/main.css",
             options: {
                 deleteAfterEncoding : false
             }
         }},
         cssmin: {
             minify: {
-                src: ['build/dothiv.css'],
-                dest: 'build/dothiv.css',
+                src: ['tmp/css/main.css'],
+                dest: 'tmp/css/main.css',
             }
         },
         includereplace: {
             dist: {
-                files: [{expand: true, cwd: 'src/', src: ['js/banner.js'], dest: 'tmp/'}]
+                files: [{expand: true, cwd: 'tmp/', src: ['js/banner.js'], dest: 'tmp/'}]
         }},
     });
 
@@ -60,5 +62,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-include-replace');
 
     // Default tasks.
-    grunt.registerTask('default', ['less','includereplace','uglify','copy','imageEmbed','cssmin']);
+    grunt.registerTask('default', ['less','copy','imageEmbed','cssmin','includereplace','uglify']);
 };
