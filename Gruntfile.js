@@ -10,11 +10,8 @@ module.exports = function(grunt) {
                     "tmp/css/main.css": "src/css/main.less"
         }}},
         uglify: {
-            options: {
-                banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-            },
             build: {
-                src: 'src/js/banner.js',
+                src: 'tmp/js/banner.js',
                 dest: 'build/banner.min.js'
         }},
         copy: {
@@ -38,6 +35,10 @@ module.exports = function(grunt) {
                 dest: 'build/dothiv.css',
             }
         },
+        includereplace: {
+            dist: {
+                files: [{expand: true, cwd: 'src/', src: ['js/banner.js'], dest: 'tmp/'}]
+        }},
     });
 
     // Load the plugin that provides the "less" task.
@@ -55,6 +56,9 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "cssmin" task.
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
+    // Load the plugin that provides the "includereplace" task.
+    grunt.loadNpmTasks('grunt-include-replace');
+
     // Default tasks.
-    grunt.registerTask('default', ['less','uglify','copy','imageEmbed','cssmin']);
+    grunt.registerTask('default', ['less','includereplace','uglify','copy','imageEmbed','cssmin']);
 };
