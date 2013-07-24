@@ -9,6 +9,7 @@
     @@include('domready.js')
     @@include('banner-center.js')
     @@include('banner-right.js')
+    @@include('banner-top.js')
 
     /**
      * This function parses the given template. 
@@ -74,7 +75,7 @@
             money: 736241,
             clickcount: 3257283,
             firstvisit: 'center',
-            secondvisit: 'right',
+            secondvisit: 'top',
             heading: 'Vielen Dank!',
             subheading: 'Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.',
             claim: 'Wir sind Teil der Bewegung',
@@ -105,8 +106,10 @@
            switch(config.secondvisit) {
                  case 'top':
                      createTopBanner(config, shortBar);
+                     break;
                  default:
                      createRightBanner(config, shortBar);
+                     break;
             }
 
         // Include styles for banner

@@ -21,4 +21,3 @@ function createRightBanner(config, shortBar) {
         bannerContainer.className = 'dothiv-container';
     };
 }
-
