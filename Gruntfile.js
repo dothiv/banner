@@ -51,6 +51,7 @@ module.exports = function(grunt) {
                     {expand: true, cwd: 'src/', src: ['banner-*.html'], dest: 'tmp/'},
                 ]
         }},
+        clean: ['tmp/','build/']
     });
 
     // Load the plugin that provides the "less" task.
@@ -74,6 +75,9 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "htmlmin" task.
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
 
+    // Load the plugin that provides the "clean" task.
+    grunt.loadNpmTasks('grunt-contrib-clean');
+
     // Default tasks.
-    grunt.registerTask('default', ['htmlmin','less','copy','imageEmbed','cssmin','includereplace','uglify']);
+    grunt.registerTask('default', ['clean','htmlmin','less','copy','imageEmbed','cssmin','includereplace','uglify']);
 };
