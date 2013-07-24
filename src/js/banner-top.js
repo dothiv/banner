@@ -13,6 +13,11 @@ function createTopBanner(config, shortBar) {
     bannerContainer.innerHTML = bannerHTML;
     document.body.insertBefore(bannerContainer, document.body.firstChild);
 
+    // Register events for removing the banner
+    document.getElementById("dothiv-tb-close").onclick = function() {
+        document.body.removeChild(bannerContainer);
+    };
+
     // Register events for mouseover
     document.getElementById("dothiv-tb-container").onmouseover = function() {
         bannerContainer.className = 'dothiv-container dothiv-tb-mouseover';
