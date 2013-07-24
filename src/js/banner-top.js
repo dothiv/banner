@@ -3,7 +3,7 @@
  */
 function createTopBanner(config, shortBar) {
     // Prepare template
-    var bannerTemplate = "@@include('../banner-top.html')";
+    var bannerTemplate = '@@include("../banner-top.html")';
     var bannerHTML = parse(bannerTemplate, config);
 
     // Create banner HTML structure

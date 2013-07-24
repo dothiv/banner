@@ -3,7 +3,7 @@
  */
 function createCenterBanner(config, shortBar) {
     // Prepare template
-    var bannerTemplate = "@@include('../banner-center.html')";
+    var bannerTemplate = '@@include("../banner-center.html")';
     var bannerHTML = parse(bannerTemplate, config);
 
     // Create banner HTML structure

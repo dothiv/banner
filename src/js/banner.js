@@ -75,7 +75,7 @@
             money: 736241,
             clickcount: 3257283,
             firstvisit: 'center',
-            secondvisit: 'top',
+            secondvisit: 'right',
             heading: 'Vielen Dank!',
             subheading: 'Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.',
             claim: 'Wir sind Teil der Bewegung',
@@ -90,7 +90,7 @@
         var shortBar = config.status < 20;
 
         // Determine which of the three banner versions to render
-        if (firstVisit || (config.secondvisit != 'top' && config.secondvisit != 'right'))
+        if (firstVisit || (config.secondvisit != 'top' && config.secondvisit != 'right' && config.secondvisit != 'center'))
             switch(config.firstvisit) {
                 case 'center':
                     createCenterBanner(config, shortBar);
@@ -107,6 +107,9 @@
                  case 'top':
                      createTopBanner(config, shortBar);
                      break;
+                 case 'center':
+                    createCenterBanner(config, shortBar);
+                    break;
                  default:
                      createRightBanner(config, shortBar);
                      break;
