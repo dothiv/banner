@@ -11,6 +11,16 @@
     @@include('banner-right.js')
     @@include('banner-top.js')
 
+    // -------- This is the main procedure -------- //
+    // Check if this is the first visit and if we can set cookies
+    var firstVisit = false;
+    if (!getCookie())
+        firstVisit = setCookie() ? true : false;
+
+    // Fetch banner configuration from dotHIV server and add banner to DOM
+    requestConfig(firstVisit);
+    // -------- This was the main procedure -------- //
+
     /**
      * This function parses the given template. 
      *
@@ -60,65 +70,71 @@
         return getCookie() ? true : false;
     }
 
-    // When DOM is ready, insert dotHIV banner
-    domready(function () {
-        // Check if this is the first visit and if we can set cookies
-        var firstVisit = false;
-        if (!getCookie())
-            firstVisit = setCookie() ? true : false;
-
-        // Fetch banner configuration from dotHIV server
-        // TODO: AJAX request the data
-        // TODO: use information of first/second visit as query parameter
-        var config = {
-            status: 25,
-            money: 736241,
-            clickcount: 3257283,
-            firstvisit: 'center',
-            secondvisit: 'right',
-            heading: 'Vielen Dank!',
-            subheading: 'Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.',
-            claim: 'Wir sind Teil der Bewegung',
-            about: '&Uuml;ber dotHIV',
-            vote: 'Vote',
-            activated: 'Bisher aktiviert:',
-            currency: '&euro;',
-            corresponding: 'entspricht',
-            clicks: 'Klicks',
-        };
-
-        var shortBar = config.status < 20;
-
-        // Determine which of the three banner versions to render
-        if (firstVisit || (config.secondvisit != 'top' && config.secondvisit != 'right' && config.secondvisit != 'center'))
-            switch(config.firstvisit) {
-                case 'center':
-                    createCenterBanner(config, shortBar);
-                    break;
-                case 'right':
-                    createRightBanner(config, shortBar);
-                    break;
-                default:
-                    createTopBanner(config, shortBar);
-                    break;
-            }
+    /**
+     * Sends a POST request to the server and receive banner configuration. The
+     * server will be informed whether this is the first visit.
+     */
+    function requestConfig(firstVisit) {
+        // Create new request
+        var request;
+        if (window.XMLHttpRequest)
+            request = new XMLHttpRequest();
         else
-           switch(config.secondvisit) {
-                 case 'top':
-                     createTopBanner(config, shortBar);
-                     break;
-                 case 'center':
-                    createCenterBanner(config, shortBar);
-                    break;
-                 default:
-                     createRightBanner(config, shortBar);
-                     break;
-            }
+            request = new ActiveXObject("Microsoft.XMLHTTP");
 
-        // Include styles for banner
-        var styleElement = document.createElement('style');
-        styleElement.type = 'text/css'
-        styleElement.innerHTML = "@@include('../css/main.css')";
-        document.head.appendChild(styleElement);
-    });
+        // Define callback function
+        request.onreadystatechange=function() {
+            if (request.readyState==4 && request.status==200) {
+                var config = (eval("(function(){return " + request.responseText + ";})()"));
+                manipulateDOM(config);
+            }
+        }
+
+        // Send request TODO: send instead POST to correct url
+        request.open("GET", "/data.json?firstvisit=" + firstVisit, true);
+        request.send();
+    }
+
+    /**
+     * Manipulate the DOM by inserting dotHIV banner and css code. This will be
+     * done once the DOM is ready.
+     */
+    function manipulateDOM(config) {
+        domready(function () {
+            // Determine whether the status bar is short
+            var shortBar = config.status < 20;
+
+            // Determine which of the three banner versions to render
+            if (firstVisit || (config.secondvisit != 'top' && config.secondvisit != 'right' && config.secondvisit != 'center'))
+                switch(config.firstvisit) {
+                    case 'center':
+                        createCenterBanner(config, shortBar);
+                        break;
+                    case 'right':
+                        createRightBanner(config, shortBar);
+                        break;
+                    default:
+                        createTopBanner(config, shortBar);
+                        break;
+                }
+            else
+               switch(config.secondvisit) {
+                     case 'top':
+                         createTopBanner(config, shortBar);
+                         break;
+                     case 'center':
+                        createCenterBanner(config, shortBar);
+                        break;
+                     default:
+                         createRightBanner(config, shortBar);
+                         break;
+                }
+
+            // Include styles for banner
+            var styleElement = document.createElement('style');
+            styleElement.type = 'text/css'
+            styleElement.innerHTML = "@@include('../css/main.css')";
+            document.head.appendChild(styleElement);
+        });
+    }
 })();
