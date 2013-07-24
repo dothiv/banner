@@ -1,21 +1,40 @@
 #dothiv-rb-container {
     bottom: 200px;
-    height: 63px;
+    height: 86px;
     position: fixed;
-    right: -100px;
+    right: -116px;
     width: 265px;
     .box-shadow(0 0 8px 1px #DEDEDE);
     .rotate(270);
+
+    &.dothiv-rb-mouseover {
+        right: -68px;
+        height: 126px;
+        bottom: 180px;
+    }
 }
 
-#dothiv-rb-right-content {
-    background: url('../img/groschen-small.png') left bottom no-repeat;
+#dothiv-rb-left {
+    background: url('../img/coin-small.png') left bottom no-repeat;
     margin-left: 10px;
     margin-top: 5px;
 }
 
+#dothiv-rb-links {
+    background-position: left bottom;
+    background-repeat: no-repeat;
+    margin-left: 80px;
+    margin-top: 8px;
+    & a {
+        font-size: 14px;
+        line-height: 14px;
+        margin-left: 45px;
+    }
+}
+
 #dothiv-rb-statusbar {
     background-color: #FCE5F1;
+    position: relative;
 }
 
 #dothiv-rb-h1 {
@@ -31,5 +50,22 @@
 #dothiv-rb-pinkbar {
     background-color: #E00073;
     height: 8px;
-    width: 47%;
+    width: 67%;
+}
+
+#dothiv-rb-status-left {
+    display: none;
+}
+
+.dothiv-rb-mouseover #dothiv-rb-status-left {
+    display: block;
+    font-size: 14px;
+    font-style: normal;
+    left: 10px;
+    position: absolute;
+    top: 5px;
+}
+
+.dothiv-rb-mouseover #dothiv-rb-pinkbar {
+    height: 48px;
 }

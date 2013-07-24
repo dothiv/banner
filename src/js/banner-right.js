@@ -13,4 +13,12 @@ function createRightBanner(config, shortBar) {
     bannerContainer.innerHTML = bannerHTML;
     document.body.insertBefore(bannerContainer, document.body.firstChild);
 
+    // Register events for mouseover
+    document.getElementById("dothiv-rb-container").onmouseover = function() {
+        bannerContainer.className = 'dothiv-container dothiv-rb-mouseover';
+    };
+    document.getElementById("dothiv-rb-container").onmouseout = function(){
+        bannerContainer.className = 'dothiv-container';
+    };
 }
+

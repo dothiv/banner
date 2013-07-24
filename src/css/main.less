@@ -1,6 +1,7 @@
 @import "banner-center.less";
 @import "banner-right.less";
 
+// shared attributes for all three containers
 .dothiv-container {
     background: url('../img/squairy-small.png');
     color: #333333;
@@ -11,6 +12,11 @@
     & a, a:visited {
         color: #333333;
     }
+}
+
+// shared 'arrow' image for all three containers
+.dothiv-arrow {
+    background-image: url('../img/arrow.png');
 }
 
 // ------ mixins ------
