@@ -18,7 +18,6 @@ module.exports = function(grunt) {
             development: {
                 files: [
                     {expand: true, cwd: 'src/', src: ['page.html'], dest: 'build/'},
-                    {expand: true, cwd: 'src/', src: ['banner*.html'], dest: 'tmp/'},
                     {expand: true, cwd: 'src/img/', src: ['*'], dest: 'tmp/img/'},
                     {expand: true, cwd: 'src/js/', src: ['*'], dest: 'tmp/js/'},
                     ]
@@ -41,6 +40,16 @@ module.exports = function(grunt) {
             dist: {
                 files: [{expand: true, cwd: 'tmp/', src: ['js/banner.js'], dest: 'tmp/'}]
         }},
+        htmlmin: {
+            dist: {
+                options: {
+                    removeComments: true,
+                    collapseWhitespace: true
+              },
+                files: [
+                    {expand: true, cwd: 'src/', src: ['banner-*.html'], dest: 'tmp/'},
+                ]
+        }},
     });
 
     // Load the plugin that provides the "less" task.
@@ -61,6 +70,9 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "includereplace" task.
     grunt.loadNpmTasks('grunt-include-replace');
 
+    // Load the plugin that provides the "htmlmin" task.
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+
     // Default tasks.
-    grunt.registerTask('default', ['less','copy','imageEmbed','cssmin','includereplace','uglify']);
+    grunt.registerTask('default', ['htmlmin','less','copy','imageEmbed','cssmin','includereplace','uglify']);
 };
