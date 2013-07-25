@@ -9,13 +9,13 @@ function createCenterBanner(config, shortBar) {
     // Create banner HTML structure
     var bannerContainer = null;
     try {
-        bannerContainer = document.createElement('<dothiv:div xmlns:dothiv="http://www.dothiv.org/bannerIE">');
+        bannerContainer = document.createElement('<dothiv:div xmlns:dothiv="http://www.dothiv.org/bannerIE" class="dothiv-container">');
     } catch (e) {
         bannerContainer = document.createElement('dothiv:div');
         bannerContainer.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
+        bannerContainer.className = 'dothiv-container';
     }
     bannerContainer.id = 'dothiv-cb-container';
-    bannerContainer.className = 'dothiv-container';
     bannerContainer.innerHTML = bannerHTML;
 
     // Create background HTML structure
