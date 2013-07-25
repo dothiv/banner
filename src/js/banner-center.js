@@ -19,9 +19,14 @@ function createCenterBanner(config, shortBar) {
     bannerContainer.innerHTML = bannerHTML;
 
     // Create background HTML structure
-    var bannerBackground = document.createElement('dothiv:div');
+    var bannerBackground = null;
+    try {
+        var bannerBackground = document.createElement('<dothiv:div xmlns:dothiv="http://www.dothiv.org/bannerIE">');
+    } catch (e) {
+        var bannerBackground = document.createElement('dothiv:div');
+        bannerBackground.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
+    }
     bannerBackground.id = 'dothiv-cb-background';
-    bannerBackground.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
     document.body.insertBefore(bannerBackground, document.body.firstChild);
     document.body.insertBefore(bannerContainer, document.body.firstChild);
 
