@@ -7,10 +7,15 @@ function createCenterBanner(config, shortBar) {
     var bannerHTML = parse(bannerTemplate, config);
 
     // Create banner HTML structure
-    var bannerContainer = document.createElement('dothiv:div');
+    var bannerContainer = null;
+    try {
+        bannerContainer = document.createElement('<dothiv:div xmlns:dothiv="http://www.dothiv.org/bannerIE">');
+    } catch (e) {
+        bannerContainer = document.createElement('dothiv:div');
+        bannerContainer.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
+    }
     bannerContainer.id = 'dothiv-cb-container';
     bannerContainer.className = 'dothiv-container';
-    bannerContainer.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
     bannerContainer.innerHTML = bannerHTML;
 
     // Create background HTML structure
