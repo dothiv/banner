@@ -18,7 +18,7 @@
     border-top: 1px solid #E4E4E4;
     height: 152px;
     left: 0px;
-    position: absolute;
+    position: fixed;
     text-align: center;
     top: 200px;
     width: 100%;
@@ -55,20 +55,22 @@
 #dothiv-cb-left {
     float: left;
     margin-left: 83px;
-    width: 650px;
+    width: 645px;
+}
 
-    & span {
-        display: block;
-        line-height: 20px;
-    }
+#dothiv-cb-left-span {
+    display: block;
+    line-height: 20px;
+}
+
+.dothiv-cb-link {
+    margin-right: 14px;
 }
 
 #dothiv-cb-links {
+    display: block;
     line-height: 20px;
     margin-top: 11px;
-    & a {
-        margin-right: 14px;
-    }
 }
 
 #dothiv-cb-logo {
@@ -81,8 +83,9 @@
 }
 
 #dothiv-cb-movement {
-    background-position: 685px 40px;
+    background-position: 680px 40px;
     background-repeat: no-repeat;
+    display: block;
     padding-top: 30px;
 }
 
@@ -91,10 +94,6 @@
     float: left;
     height: 36px;
     width: 57%;
-}
-
-#dothiv-cb-right span {
-    display: block;
 }
 
 #dothiv-cb-status-left {

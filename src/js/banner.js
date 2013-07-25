@@ -12,6 +12,13 @@
     @@include('banner-top.js')
 
     // -------- This is the main procedure -------- //
+    // Check if we have to deal with Internet Explorer 8 or earlier
+    var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
+
+    // Make custom tags available for Internet Explorer
+    if (msie <= 8)
+        registerCustomTags();
+
     // Check if this is the first visit and if we can set cookies
     var firstVisit = false;
     if (!getCookie())
@@ -19,10 +26,21 @@
 
     // Fetch banner configuration from dotHIV server and add banner to DOM
     requestConfig(firstVisit);
-    // -------- This was the main procedure -------- //
+    // -------- End of main procedure -------- //
 
     /**
-     * This function parses the given template. 
+     * Register custom tags (necessary for IE8 and below).
+     */
+    function registerCustomTags() {
+        document.createElement('dothiv:div');
+        document.createElement('dothiv:span');
+        document.createElement('dothiv:a');
+        document.createElement('dothiv:b');
+        document.createElement('dothiv:h1');
+    }
+
+    /**
+     * Parse the given template. 
      *
      * Supported placeholders are:
      *  - %HEADING%:       config.heading

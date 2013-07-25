@@ -2,6 +2,23 @@
 @import "banner-right.less";
 @import "banner-top.less";
 
+// basic attributes for custom tags
+dothiv\\:div {
+    display: block;
+}
+
+dothiv\\:span {
+    display: inline;
+}
+
+dothiv\\:a {
+    text-decoration: underline;
+}
+
+dothiv\\:b {
+    font-weight: bold;
+}
+
 // shared attributes for all three containers
 .dothiv-container {
     background: url('../img/squairy-small.png');
@@ -10,12 +27,14 @@
     font-size: 13px;
     font-style: italic;
     z-index: 1000;
-    & a, a:visited {
+    & dothiv\\:a, dothiv\\:a:visited {
         color: #333333;
     }
-    & h1 {
+    & dothiv\\:h1 {
+        display: block;
         font-family: 'Trebuchet MS', Helvetica, sans-serif;
         font-style: normal;
+        font-weight: bold;
     }
 }
 

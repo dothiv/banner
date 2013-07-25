@@ -7,14 +7,16 @@ function createCenterBanner(config, shortBar) {
     var bannerHTML = parse(bannerTemplate, config);
 
     // Create banner HTML structure
-    var bannerContainer = document.createElement('div');
+    var bannerContainer = document.createElement('dothiv:div');
     bannerContainer.id = 'dothiv-cb-container';
     bannerContainer.className = 'dothiv-container';
+    bannerContainer.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
     bannerContainer.innerHTML = bannerHTML;
 
     // Create background HTML structure
-    var bannerBackground = document.createElement('div');
+    var bannerBackground = document.createElement('dothiv:div');
     bannerBackground.id = 'dothiv-cb-background';
+    bannerBackground.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
     document.body.insertBefore(bannerBackground, document.body.firstChild);
     document.body.insertBefore(bannerContainer, document.body.firstChild);
 
