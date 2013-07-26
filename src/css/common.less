@@ -1,0 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.dothiv-arrow {
+    background-image: url('../img/arrow.png');
+}
+
+.dothiv-close {
+    background-image: url('../img/x.png');
+    cursor: pointer;
+    display: block;
+    height: 34px;
+    position: absolute;
+    right: 5px;
+    top: 7px;
+    width: 34px;
+}
+
+.dothiv-status-left {
+    color: white;
+    display: none;
+    font-style: normal;
+    line-height: 36px;
+    padding-right: 20px;
+    text-align: right;
+}
+
+#dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
+    background: url('../img/squairy-small.png');
+    color: #333333;
+    font-family: Georgia, serif;
+    font-size: 13px;
+    font-style: italic;
+    z-index: 1000;
+    & a, a:visited {
+        color: #333333;
+    }
+    & h1 {
+        display: block;
+        font-family: 'Trebuchet MS', Helvetica, sans-serif;
+        font-style: normal;
+        font-weight: bold;
+    }
+}
+
+// ------ mixins ------
+.box-shadow(@arguments) {
+    -webkit-box-shadow: @arguments;
+    -moz-box-shadow: @arguments;
+    box-shadow: @arguments;
+}
+
+.rotate(@arguments) {
+    @ms-degrees: @arguments / 90;
+    @degrees: ~'@{arguments}deg';
+    -ms-filter: ~'progid:DXImageTransform.Microsoft.BasicImage(rotation=@{ms-degrees})';
+    -moz-transform: rotate(@degrees);
+    -o-transform: rotate(@degrees);
+    -webkit-transform: rotate(@degrees);
+    transform: rotate(@degrees);
+}

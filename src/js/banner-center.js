@@ -1,75 +1,100 @@
 /**
- * Creates the 'center' version of the banner and inserts it into the DOM.
+ * Control for center banner
  */
-function createCenterBanner(config, shortBar) {
-    // Prepare template
-    var bannerTemplate = '@@include("../banner-center.html")';
-    var bannerHTML = parse(bannerTemplate, config);
+(function() {
 
-    // Create banner HTML structure
-    var bannerContainer = null;
-    try {
-        bannerContainer = document.createElement('<dothiv:div xmlns:dothiv="http://www.dothiv.org/bannerIE" class="dothiv-container">');
-    } catch (e) {
-        bannerContainer = document.createElement('dothiv:div');
-        bannerContainer.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
-        bannerContainer.className = 'dothiv-container';
+    @@include('domready.js')
+
+    domready(function () {
+        // Prepare for messaging and request banner configuration
+        var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+        var eventer = window[eventMethod];
+        var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+        eventer(messageEvent, function(e) {
+            customizeBanner(e.data);
+        }, false);
+
+        window.parent.postMessage("get config","*");
+        });
+
+    function customizeBanner(config) {
+        // Parse template
+        document.body.innerHTML = parse(document.body.innerHTML, config);
+
+        // Determine whether the status bar is short
+        var shortBar = config.status < 20;
+
+        // Configure pink status bar
+        document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
+        if (shortBar)
+            document.getElementById("dothiv-cb-status-left").style.display = 'none';
+        else
+           document.getElementById("dothiv-cb-status-right").style.display = 'none';
+
+        // Register events for pink bar
+        document.getElementById("dothiv-cb-statusbar").onmouseover = function(){showClicks(shortBar);};
+        document.getElementById("dothiv-cb-statusbar").onmouseout = function(){showMoney(shortBar);};
+
+        // Register events for removing the banner
+        document.getElementById("dothiv-cb-close").onclick = function() {window.parent.postMessage("remove","*");};
     }
-    bannerContainer.id = 'dothiv-cb-container';
-    bannerContainer.innerHTML = bannerHTML;
 
-    // Create background HTML structure
-    var bannerBackground = null;
-    try {
-        var bannerBackground = document.createElement('<dothiv:div xmlns:dothiv="http://www.dothiv.org/bannerIE">');
-    } catch (e) {
-        var bannerBackground = document.createElement('dothiv:div');
-        bannerBackground.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
+    /**
+     * Parse the given template. 
+     *
+     * Supported placeholders are:
+     *  - %HEADING%:       config.heading
+     *  - %SUBHEADING%:    config.subheading
+     *  - %CLAIM%:         config.claim
+     *  - %ABOUT%:         config.about
+     *  - %VOTE%:          config.vote
+     *  - %ACTIVATED%:     config.activated
+     *  - %CURRENCY%:      config.currency
+     *  - %CORRESPONDING%: config.corresponding
+     *  - %CLICKS%:        config.clicks
+     *  - %CLICKCOUNT%:    config.clickcount
+     *  - %MONEY%:         config.money
+     */
+    function parse(template, config) {
+        template = template.replace(/%HEADING%/g,config.heading);
+        template = template.replace(/%SUBHEADING%/g,config.subheading);
+        template = template.replace(/%CLAIM%/g,config.claim);
+        template = template.replace(/%ABOUT%/g,config.about);
+        template = template.replace(/%VOTE%/g,config.vote);
+        template = template.replace(/%ACTIVATED%/g,config.activated);
+        template = template.replace(/%CURRENCY%/g,config.currency);
+        template = template.replace(/%CORRESPONDING%/g,config.corresponding);
+        template = template.replace(/%CLICKS%/g,config.clicks);
+        template = template.replace(/%CLICKCOUNT%/g,config.clickcount);
+        template = template.replace(/%MONEY%/g,config.money);
+        return template;
     }
-    bannerBackground.id = 'dothiv-cb-background';
-    document.body.insertBefore(bannerBackground, document.body.firstChild);
-    document.body.insertBefore(bannerContainer, document.body.firstChild);
 
-    // Register events for removing the banner
-    var removeBanner = function(){document.body.removeChild(bannerContainer); document.body.removeChild(bannerBackground)};
-    document.getElementById("dothiv-cb-close").onclick = document.getElementById("dothiv-cb-background").onclick = removeBanner;
-
-    // Configure pink status bar
-    document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
-    if (shortBar)
-        document.getElementById("dothiv-cb-status-left").style.display = 'none';
-    else
-       document.getElementById("dothiv-cb-status-right").style.display = 'none';
-
-    // Register events for pink bar
-    document.getElementById("dothiv-cb-statusbar").onmouseover = function(){showClicks(shortBar)};
-    document.getElementById("dothiv-cb-statusbar").onmouseout = function(){showMoney(shortBar)};
-}
-
-/**
- * Show the secondary information layer on pink bar, indicating the number 
- * of clicks so far. The argument indicates whether the pink bar is short.
- */
-function showClicks(shortBar) {
-    if (shortBar) {
-        document.getElementById("dothiv-cb-status-right").style.display = 'none';
-        document.getElementById("dothiv-cb-status-right-secondary").style.display = 'inline-block';
-    } else {
-        document.getElementById("dothiv-cb-status-left").style.display = 'none';
-        document.getElementById("dothiv-cb-status-left-secondary").style.display = 'block';
+    /**
+     * Show the secondary information layer on pink bar, indicating the number 
+     * of clicks so far. The argument indicates whether the pink bar is short.
+     */
+    function showClicks(shortBar) {
+        if (shortBar) {
+            document.getElementById("dothiv-cb-status-right").style.display = 'none';
+            document.getElementById("dothiv-cb-status-right-secondary").style.display = 'inline-block';
+        } else {
+            document.getElementById("dothiv-cb-status-left").style.display = 'none';
+            document.getElementById("dothiv-cb-status-left-secondary").style.display = 'block';
+        }
     }
-}
 
-/**
- * Show the primary information layer on pink bar, indicating the activated
- * money. The argument indicates whether the pink bar is short.
- */
-function showMoney(shortBar) {
-    if (shortBar) {
-        document.getElementById("dothiv-cb-status-right").style.display = 'inline-block';
-        document.getElementById("dothiv-cb-status-right-secondary").style.display = 'none';
-    } else {
-        document.getElementById("dothiv-cb-status-left").style.display = 'block';
-        document.getElementById("dothiv-cb-status-left-secondary").style.display = 'none';
+    /**
+     * Show the primary information layer on pink bar, indicating the activated
+     * money. The argument indicates whether the pink bar is short.
+     */
+    function showMoney(shortBar) {
+        if (shortBar) {
+            document.getElementById("dothiv-cb-status-right").style.display = 'inline-block';
+            document.getElementById("dothiv-cb-status-right-secondary").style.display = 'none';
+        } else {
+            document.getElementById("dothiv-cb-status-left").style.display = 'block';
+            document.getElementById("dothiv-cb-status-left-secondary").style.display = 'none';
+        }
     }
-}
+})();

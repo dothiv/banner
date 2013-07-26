@@ -7,7 +7,8 @@ module.exports = function(grunt) {
             development: {
                 options: {},
                 files: {
-                    "tmp/css/main.css": "src/css/main.less"
+                    "tmp/css/main.css": "src/css/main.less",
+                    "tmp/css/banner-center.css": "src/css/banner-center.less"
         }}},
         uglify: {
             build: {
@@ -19,27 +20,32 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, cwd: 'src/', src: ['page.html'], dest: 'build/'},
                     {expand: true, cwd: 'src/', src: ['data.json'], dest: 'build/'},
+                    {expand: true, cwd: 'src/', src: ['banner-*.html'], dest: 'tmp/'},
                     {expand: true, cwd: 'src/img/', src: ['*'], dest: 'tmp/img/'},
                     {expand: true, cwd: 'src/js/', src: ['*'], dest: 'tmp/js/'},
                     ]
         }},
         imageEmbed: {
             dist: {
-                src: [ "tmp/css/main.css" ],
-                dest: "tmp/css/main.css",
+                files: [
+                    {expand: true, cwd: 'tmp/', src: ['css/*.css'], dest: 'tmp/'},
+                ]},
             options: {
                 deleteAfterEncoding : false
-            }
-        }},
+       }},
         cssmin: {
             minify: {
-                src: ['tmp/css/main.css'],
-                dest: 'tmp/css/main.css',
+                files: [
+                    {expand: true, cwd: 'tmp/', src: ['css/*.css'], dest: 'tmp/'},
+                ]
             }
         },
         includereplace: {
             dist: {
-                files: [{expand: true, cwd: 'tmp/', src: ['js/banner.js'], dest: 'tmp/'}]
+                files: [
+                    {expand: true, cwd: 'tmp/', src: ['js/banner.js'], dest: 'tmp/'},
+                    {expand: true, cwd: 'tmp/', src: ['banner-*.html'], dest: 'tmp/'},
+                    ]
         }},
         htmlmin: {
             dist: {
@@ -48,7 +54,7 @@ module.exports = function(grunt) {
                     collapseWhitespace: true
               },
                 files: [
-                    {expand: true, cwd: 'src/', src: ['banner-*.html'], dest: 'tmp/'},
+                    {expand: true, cwd: 'tmp/', src: ['banner-*.html'], dest: 'build/'},
                 ]
         }},
         clean: ['tmp/','build/']
@@ -79,5 +85,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Default tasks.
-    grunt.registerTask('default', ['clean','htmlmin','less','copy','imageEmbed','cssmin','includereplace','uglify']);
+    grunt.registerTask('default', ['clean','less','copy','imageEmbed','cssmin','includereplace','htmlmin','uglify']);
 };
