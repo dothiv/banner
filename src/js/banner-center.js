@@ -62,7 +62,7 @@
         if (window.JSON)
             document.getElementById("dothiv-cb-close").onclick = function() {window.parent.postMessage("remove","*");};
         else
-           document.body.removeChild(document.getElementById("dothiv-cb-close"));
+           document.getElementById("dothiv-cb-close").style.display = 'none';
     }
 
     /**
