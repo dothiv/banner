@@ -13,19 +13,7 @@
 
     // Fetch banner configuration from dotHIV server and add banner to DOM
     requestConfig(firstVisit);
-
     // -------- End of main procedure -------- //
-
-    /**
-     * Register custom tags (necessary for IE8 and below).
-     */
-    function registerCustomTags() {
-        document.createElement('dothiv:div');
-        document.createElement('dothiv:span');
-        document.createElement('dothiv:a');
-        document.createElement('dothiv:b');
-        document.createElement('dothiv:h1');
-    }
 
     /**
      * Gets the dothiv status cookie and returns its value. If the cookie 
@@ -90,36 +78,15 @@
         eventer(messageEvent, function(e) {
             switch (e.data) {
                 case 'get config':
-                    document.getElementById('dothiv-iframe').contentWindow.postMessage(config, "*");
+                    document.getElementById('dothiv-clickcounter').contentWindow.postMessage(config, "*");
                     break;
                 case 'remove':
-                    document.body.removeChild(document.getElementById('dothiv-iframe'));
+                    document.body.removeChild(document.getElementById('dothiv-clickcounter'));
+                    if (document.getElementById('dothiv-background')) 
+                        document.body.removeChild(document.getElementById('dothiv-background'));
                   break;
             }
         }, false);
-    }
-
-    /**
-     * Creates the 'center' version of the banner and inserts it into the DOM.
-     */
-    function createCenterBanner(config) {
-        // Create banner iframe
-        var bannerContainer = document.createElement('iframe');
-        bannerContainer.id = 'dothiv-iframe';
-        bannerContainer.src = 'banner-center.html';
-        bannerContainer.scrolling = 'no';
-        document.body.insertBefore(bannerContainer, document.body.firstChild);
-
-        // Create background HTML structure
-        var bannerBackground = document.createElement('div');
-        bannerBackground.id = 'dothiv-cb-background';
-        document.body.insertBefore(bannerBackground, document.body.firstChild);
-
-        // Include styles for banner
-        var styleElement = document.createElement('style');
-        styleElement.type = 'text/css';
-        styleElement.innerHTML = "#dothiv-iframe{z-index:1000;position:fixed;width:100%;height:157px;left:0;top: 200px;border:0;bottom:0;position:absolute;}";
-        document.head.appendChild(styleElement);
     }
 
     /**
@@ -154,5 +121,34 @@
                          break;
                 }
         });
+    }
+
+    /**
+     * Creates the 'center' version of the banner and inserts it into the DOM.
+     */
+    function createCenterBanner(config) {
+        // Create banner iframe
+        var bannerContainer = document.createElement('iframe');
+        bannerContainer.id = 'dothiv-clickcounter';
+        bannerContainer.src = 'banner-center.html';
+        bannerContainer.scrolling = 'no';
+        document.body.insertBefore(bannerContainer, document.body.firstChild);
+
+        // Create background HTML structure
+        var bannerBackground = document.createElement('div');
+        bannerBackground.id = 'dothiv-background';
+        document.body.insertBefore(bannerBackground, document.body.firstChild);
+
+        // Include styles for banner
+        var styleElement = document.createElement('style');
+        styleElement.type = 'text/css';
+        styleElement.innerHTML = "@@include('../css/iframe.css')";
+        document.head.appendChild(styleElement);
+
+        // Register event for removing the banner when clicking on background
+        document.getElementById("dothiv-background").onclick = function() {
+            document.body.removeChild(document.getElementById('dothiv-clickcounter'));
+            document.body.removeChild(document.getElementById('dothiv-background'));
+        };
     }
 })();

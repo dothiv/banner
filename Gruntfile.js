@@ -7,7 +7,7 @@ module.exports = function(grunt) {
             development: {
                 options: {},
                 files: {
-                    "tmp/css/main.css": "src/css/main.less",
+                    "tmp/css/iframe.css": "src/css/iframe.less",
                     "tmp/css/banner-center.css": "src/css/banner-center.less"
         }}},
         uglify: {
