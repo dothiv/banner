@@ -58,8 +58,11 @@
         document.getElementById("dothiv-cb-statusbar").onmouseover = function(){showClicks(shortBar);};
         document.getElementById("dothiv-cb-statusbar").onmouseout = function(){showMoney(shortBar);};
 
-        // Register events for removing the banner
-        document.getElementById("dothiv-cb-close").onclick = function() {window.parent.postMessage("remove","*");};
+        // Register events for removing the banner, if supported by browser
+        if (window.JSON)
+            document.getElementById("dothiv-cb-close").onclick = function() {window.parent.postMessage("remove","*");};
+        else
+           document.body.removeChild(document.getElementById("dothiv-cb-close"));
     }
 
     /**
