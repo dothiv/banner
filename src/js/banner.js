@@ -146,10 +146,10 @@
         if (styleElement.styleSheet) {
             styleElement.styleSheet.cssText = styleRules;
         } else {
-           var textnode = document.createTextNode(styleRules);
-            styleElement.appendChild(textnode);
+           var textNode = document.createTextNode(styleRules);
+            styleElement.appendChild(textNode);
         }
-        document.head.appendChild(styleElement);
+        document.getElementsByTagName('head')[0].appendChild(styleElement);
 
         // Register event for removing the banner when clicking on background
         document.getElementById("dothiv-background").onclick = function() {
