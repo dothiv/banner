@@ -32,7 +32,7 @@
                 }
             }
             // Send request TODO: send instead POST to correct url, use parameter to distinguish second visits
-            request.open("GET", "/data.json", true);
+            request.open("GET", "http://commondatastorage.googleapis.com/clickcounter/banner.enit.biz", true);
             request.send();
         }
     });
