@@ -11,7 +11,7 @@
         var eventer = window[eventMethod];
         var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
         eventer(messageEvent, function(e) {
-            customizeBanner(e.data);
+            customizeBanner(JSON.parse(e.data));
         }, false);
 
         window.parent.postMessage("get config","*");

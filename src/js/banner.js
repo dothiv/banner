@@ -78,7 +78,7 @@
         eventer(messageEvent, function(e) {
             switch (e.data) {
                 case 'get config':
-                    document.getElementById('dothiv-clickcounter').contentWindow.postMessage(config, "*");
+                    document.getElementById('dothiv-clickcounter').contentWindow.postMessage(JSON.stringify(config), "*");
                     break;
                 case 'remove':
                     document.body.removeChild(document.getElementById('dothiv-clickcounter'));
@@ -132,6 +132,9 @@
         bannerContainer.id = 'dothiv-clickcounter';
         bannerContainer.src = 'banner-center.html';
         bannerContainer.scrolling = 'no';
+        bannerContainer.frameBorder = 0;
+        bannerContainer.allowTransparency = true;
+        bannerContainer.setAttribute("allowtransparency", "true");
         document.body.insertBefore(bannerContainer, document.body.firstChild);
 
         // Create background HTML structure
