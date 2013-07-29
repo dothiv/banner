@@ -141,8 +141,14 @@
 
         // Include styles for banner
         var styleElement = document.createElement('style');
+        var styleRules = "@@include('../css/iframe.css')";
         styleElement.type = 'text/css';
-        styleElement.innerHTML = "@@include('../css/iframe.css')";
+        if (styleElement.styleSheet) {
+            styleElement.styleSheet.cssText = styleRules;
+        } else {
+           var textnode = document.createTextNode(styleRules);
+            styleElement.appendChild(textnode);
+        }
         document.head.appendChild(styleElement);
 
         // Register event for removing the banner when clicking on background
