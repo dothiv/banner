@@ -4,9 +4,10 @@
 (function() {
 
     @@include('domready.js')
+    @@include('json2.js')
 
     domready(function () {
-        if (window.JSON) { // Prepare for messaging and request banner configuration, if browser is capable (>=IE8)
+        if (!!window.postMessage) { // Prepare for messaging and request banner configuration, if browser is capable (>=IE8)
             var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
             var eventer = window[eventMethod];
             var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
@@ -55,7 +56,7 @@
         document.getElementById("dothiv-cb-statusbar").onmouseout = function(){showMoney(shortBar);};
 
         // Register events for removing the banner, if supported by browser
-        if (window.JSON)
+        if (!!window.postMessage)
             document.getElementById("dothiv-cb-close").onclick = function() {window.parent.postMessage("remove","*");};
         else
            document.getElementById("dothiv-cb-close").style.display = 'none';

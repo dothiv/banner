@@ -4,6 +4,7 @@
 (function() {
 
     @@include('domready.js')
+    @@include('json2.js')
 
     // -------- This is the main procedure -------- //
     // Check if this is the first visit and if we can set cookies
@@ -53,8 +54,8 @@
         request.onreadystatechange=function() {
             if (request.readyState==4 && request.status==200) {
                 var config = (eval("(function(){return " + request.responseText + ";})()"));
-                // Set up message handling if browser is capable of handling JSON and postmessage (>=IE8)
-                if (window.JSON)
+                // Set up message handling if browser is capable of handling postmessage (>=IE8)
+                if (!!window.postMessage)
                     registerMessageHandling(config);
                 manipulateDOM(config);
             }
