@@ -11,6 +11,9 @@ module.exports = function(grunt) {
                     "tmp/css/banner-center.css": "src/css/banner-center.less"
         }}},
         uglify: {
+            options: {
+                beautify: true
+            },
             build: {
                 src: 'tmp/js/banner.js',
                 dest: 'build/banner.min.js'
