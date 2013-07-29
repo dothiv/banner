@@ -53,6 +53,9 @@
         request.onreadystatechange=function() {
             if (request.readyState==4 && request.status==200) {
                 var config = (eval("(function(){return " + request.responseText + ";})()"));
+                // Set up message handling if browser is capable of handling JSON and postmessage (>=IE8)
+                if (window.JSON)
+                    registerMessageHandling(config);
                 manipulateDOM(config);
             }
         }
@@ -60,12 +63,12 @@
         // Send request TODO: send instead POST to correct url
         //request.open("GET", "/data.json?firstvisit=" + firstVisit, true);
         //request.send();
-        var config = {status: 45,money: '736.241',clickcount: '3.257.283',firstvisit: 'center',secondvisit: 'center',heading: 'Vielen Dank!',subheading: 'Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.',claim: 'Wir sind Teil der Bewegung',about: '&Uuml;ber dotHIV',vote: 'Vote',activated: 'Bisher aktiviert:',currency: '&euro;',corresponding: 'entspricht',clicks: 'Klicks'};
 
+        // no-ajax version only
+        var config = {status: 45,money: '736.241',clickcount: '3.257.283',firstvisit: 'center',secondvisit: 'center',heading: 'Vielen Dank!',subheading: 'Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.',claim: 'Wir sind Teil der Bewegung',about: '&Uuml;ber dotHIV',vote: 'Vote',activated: 'Bisher aktiviert:',currency: '&euro;',corresponding: 'entspricht',clicks: 'Klicks'};
         // Set up message handling if browser is capable of handling JSON and postmessage (>=IE8)
         if (window.JSON)
             registerMessageHandling(config);
-
         // Insert banner into DOM
         manipulateDOM(config);
     }
