@@ -6,16 +6,32 @@
     @@include('domready.js')
 
     domready(function () {
-        // Prepare for messaging and request banner configuration
-        var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-        var eventer = window[eventMethod];
-        var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
-        eventer(messageEvent, function(e) {
-            customizeBanner(JSON.parse(e.data));
-        }, false);
+        if (window.JSON) { // Prepare for messaging and request banner configuration, if browser is capable (>=IE8)
+            var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+            var eventer = window[eventMethod];
+            var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
+            eventer(messageEvent, function(e) {
+                customizeBanner(JSON.parse(e.data));
+            }, false);
 
-        window.parent.postMessage("get config","*");
-        });
+            window.parent.postMessage("get config","*");
+        } else { // Request config again
+            // Create new request
+            var request;
+            if (window.XMLHttpRequest)
+                request = new XMLHttpRequest();
+            else
+              request = new ActiveXObject("Microsoft.XMLHTTP");
+
+            // Define callback function
+            request.onreadystatechange=function() {
+                if (request.readyState==4 && request.status==200) {
+                    var config = (eval("(function(){return " + request.responseText + ";})()"));
+                    customizeBanner(config);
+                }
+            }
+        }
+    });
 
     function customizeBanner(config) {
         // Parse template
