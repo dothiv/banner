@@ -1,49 +1,55 @@
 /**
- * Creates the 'top' version of the banner and inserts it into the DOM.
+ * Control for top banner
  */
-function createTopBanner(config, shortBar) {
-    // Prepare template
-    var bannerTemplate = '@@include("../banner-top.html")';
-    var bannerHTML = parse(bannerTemplate, config);
+(function() {
+    @@include('domready.js')
+    @@include('json2.js')
+    @@include('banner-base.js')
 
-    // Create banner HTML structure
-    var bannerContainer = document.createElement('dothiv:div');
-    bannerContainer.id = 'dothiv-tb-container';
-    bannerContainer.className = 'dothiv-container';
-    bannerContainer.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
-    bannerContainer.innerHTML = bannerHTML;
-    document.body.insertBefore(bannerContainer, document.body.firstChild);
+    /**
+     * Creates the 'top' version of the banner.
+     */
+    function customizeBanner(config) {
+        // Parse template
+        document.body.innerHTML = parse(document.body.innerHTML, config);
 
-    // Register events for removing the banner
-    document.getElementById("dothiv-tb-close").onclick = function() {
-        document.body.removeChild(bannerContainer);
-    };
+        // Determine whether the status bar is short
+        var shortBar = config.status < 20;
 
-    // Register events for mouseover
-    document.getElementById("dothiv-tb-container").onmouseover = function() {
-        bannerContainer.className = 'dothiv-container dothiv-tb-mouseover';
-        showLabel(shortBar);
-    };
-    document.getElementById("dothiv-tb-container").onmouseout = function(){
-        bannerContainer.className = 'dothiv-container';
-        hideLabel();
-    };
-}
+        // Configure pink status bar
+        // TODO document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
 
-/**
- * Label the pink bar according to its length.
- */
-function showLabel(shortBar) {
-    if (shortBar)
-        document.getElementById("dothiv-tb-status-right").style.display = 'inline-block';
-    else
-        document.getElementById("dothiv-tb-status-left").style.display = 'block';
-}
+        // Register events for removing the banner
+        document.getElementById("dothiv-tb-close").onclick = function() {
+            document.body.removeChild(bannerContainer);
+        };
 
-/**
- * Hide label of pink bar.
- */
-function hideLabel() {
-    document.getElementById("dothiv-tb-status-right").style.display = 'none';
-    document.getElementById("dothiv-tb-status-left").style.display = 'none';
-}
+        // Register events for mouseover
+        document.getElementById("dothiv-tb-container").onmouseover = function() {
+            bannerContainer.className = 'dothiv-container dothiv-tb-mouseover';
+            showLabel(shortBar);
+        };
+        document.getElementById("dothiv-tb-container").onmouseout = function(){
+            bannerContainer.className = 'dothiv-container';
+            hideLabel();
+        };
+    }
+
+    /**
+     * Label the pink bar according to its length.
+     */
+    function showLabel(shortBar) {
+        if (shortBar)
+            document.getElementById("dothiv-tb-status-right").style.display = 'inline-block';
+        else
+            document.getElementById("dothiv-tb-status-left").style.display = 'block';
+    }
+
+    /**
+     * Hide label of pink bar.
+     */
+    function hideLabel() {
+        document.getElementById("dothiv-tb-status-right").style.display = 'none';
+        document.getElementById("dothiv-tb-status-left").style.display = 'none';
+    }
+})();

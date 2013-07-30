@@ -8,15 +8,19 @@ module.exports = function(grunt) {
                 options: {},
                 files: {
                     "tmp/css/iframe.css": "src/css/iframe.less",
-                    "tmp/css/banner-center.css": "src/css/banner-center.less"
+                    "tmp/css/banner-center.css": "src/css/banner-center.less",
+                    "tmp/css/banner-right.css": "src/css/banner-right.less",
+                    "tmp/css/banner-top.css": "src/css/banner-top.less",
         }}},
         uglify: {
+            options : {
+                beautify: true
+           },
             libs: {
                 files: [{expand: true, cwd: 'tmp/', src: ['js/domready.js', 'js/json2.js'], dest: 'tmp/'}]
             },
             internal: {
-                src: 'tmp/js/banner-center.js',
-                dest: 'tmp/js/banner-center.js'
+                files: [{expand: true, cwd: 'tmp/', src: ['js/banner-*.js'], dest: 'tmp/'}]
             },
             external: {
                 src: 'tmp/js/banner.js',
@@ -49,7 +53,7 @@ module.exports = function(grunt) {
         },
         includereplace: {
             internal: {
-                files: [{expand: true, cwd: 'tmp/', src: ['js/banner-center.js'], dest: 'tmp/'}]
+                files: [{expand: true, cwd: 'tmp/', src: ['js/banner-*.js'], dest: 'tmp/'}]
             },
             external: {
                 files: [

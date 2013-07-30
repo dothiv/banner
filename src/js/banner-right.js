@@ -1,24 +1,30 @@
 /**
- * Creates the 'right' version of the banner and inserts it into the DOM.
+ * Control for right banner
  */
-function createRightBanner(config, shortBar) {
-    // Prepare template
-    var bannerTemplate = '@@include("../banner-right.html")';
-    var bannerHTML = parse(bannerTemplate, config);
+(function() {
+    @@include('domready.js')
+    @@include('json2.js')
+    @@include('banner-base.js')
 
-    // Create banner HTML structure
-    var bannerContainer = document.createElement('dothiv:div');
-    bannerContainer.id = 'dothiv-rb-container';
-    bannerContainer.className = 'dothiv-container';
-    bannerContainer.setAttribute("xmlns:dothiv", "http://www.dothiv.org/banner");
-    bannerContainer.innerHTML = bannerHTML;
-    document.body.insertBefore(bannerContainer, document.body.firstChild);
+    /**
+     * Creates the 'right' version of the banner.
+     */
+    function customizeBanner(config) {
+        // Parse template
+        document.body.innerHTML = parse(document.body.innerHTML, config);
 
-    // Register events for mouseover
-    document.getElementById("dothiv-rb-container").onmouseover = function() {
-        bannerContainer.className = 'dothiv-container dothiv-rb-mouseover';
-    };
-    document.getElementById("dothiv-rb-container").onmouseout = function(){
-        bannerContainer.className = 'dothiv-container';
-    };
-}
+        // Determine whether the status bar is short
+        var shortBar = config.status < 20;
+
+        // Configure pink status bar
+        // TODO document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
+
+        // Register events for mouseover
+        document.getElementById("dothiv-rb-container").onmouseover = function() {
+            bannerContainer.className = 'dothiv-container dothiv-rb-mouseover';
+        };
+        document.getElementById("dothiv-rb-container").onmouseout = function(){
+            bannerContainer.className = 'dothiv-container';
+        };
+    }
+})();

@@ -43,27 +43,36 @@
      * server will be informed whether this is the first visit.
      */
     function requestConfig(firstVisit) {
-        // Create new request
-        var request;
-        if (window.XMLHttpRequest)
-            request = new XMLHttpRequest();
-        else
-           request = new ActiveXObject("Microsoft.XMLHTTP");
-
-        // Define callback function
-        request.onreadystatechange=function() {
-            if (request.readyState==4 && request.status==200) {
-                var config = (eval("(function(){return " + request.responseText + ";})()"));
-                // Set up message handling if browser is capable of handling postmessage (>=IE8)
-                if (!!window.postMessage)
-                    registerMessageHandling(config);
-                manipulateDOM(config);
+        try {
+            var request;
+            if (window.XDomainRequest) {
+                request = new XDomainRequest();
+                request.onload = function() { ajaxCallback(request.responseText); };
+                request.onprogress = function() {};
+            } else {
+                request = new XMLHttpRequest();
+                request.onreadystatechange = function() {
+                    if (request.readyState == 4 && request.status == 200) 
+                        ajaxCallback(request.responseText);
+                }
             }
+            // Send request. TODO: send instead POST to correct url
+            request.open("POST", "http://dothiv-registry.appspot.com/c?firstvisit=" + firstVisit + "&domain=" + document.domain, true);
+            request.send();
+        } catch(e) {
+            var responseText = '{"secondvisit":"top","firstvisit":"top"}';
+            ajaxCallback(responseText);
         }
+    }
 
-        // Send request TODO: send instead POST to correct url
-        request.open("GET", "http://dothivclickcounter.appspot.com/config/banner.enit.biz?firstvisit=" + firstVisit, true);
-        request.send();
+    /**
+     * Callback function for handling config data and moving on.
+     */
+    function ajaxCallback(responseText) {
+        var config = JSON.parse(responseText);
+        if (!!window.postMessage)
+            registerMessageHandling(config);
+        manipulateDOM(config);
     }
 
     /**
@@ -103,22 +112,22 @@
                         createCenterBanner(config);
                         break;
                     case 'right':
-                        //createRightBanner(config, shortBar);
+                        //createRightBanner(config);
                         break;
                     default:
-                        //createTopBanner(config, shortBar);
+                        //createTopBanner(config);
                         break;
                 }
             else
                switch(config.secondvisit) {
                      case 'top':
-                         //createTopBanner(config, shortBar);
+                         //createTopBanner(config);
                          break;
                      case 'center':
                         createCenterBanner(config);
                         break;
                      default:
-                         //createRightBanner(config, shortBar);
+                         //createRightBanner(config);
                          break;
                 }
         });
@@ -131,7 +140,7 @@
         // Create banner iframe
         var bannerContainer = document.createElement('iframe');
         bannerContainer.id = 'dothiv-clickcounter';
-        bannerContainer.src = 'http://dothivclickcounter.appspot.com/banner-center.html';
+        bannerContainer.src = 'http://dothiv-registry.appspot.com/banner-center.html';
         bannerContainer.scrolling = 'no';
         bannerContainer.frameBorder = 0;
         bannerContainer.allowTransparency = true;
