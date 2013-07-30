@@ -62,7 +62,7 @@
         }
 
         // Send request TODO: send instead POST to correct url
-        request.open("GET", "http://commondatastorage.googleapis.com/clickcounter/banner.enit.biz?firstvisit=" + firstVisit, true);
+        request.open("GET", "http://dothivclickcounter.appspot.com?firstvisit=" + firstVisit, true);
         request.send();
     }
 
