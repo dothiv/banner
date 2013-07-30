@@ -11,7 +11,14 @@ module.exports = function(grunt) {
                     "tmp/css/banner-center.css": "src/css/banner-center.less"
         }}},
         uglify: {
-            build: {
+            libs: {
+                files: [{expand: true, cwd: 'tmp/', src: ['js/domready.js', 'js/json2.js'], dest: 'tmp/'}]
+            },
+            internal: {
+                src: 'tmp/js/banner-center.js',
+                dest: 'tmp/js/banner-center.js'
+            },
+            external: {
                 src: 'tmp/js/banner.js',
                 dest: 'build/banner.min.js'
         }},
@@ -41,7 +48,10 @@ module.exports = function(grunt) {
             }
         },
         includereplace: {
-            dist: {
+            internal: {
+                files: [{expand: true, cwd: 'tmp/', src: ['js/banner-center.js'], dest: 'tmp/'}]
+            },
+            external: {
                 files: [
                     {expand: true, cwd: 'tmp/', src: ['js/banner.js'], dest: 'tmp/'},
                     {expand: true, cwd: 'tmp/', src: ['banner-*.html'], dest: 'tmp/'},
@@ -85,5 +95,5 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     // Default tasks.
-    grunt.registerTask('default', ['clean','less','copy','imageEmbed','cssmin','includereplace','htmlmin','uglify']);
+    grunt.registerTask('default', ['clean','less','copy','imageEmbed','cssmin','uglify:libs','includereplace:internal','uglify:internal','includereplace:external','htmlmin','uglify:external']);
 };
