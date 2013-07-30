@@ -2,9 +2,10 @@
  * Control for top banner
  */
 (function() {
-    @@include('domready.js')
-    @@include('json2.js')
-    @@include('banner-base.js')
+    // These are grunt includes
+    //@@include('domready.js')
+    //@@include('json2.js')
+    //@@include('banner-base.js')
 
     /**
      * Creates the 'top' version of the banner.

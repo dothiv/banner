@@ -2,9 +2,9 @@
  * This is the dotHIV banner control.
  */
 (function() {
-
-    @@include('domready.js')
-    @@include('json2.js')
+    // These are grunt includes
+    //@@include('domready.js')
+    //@@include('json2.js')
 
     // -------- This is the main procedure -------- //
     // Check if this is the first visit and if we can set cookies
@@ -43,6 +43,10 @@
      * server will be informed whether this is the first visit.
      */
     function requestConfig(firstVisit) {
+        var responseText = '{"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"right","secondvisit":"right","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"}';
+        ajaxCallback(responseText);
+        return;
+
         try {
             var request;
             if (window.XDomainRequest) {
@@ -60,7 +64,7 @@
             request.open("POST", "http://dothiv-registry.appspot.com/c?firstvisit=" + firstVisit + "&domain=" + document.domain, true);
             request.send();
         } catch(e) {
-            var responseText = '{"secondvisit":"top","firstvisit":"top"}';
+            var responseText = '{"secondvisit":"right","firstvisit":"right"}';
             ajaxCallback(responseText);
         }
     }
@@ -112,25 +116,41 @@
                         createCenterBanner(config);
                         break;
                     case 'right':
-                        //createRightBanner(config);
+                        createRightBanner(config);
                         break;
                     default:
-                        //createTopBanner(config);
+                        createTopBanner(config);
                         break;
                 }
             else
                switch(config.secondvisit) {
                      case 'top':
-                         //createTopBanner(config);
+                         createTopBanner(config);
                          break;
                      case 'center':
-                        createCenterBanner(config);
-                        break;
+                         createCenterBanner(config);
+                         break;
                      default:
-                         //createRightBanner(config);
+                         createRightBanner(config);
                          break;
                 }
         });
+    }
+
+    /**
+     * Inserts style rules for the iframes into the DOM.
+     */
+    function includeCSS() {
+        var styleElement = document.createElement('style');
+        var styleRules = "//@@include('../css/iframe.css')";
+        styleElement.type = 'text/css';
+        if (styleElement.styleSheet) {
+            styleElement.styleSheet.cssText = styleRules;
+        } else {
+           var textNode = document.createTextNode(styleRules);
+            styleElement.appendChild(textNode);
+        }
+        document.getElementsByTagName('head')[0].appendChild(styleElement);
     }
 
     /**
@@ -140,7 +160,8 @@
         // Create banner iframe
         var bannerContainer = document.createElement('iframe');
         bannerContainer.id = 'dothiv-clickcounter';
-        bannerContainer.src = 'http://dothiv-registry.appspot.com/banner-center.html';
+        bannerContainer.className = 'dothiv-clickcounter-center';
+        bannerContainer.src = 'banner-center.html'; //'http://dothiv-registry.appspot.com/banner-center.html';
         bannerContainer.scrolling = 'no';
         bannerContainer.frameBorder = 0;
         bannerContainer.allowTransparency = true;
@@ -152,22 +173,44 @@
         bannerBackground.id = 'dothiv-background';
         document.body.insertBefore(bannerBackground, document.body.firstChild);
 
-        // Include styles for banner
-        var styleElement = document.createElement('style');
-        var styleRules = "@@include('../css/iframe.css')";
-        styleElement.type = 'text/css';
-        if (styleElement.styleSheet) {
-            styleElement.styleSheet.cssText = styleRules;
-        } else {
-           var textNode = document.createTextNode(styleRules);
-            styleElement.appendChild(textNode);
-        }
-        document.getElementsByTagName('head')[0].appendChild(styleElement);
+        // Insert CSS rules
+        includeCSS();
 
         // Register event for removing the banner when clicking on background
         document.getElementById("dothiv-background").onclick = function() {
             document.body.removeChild(document.getElementById('dothiv-clickcounter'));
             document.body.removeChild(document.getElementById('dothiv-background'));
+        };
+    }
+
+    /**
+     * Creates the 'right' version of the banner and inserts it into the DOM.
+     */
+    function createRightBanner(config) {
+        // Create banner iframe
+        var bannerContainer = document.createElement('iframe');
+        bannerContainer.id = 'dothiv-clickcounter';
+        bannerContainer.className = 'dothiv-clickcounter-right';
+        bannerContainer.src = 'banner-right.html'; //'http://dothiv-registry.appspot.com/banner-right.html';
+        bannerContainer.scrolling = 'no';
+        bannerContainer.frameBorder = 0;
+        bannerContainer.allowTransparency = true;
+        bannerContainer.setAttribute("allowtransparency", "true");
+        document.body.insertBefore(bannerContainer, document.body.firstChild);
+
+        // Insert CSS rules
+        includeCSS();
+
+        // Register event for mouseover on iframe
+        bannerContainer.onmouseover = function() {
+            bannerContainer.style.height = '126px';
+            bannerContainer.style.bottom = '180px';
+            bannerContainer.style.right = '-68px';
+        };
+        bannerContainer.onmouseout = function() {
+            bannerContainer.style.height = '86px';
+            bannerContainer.style.bottom = '200px';
+            bannerContainer.style.right = '-116px';
         };
     }
 })();

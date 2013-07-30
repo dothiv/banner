@@ -2,9 +2,10 @@
  * Control for right banner
  */
 (function() {
-    @@include('domready.js')
-    @@include('json2.js')
-    @@include('banner-base.js')
+    // These are grunt includes
+    //@@include('domready.js')
+    //@@include('json2.js')
+    //@@include('banner-base.js')
 
     /**
      * Creates the 'right' version of the banner.
@@ -17,14 +18,14 @@
         var shortBar = config.status < 20;
 
         // Configure pink status bar
-        // TODO document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
+        document.getElementById("dothiv-rb-pinkbar").style.width = config.status + '%';
 
         // Register events for mouseover
         document.getElementById("dothiv-rb-container").onmouseover = function() {
-            bannerContainer.className = 'dothiv-container dothiv-rb-mouseover';
+            document.getElementById("dothiv-rb-container").className = 'dothiv-rb-mouseover';
         };
         document.getElementById("dothiv-rb-container").onmouseout = function(){
-            bannerContainer.className = 'dothiv-container';
+            document.getElementById("dothiv-rb-container").className = '';
         };
     }
 })();

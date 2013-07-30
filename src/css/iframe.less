@@ -1,12 +1,25 @@
-#dothiv-clickcounter {
+@import "mixins.less";
+
+#dothiv-clickcounter.dothiv-clickcounter-center {
     border: none;
-    bottom: 0;
     height: 157px;
     left: 0;
     position: fixed;
     top: 200px;
     width: 100%;
     z-index: 1000;
+}
+
+#dothiv-clickcounter.dothiv-clickcounter-right {
+    border: none;
+    bottom: 200px;
+    height: 86px;
+    position: fixed;
+    right: -116px;
+    width: 265px;
+    z-index: 1000;
+    .box-shadow(0 0 8px 1px #DEDEDE);
+    .rotate(270);
 }
 
 #dothiv-background {

@@ -1,33 +1,54 @@
+/**
+ * This file contains javascript code and functions that are used by all three
+ * banner variants.
+ */
+
 domready(function () {
     if (!!window.postMessage) { // Prepare for messaging and request banner configuration, if browser is capable (>=IE8)
         var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
         var eventer = window[eventMethod];
         var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
         eventer(messageEvent, function(e) {
-            customizeBanner(JSON.parse(e.data));
+            var config = JSON.parse(e.data)
+            if (config.money)
+                customizeBanner(config);
+            else
+              requestConfigAgain();
         }, false);
 
         window.parent.postMessage("get config","*");
-    } else { // Request config again
-        // Create new request
-        var request;
-        if (window.XMLHttpRequest)
-            request = new XMLHttpRequest();
-        else
-          request = new ActiveXObject("Microsoft.XMLHTTP");
-
-        // Define callback function
-        request.onreadystatechange=function() {
-            if (request.readyState==4 && request.status==200) {
-                var config = (eval("(function(){return " + request.responseText + ";})()"));
-                customizeBanner(config);
-            }
-        }
-        // Send request TODO: send instead POST to correct url, use parameter to distinguish second visits
-        request.open("GET", "http://dothivclickcounter.appspot.com/config/banner.enit.biz", true);
-        request.send();
+    } else {
+        requestConfigAgain();
     }
 });
+
+/**
+ * Requests the config object using AJAX.
+ */
+function requestConfigAgain() {
+    // no-ajax version only
+    var config = {"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"center","secondvisit":"center","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"};
+    customizeBanner(config);
+    return;
+
+    // Create new request
+    var request;
+    if (window.XMLHttpRequest)
+        request = new XMLHttpRequest();
+    else
+      request = new ActiveXObject("Microsoft.XMLHTTP");
+
+    // Define callback function
+    request.onreadystatechange=function() {
+        if (request.readyState==4 && request.status==200) {
+            var config = (eval("(function(){return " + request.responseText + ";})()"));
+            customizeBanner(config);
+        }
+    }
+    // Send request TODO: send instead POST to correct url, use parameter to distinguish second visits
+    request.open("POST", "http://dothiv-registry.appspot.com/c?firstvisit=" + firstVisit + "&domain=" + document.domain, true);
+    request.send();
+}
 
 /**
  * Parse the given template. 

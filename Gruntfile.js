@@ -52,6 +52,9 @@ module.exports = function(grunt) {
             }
         },
         includereplace: {
+            options: {
+                prefix: '//@@',
+            },
             internal: {
                 files: [{expand: true, cwd: 'tmp/', src: ['js/banner-*.js'], dest: 'tmp/'}]
             },
