@@ -62,7 +62,7 @@
         }
 
         // Send request TODO: send instead POST to correct url
-        request.open("GET", "http://dothivclickcounter.appspot.com?firstvisit=" + firstVisit, true);
+        request.open("GET", "http://dothivclickcounter.appspot.com/config/banner.enit.biz?firstvisit=" + firstVisit, true);
         request.send();
     }
 
@@ -131,7 +131,7 @@
         // Create banner iframe
         var bannerContainer = document.createElement('iframe');
         bannerContainer.id = 'dothiv-clickcounter';
-        bannerContainer.src = 'http://commondatastorage.googleapis.com/clickcounter/banner-center.html';
+        bannerContainer.src = 'http://dothivclickcounter.appspot.com/banner-center.html';
         bannerContainer.scrolling = 'no';
         bannerContainer.frameBorder = 0;
         bannerContainer.allowTransparency = true;

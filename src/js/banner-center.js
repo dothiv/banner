@@ -32,7 +32,7 @@
                 }
             }
             // Send request TODO: send instead POST to correct url, use parameter to distinguish second visits
-            request.open("GET", "http://dothivclickcounter.appspot.com", true);
+            request.open("GET", "http://dothivclickcounter.appspot.com/config/banner.enit.biz", true);
             request.send();
         }
     });
