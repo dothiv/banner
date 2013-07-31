@@ -186,6 +186,7 @@
         var bannerBackground = document.createElement('div');
         bannerBackground.id = 'dothiv-background';
 
+        // If we have to deal with IE and it's running in Quirks mode...
         if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat')
             bannerContainer.style.position = 'absolute';
 
@@ -210,6 +211,13 @@
         // Create banner iframe
         var bannerContainer = createIframeElement('right');
         document.body.insertBefore(bannerContainer, document.body.firstChild);
+
+        // If we have to deal with IE and it's running in Quirks mode...
+        if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat') {
+            bannerContainer.style.position = 'absolute';
+            bannerContainer.style.bottom = '120px';
+            bannerContainer.style.right = '0';
+        }
 
         // Insert CSS rules
         includeCSS();
