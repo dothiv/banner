@@ -96,8 +96,11 @@
                     document.getElementById('dothiv-clickcounter').contentWindow.postMessage(JSON.stringify(config), "*");
                     break;
                 case 'remove':
-                    document.body.removeChild(document.getElementById('dothiv-clickcounter'));
-                    if (document.getElementById('dothiv-background')) 
+                    if (document.getElementById('dothiv-outer'))
+                        document.body.removeChild(document.getElementById('dothiv-outer'));
+                    if (document.getElementById('dothiv-clickcounter'))
+                        document.body.removeChild(document.getElementById('dothiv-clickcounter'));
+                    if (document.getElementById('dothiv-background'))
                         document.body.removeChild(document.getElementById('dothiv-background'));
                   break;
             }
@@ -197,8 +200,6 @@
         // Register event for removing the banner when clicking on background
         document.getElementById("dothiv-background").onclick = function() {
             document.body.removeChild(document.getElementById('dothiv-outer'));
-            //document.body.removeChild(document.getElementById('dothiv-clickcounter'));
-            //document.body.removeChild(document.getElementById('dothiv-background'));
         };
     }
 
