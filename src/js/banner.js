@@ -219,6 +219,12 @@
             bannerContainer.style.right = '0';
         }
 
+        var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
+        if (msie <= 8 && document.compatMode==='CSS1Compat') {
+            bannerContainer.style.bottom = '120px';
+            bannerContainer.style.right = '20px';
+        }
+
         // Insert CSS rules
         includeCSS();
 
