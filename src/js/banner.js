@@ -220,9 +220,12 @@
         }
 
         var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
-        if (msie <= 8 && document.compatMode==='CSS1Compat') {
+        if (msie < 8 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '120px';
             bannerContainer.style.right = '20px';
+        } else if(msie == 8 && document.compatMode==='CSS1Compat') {
+            bannerContainer.style.bottom = '280px';
+            bannerContainer.style.right = '-210px';
         }
 
         // Insert CSS rules
