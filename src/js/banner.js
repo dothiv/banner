@@ -173,6 +173,7 @@
      */
     function createCenterBanner(config) {
         var outerContainer = document.createElement('div');
+        outerContainer.id = 'dothiv-outer';
         outerContainer.style.zIndex = 1;
 
         // Create banner iframe
@@ -182,8 +183,12 @@
         var bannerBackground = document.createElement('div');
         bannerBackground.id = 'dothiv-background';
 
+        if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat')
+            bannerContainer.style.position = absolute;
+
         outerContainer.appendChild(bannerContainer);
         outerContainer.appendChild(bannerBackground);
+
         document.body.insertBefore(outerContainer, document.body.firstChild);
 
         // Insert CSS rules
@@ -191,8 +196,9 @@
 
         // Register event for removing the banner when clicking on background
         document.getElementById("dothiv-background").onclick = function() {
-            document.body.removeChild(document.getElementById('dothiv-clickcounter'));
-            document.body.removeChild(document.getElementById('dothiv-background'));
+            document.body.removeChild(document.getElementById('dothiv-outer'));
+            //document.body.removeChild(document.getElementById('dothiv-clickcounter'));
+            //document.body.removeChild(document.getElementById('dothiv-background'));
         };
     }
 
