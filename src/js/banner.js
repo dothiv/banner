@@ -223,6 +223,7 @@
         if (msie < 8 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '120px';
             bannerContainer.style.right = '20px';
+            bannerContainer.style.display = 'block';
         } else if(msie == 8 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '280px';
             bannerContainer.style.right = '-210px';
