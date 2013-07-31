@@ -184,7 +184,7 @@
         bannerBackground.id = 'dothiv-background';
 
         if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat')
-            bannerContainer.style.position = absolute;
+            bannerContainer.style.position = 'absolute';
 
         outerContainer.appendChild(bannerContainer);
         outerContainer.appendChild(bannerBackground);
