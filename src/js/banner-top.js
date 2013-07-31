@@ -14,6 +14,9 @@
         // Parse template
         document.body.innerHTML = parse(document.body.innerHTML, config);
 
+        // Make banner body visible
+        document.body.style.display = 'block';
+
         // Determine whether the status bar is short
         var shortBar = isShortBar(config);
 

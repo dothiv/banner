@@ -43,7 +43,7 @@
      * server will be informed whether this is the first visit.
      */
     function requestConfig(firstVisit) {
-        var responseText = '{"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"center","secondvisit":"center","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"}';
+        var responseText = '{"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"right","secondvisit":"right","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"}';
         ajaxCallback(responseText);
         return;
 
@@ -204,14 +204,10 @@
 
         // Register event for mouseover on iframe
         bannerContainer.onmouseover = function() {
-            bannerContainer.style.height = '126px';
-            bannerContainer.style.bottom = '180px';
-            bannerContainer.style.right = '-68px';
+            bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
         };
         bannerContainer.onmouseout = function() {
-            bannerContainer.style.height = '86px';
-            bannerContainer.style.bottom = '200px';
-            bannerContainer.style.right = '-116px';
+            bannerContainer.className = 'dothiv-clickcounter-right';
         };
     }
 
@@ -225,10 +221,10 @@
 
         // Register event for mouseover on iframe
         bannerContainer.onmouseover = function() {
-            bannerContainer.style.height = '86px';
+            bannerContainer.style.height = '90px';
         };
         bannerContainer.onmouseout = function() {
-            bannerContainer.style.height = '56px';
+            bannerContainer.style.height = '60px';
         };
     }
 })();

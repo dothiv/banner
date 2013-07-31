@@ -14,6 +14,9 @@
         // Parse template
         document.body.innerHTML = parse(document.body.innerHTML, config);
 
+        // Make banner body visible
+        document.body.style.display = 'block';
+
         // Determine whether the status bar is short
         var shortBar = isShortBar(config);
 
@@ -21,10 +24,10 @@
         document.getElementById("dothiv-rb-pinkbar").style.width = config.status + '%';
 
         // Register events for mouseover
-        document.getElementById("dothiv-rb-container").onmouseover = function() {
+        document.body.onmouseover = function() {
             document.getElementById("dothiv-rb-container").className = 'dothiv-rb-mouseover';
         };
-        document.getElementById("dothiv-rb-container").onmouseout = function(){
+        document.body.onmouseout = function(){
             document.getElementById("dothiv-rb-container").className = '';
         };
     }
