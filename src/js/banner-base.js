@@ -45,8 +45,8 @@ function requestConfigAgain() {
             customizeBanner(config);
         }
     }
-    // Send request TODO: send instead POST to correct url, use parameter to distinguish second visits
-    request.open("POST", "http://dothiv-registry.appspot.com/c?firstvisit=" + firstVisit + "&domain=" + document.domain, true);
+    // Send request
+    request.open("POST", "http://dothiv-registry.appspot.com/c?from=iframe&domain=" + document.domain, true);
     request.send();
 }
 
@@ -79,4 +79,11 @@ function parse(template, config) {
     template = template.replace(/%CLICKCOUNT%/g,config.clickcount);
     template = template.replace(/%MONEY%/g,config.money);
     return template;
+}
+
+/**
+ * Determines whether the pink bar needs to be rendered in short version.
+ */
+function isShortBar(config) {
+    return config.status < 25;
 }

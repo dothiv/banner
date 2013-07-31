@@ -9,6 +9,7 @@
     @ms-degrees: @arguments / 90;
     @degrees: ~'@{arguments}deg';
     -ms-filter: ~'progid:DXImageTransform.Microsoft.BasicImage(rotation=@{ms-degrees})';
+    filter: ~'progid:DXImageTransform.Microsoft.BasicImage(rotation=@{ms-degrees})';
     -moz-transform: rotate(@degrees);
     -o-transform: rotate(@degrees);
     -webkit-transform: rotate(@degrees);

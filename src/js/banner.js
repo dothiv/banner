@@ -43,7 +43,7 @@
      * server will be informed whether this is the first visit.
      */
     function requestConfig(firstVisit) {
-        var responseText = '{"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"right","secondvisit":"right","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"}';
+        var responseText = '{"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"top","secondvisit":"top","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"}';
         ajaxCallback(responseText);
         return;
 
@@ -60,10 +60,11 @@
                         ajaxCallback(request.responseText);
                 }
             }
-            // Send request. TODO: send instead POST to correct url
-            request.open("POST", "http://dothiv-registry.appspot.com/c?firstvisit=" + firstVisit + "&domain=" + document.domain, true);
+            // Send request.
+            request.open("POST", "http://dothiv-registry.appspot.com/c?from=outside&firstvisit=" + firstVisit + "&domain=" + document.domain, true);
             request.send();
         } catch(e) {
+            // Use default config if request fails
             var responseText = '{"secondvisit":"right","firstvisit":"right"}';
             ajaxCallback(responseText);
         }
@@ -133,9 +134,7 @@
                      default:
                          createRightBanner(config);
                          break;
-                }
-        });
-    }
+    }});}
 
     /**
      * Inserts style rules for the iframes into the DOM.
@@ -154,18 +153,27 @@
     }
 
     /**
-     * Creates the 'center' version of the banner and inserts it into the DOM.
+     * Returns an iframe DOM element configured for the given position. 
+     * Supported positions are 'top', 'center' and 'right'.
      */
-    function createCenterBanner(config) {
-        // Create banner iframe
+    function createIframeElement(position) {
         var bannerContainer = document.createElement('iframe');
         bannerContainer.id = 'dothiv-clickcounter';
-        bannerContainer.className = 'dothiv-clickcounter-center';
-        bannerContainer.src = 'banner-center.html'; //'http://dothiv-registry.appspot.com/banner-center.html';
+        bannerContainer.className = 'dothiv-clickcounter-' + position;
+        bannerContainer.src = 'banner-' + position + '.html'; //'http://dothiv-registry.appspot.com/banner-center.html';
         bannerContainer.scrolling = 'no';
         bannerContainer.frameBorder = 0;
         bannerContainer.allowTransparency = true;
         bannerContainer.setAttribute("allowtransparency", "true");
+        return bannerContainer;
+    }
+
+    /**
+     * Creates the 'center' version of the banner and inserts it into the DOM.
+     */
+    function createCenterBanner(config) {
+        // Create banner iframe
+        var bannerContainer = createIframeElement('center');
         document.body.insertBefore(bannerContainer, document.body.firstChild);
 
         // Create background HTML structure
@@ -188,14 +196,7 @@
      */
     function createRightBanner(config) {
         // Create banner iframe
-        var bannerContainer = document.createElement('iframe');
-        bannerContainer.id = 'dothiv-clickcounter';
-        bannerContainer.className = 'dothiv-clickcounter-right';
-        bannerContainer.src = 'banner-right.html'; //'http://dothiv-registry.appspot.com/banner-right.html';
-        bannerContainer.scrolling = 'no';
-        bannerContainer.frameBorder = 0;
-        bannerContainer.allowTransparency = true;
-        bannerContainer.setAttribute("allowtransparency", "true");
+        var bannerContainer = createIframeElement('right');
         document.body.insertBefore(bannerContainer, document.body.firstChild);
 
         // Insert CSS rules
@@ -211,6 +212,23 @@
             bannerContainer.style.height = '86px';
             bannerContainer.style.bottom = '200px';
             bannerContainer.style.right = '-116px';
+        };
+    }
+
+    function createTopBanner(config) {
+        // Create banner iframe
+        var bannerContainer = createIframeElement('top');
+        document.body.insertBefore(bannerContainer, document.body.firstChild);
+
+        // Insert CSS rules
+        includeCSS();
+
+        // Register event for mouseover on iframe
+        bannerContainer.onmouseover = function() {
+            bannerContainer.style.height = '86px';
+        };
+        bannerContainer.onmouseout = function() {
+            bannerContainer.style.height = '56px';
         };
     }
 })();

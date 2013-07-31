@@ -15,23 +15,24 @@
         document.body.innerHTML = parse(document.body.innerHTML, config);
 
         // Determine whether the status bar is short
-        var shortBar = config.status < 20;
+        var shortBar = isShortBar(config);
 
         // Configure pink status bar
-        // TODO document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
+        document.getElementById("dothiv-tb-pinkbar").style.width = config.status + '%';
 
-        // Register events for removing the banner
-        document.getElementById("dothiv-tb-close").onclick = function() {
-            document.body.removeChild(bannerContainer);
-        };
+        // Register events for removing the banner, if supported by browser
+        if (!!window.postMessage)
+            document.getElementById("dothiv-tb-close").onclick = function() { window.parent.postMessage("remove","*"); };
+        else
+           document.getElementById("dothiv-tb-close").style.display = 'none';
 
         // Register events for mouseover
         document.getElementById("dothiv-tb-container").onmouseover = function() {
-            bannerContainer.className = 'dothiv-container dothiv-tb-mouseover';
+            document.getElementById("dothiv-tb-container").className = 'dothiv-tb-mouseover';
             showLabel(shortBar);
         };
         document.getElementById("dothiv-tb-container").onmouseout = function(){
-            bannerContainer.className = 'dothiv-container';
+            document.getElementById("dothiv-tb-container").className = '';
             hideLabel();
         };
     }

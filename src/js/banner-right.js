@@ -15,7 +15,7 @@
         document.body.innerHTML = parse(document.body.innerHTML, config);
 
         // Determine whether the status bar is short
-        var shortBar = config.status < 20;
+        var shortBar = isShortBar(config);
 
         // Configure pink status bar
         document.getElementById("dothiv-rb-pinkbar").style.width = config.status + '%';

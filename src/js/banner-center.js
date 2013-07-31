@@ -15,7 +15,7 @@
         document.body.innerHTML = parse(document.body.innerHTML, config);
 
         // Determine whether the status bar is short
-        var shortBar = config.status < 20;
+        var shortBar = isShortBar(config);
 
         // Configure pink status bar
         document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
@@ -30,7 +30,7 @@
 
         // Register events for removing the banner, if supported by browser
         if (!!window.postMessage)
-            document.getElementById("dothiv-cb-close").onclick = function() {window.parent.postMessage("remove","*");};
+            document.getElementById("dothiv-cb-close").onclick = function() { window.parent.postMessage("remove","*"); };
         else
            document.getElementById("dothiv-cb-close").style.display = 'none';
     }
