@@ -224,7 +224,7 @@
             bannerContainer.style.bottom = '120px';
             bannerContainer.style.right = '20px';
             bannerContainer.style.display = 'block';
-        } else if(msie == 8 && document.compatMode==='CSS1Compat') {
+        } else if (msie <= 9 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '280px';
             bannerContainer.style.right = '-210px';
         }
@@ -232,7 +232,7 @@
         // Insert CSS rules
         includeCSS();
 
-        if (msie <= 8 && document.compatMode==='CSS1Compat') {
+        if (msie <= 9 && document.compatMode==='CSS1Compat') {
             bannerContainer.onmouseover = function() {
                 bannerContainer.style.right = '-185px';
             };
