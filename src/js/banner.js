@@ -225,8 +225,9 @@
             bannerContainer.style.right = '20px';
             bannerContainer.style.display = 'block';
         } else if (msie <= 9 && document.compatMode==='CSS1Compat') {
-            bannerContainer.style.bottom = '280px';
+            bannerContainer.style.bottom = '240px';
             bannerContainer.style.right = '-210px';
+            bannerContainer.style.height = '150px';
         }
 
         // Insert CSS rules
@@ -234,7 +235,7 @@
 
         if (msie <= 9 && document.compatMode==='CSS1Compat') {
             bannerContainer.onmouseover = function() {
-                bannerContainer.style.right = '-185px';
+                bannerContainer.style.right = '-145px';
             };
             bannerContainer.onmouseout = function() {
                 bannerContainer.style.right = '-210px';
