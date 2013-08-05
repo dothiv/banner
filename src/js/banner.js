@@ -159,7 +159,7 @@
         var bannerContainer = document.createElement('iframe');
         bannerContainer.id = 'dothiv-clickcounter';
         bannerContainer.className = 'dothiv-clickcounter-' + position;
-        bannerContainer.src = 'banner-' + position + '.html'; //'http://dothiv-registry.appspot.com/banner-center.html';
+        bannerContainer.src = 'http://dothiv-registry.appspot.com/banner-' + position + '.html'; // 'banner-' + position + '.html';
         bannerContainer.scrolling = 'no';
         bannerContainer.frameBorder = 0;
         bannerContainer.allowTransparency = true;
