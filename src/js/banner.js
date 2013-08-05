@@ -43,10 +43,6 @@
      * server will be informed whether this is the first visit.
      */
     function requestConfig(firstVisit) {
-        var responseText = '{"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"center","secondvisit":"center","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"}';
-        ajaxCallback(responseText);
-        return;
-
         try {
             var request;
             if (window.XDomainRequest) {

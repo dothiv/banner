@@ -26,11 +26,6 @@ domready(function () {
  * Requests the config object using AJAX.
  */
 function requestConfigAgain() {
-    // no-ajax version only
-    var config = {"status":25,"money":"736.241","clickcount":"3.257.283","firstvisit":"center","secondvisit":"center","heading":"Vielen Dank!","subheading":"Dein Klick auf domain.hiv hat soeben einen Gegenwert von 1&thinsp;ct ausgel&ouml;st.","claim":"Wir sind Teil der Bewegung","about":"&Uuml;ber dotHIV","vote":"Vote","activated":"Bisher aktiviert:","currency":"&euro;","corresponding":"entspricht","clicks":"Klicks"};
-    customizeBanner(config);
-    return;
-
     // Create new request
     var request;
     if (window.XMLHttpRequest)
