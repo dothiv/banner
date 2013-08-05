@@ -194,7 +194,7 @@
         var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
         if (msie == 6 && document.compatMode=='CSS1Compat') {
             bannerContainer.style.position = 'absolute';
-            bannerBackground.style.width = '1200px';
+            bannerBackground.style.height = '1200px';
         }
 
         outerContainer.appendChild(bannerBackground);
