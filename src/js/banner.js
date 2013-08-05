@@ -232,13 +232,22 @@
         // Insert CSS rules
         includeCSS();
 
-        // Register event for mouseover on iframe
-        bannerContainer.onmouseover = function() {
-            bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
-        };
-        bannerContainer.onmouseout = function() {
-            bannerContainer.className = 'dothiv-clickcounter-right';
-        };
+        if (msie <= 8 && document.compatMode==='CSS1Compat') {
+            bannerContainer.onmouseover = function() {
+                bannerContainer.style.right = '-185px';
+            };
+            bannerContainer.onmouseout = function() {
+                bannerContainer.style.right = '-210px';
+            };
+        } else {
+            // Register event for mouseover on iframe
+            bannerContainer.onmouseover = function() {
+                bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
+            };
+            bannerContainer.onmouseout = function() {
+                bannerContainer.className = 'dothiv-clickcounter-right';
+            };
+        }
     }
 
     function createTopBanner(config) {
