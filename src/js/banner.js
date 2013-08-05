@@ -62,6 +62,11 @@
         } catch(e) {
             // Use default config if request fails
             var responseText = '{"secondvisit":"right","firstvisit":"right"}';
+
+            // Use other default config for old IEs
+            var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
+            if (msie <= 8)
+                responseText = '{"secondvisit":"center","firstvisit":"center"}';
             ajaxCallback(responseText);
         }
     }
