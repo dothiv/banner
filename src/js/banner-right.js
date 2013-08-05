@@ -30,5 +30,10 @@
         document.body.onmouseout = function(){
             document.getElementById("dothiv-rb-container").className = '';
         };
+
+        // Remove box shadow if we have to deal with IE9
+        var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
+        if (msie == 9)
+            document.getElementById("dothiv-rb-container").style.boxShadow = 'none';
     }
 })();
