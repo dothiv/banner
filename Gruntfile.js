@@ -14,7 +14,7 @@ module.exports = function(grunt) {
         }}},
         uglify: {
             options : {
-                beautify: true
+                //beautify: true
            },
             libs: {
                 files: [{expand: true, cwd: 'tmp/', src: ['js/domready.js', 'js/json2.js'], dest: 'tmp/'}]
