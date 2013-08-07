@@ -146,3 +146,5 @@ Thus, a complete POST request could look like this:
 ```
 POST http://dothiv-registry.appspot.com/c?from=outside&firstvisit=false&domain=example.hiv
 ```
+
+The application answering this request is expected to return a valid configuration object as described above.
