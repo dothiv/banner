@@ -135,4 +135,14 @@ See this sample config object for reference:
 
 ### Communication
 
-Each time the target website is visited, the banner javascript sends a POST request to http://dothiv-registry.appspot.com/c. 
+Each time the target website is visited, the banner javascript sends a POST request to http://dothiv-registry.appspot.com/c. With this request, the following parameters will be transmitted:
+
+ - `from`: possible values are `outside` or `iframe`, determining where the request was sent from
+ - `firstvisit`: boolean value indicating whether this was the first visit on this website
+ - `domain`: the visited domain
+
+Thus, a complete POST request could look like this:
+
+```
+POST http://dothiv-registry.appspot.com/c?from=outside&firstvisit=false&domain=example.hiv
+```
