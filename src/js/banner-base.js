@@ -10,7 +10,7 @@ domready(function () {
         var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
         eventer(messageEvent, function(e) {
             var config = JSON.parse(e.data)
-            if (config.money)
+            if (!(config.money == undefined))
                 customizeBanner(config);
             else
               requestConfigAgain();
@@ -41,7 +41,7 @@ function requestConfigAgain() {
         }
     }
     // Send request
-    request.open("POST", "http://dothiv-registry.appspot.com/c?from=iframe&domain=" + document.domain, true);
+    request.open("POST", "https://dothiv-registry.appspot.com/c?from=iframe&domain=" + document.domain, true);
     request.send();
 }
 
