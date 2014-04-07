@@ -57,7 +57,12 @@
                 }
             }
             // Send request.
+            // @ifdef DEBUG
+            request.open("GET", "demo.json", true);
+            // @endif
+            // @ifndef DEBUG
             request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&firstvisit=" + firstVisit + "&domain=" + document.domain, true);
+            // @endif
             request.send();
         } catch(e) {
             // Use default config if request fails
@@ -164,7 +169,12 @@
         var bannerContainer = document.createElement('iframe');
         bannerContainer.id = 'dothiv-clickcounter';
         bannerContainer.className = 'dothiv-clickcounter-' + position;
-        bannerContainer.src = 'https://dothiv-registry.appspot.com/static/banner-' + position + '.html'; // 'banner-' + position + '.html';
+        // @ifdef DEBUG
+        bannerContainer.src = 'banner-' + position + '.html';
+        // @endif
+        // @ifndef DEBUG
+        bannerContainer.src = 'https://dothiv-registry.appspot.com/static/banner-' + position + '.html';
+        // @endif
         bannerContainer.scrolling = 'no';
         bannerContainer.frameBorder = 0;
         bannerContainer.allowTransparency = true;
