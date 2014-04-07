@@ -1,38 +1,17 @@
 @import "common.less";
 @import "mixins.less";
 
-#dothiv-cb-close {
-    right: -40px;
-    top: -5px;
-}
-
 #dothiv-cb-container {
     border-top: 1px solid #E4E4E4;
     bottom: 3px;
-    height: 152px;
     position: absolute;
     text-align: center;
     width: 100%;
     .box-shadow(~"0 -2px 4px #ECECEC,0 2px 2px #ECECEC");
 }
 
-#dothiv-cb-content {
-    background: url('../img/coin.png') left bottom no-repeat;
-    height: 116px - 25px;
-    margin: 0 auto 25px auto;
-    position: relative;
-    text-align: left;
-    width: 960px;
-}
-
 #dothiv-cb-fb-icon {
     background: url('../img/facebook.png');
-}
-
-#dothiv-cb-h1 {
-    font-size: 45px;
-    margin: 0;
-    padding-top: 20px;
 }
 
 .dothiv-cb-icon {
@@ -41,12 +20,6 @@
     margin-left: 10px;
     vertical-align: bottom;
     width: 24px;
-}
-
-#dothiv-cb-left {
-    float: left;
-    margin-left: 83px;
-    width: 645px;
 }
 
 #dothiv-cb-left-span {
@@ -74,10 +47,10 @@
 }
 
 #dothiv-cb-movement {
-    background-position: 680px 40px;
-    background-repeat: no-repeat;
-    display: block;
-    padding-top: 30px;
+  background-position: 680px 40px;
+  background-repeat: no-repeat;
+  display: block;
+  padding-top: 30px;
 }
 
 #dothiv-cb-pinkbar {
@@ -111,8 +84,96 @@
     font-size: 16px;
     height: 36px;
     text-align: left;
+    clear: both;
 }
 
 #dothiv-cb-tw-icon {
     background: url('../img/twitter.png');
+}
+
+@media screen { // All sizes
+
+  #dothiv-cb-right {
+    display: none;
+  }
+
+  #dothiv-cb-left {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  #dothiv-cb-left-span {
+    .dothiv-cb-icon {
+      display: none;
+    }
+  }
+
+  #dothiv-cb-content {
+    width: 100%;
+    position: relative;
+  }
+
+  #dothiv-cb-h1 {
+    background: url('../img/coin-medium.png') 15px no-repeat;
+    font-size: 20px;
+    margin: 0;
+    padding-top: 20px;
+  }
+
+  #dothiv-cb-close {
+    right: 20px;
+    top: -5px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  #dothiv-cb-h1 {
+    font-size: 35px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #dothiv-cb-container {
+    height: 152px;
+  }
+  #dothiv-cb-left {
+    float: left;
+    margin-left: 83px;
+    width: 645px;
+  }
+
+  #dothiv-cb-right {
+    display: block;
+  }
+
+  #dothiv-cb-left-span {
+    .dothiv-cb-icon {
+      display: inline-block;
+    }
+  }
+
+  #dothiv-cb-content {
+    height: 116px - 25px;
+    margin: 0 auto 25px auto;
+    position: relative;
+    text-align: left;
+    width: 960px;
+  }
+
+  .dothiv-coin {
+    background: url('../img/coin.png') left bottom no-repeat;
+  }
+
+  #dothiv-cb-h1 {
+    background: none;
+    font-size: 45px;
+    margin: 0;
+    padding-top: 20px;
+  }
+
+  #dothiv-cb-close {
+    right: -40px;
+    top: -5px;
+  }
 }

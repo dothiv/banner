@@ -37,7 +37,7 @@ body {
     *background: #F7F7F7;
     color: #333333;
     font-family: Georgia, serif;
-    font-size: 13px;
+
     font-style: italic;
     z-index: 2147483647;
     & a, a:visited {
@@ -49,4 +49,16 @@ body {
         font-style: normal;
         font-weight: bold;
     }
+}
+
+@media screen { // All sizes
+  #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
+    font-size: 13px;
+  }
 }
