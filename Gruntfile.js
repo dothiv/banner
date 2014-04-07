@@ -39,7 +39,7 @@ module.exports = function(grunt) {
             },
             debug: {
                 files: [
-                        {expand: true, cwd: 'src/', src: ['test-page.html'], dest: 'build/'}
+                        {expand: true, cwd: 'src/', src: ['test-page.html', 'responsive.html'], dest: 'build/'}
                        ]
             }
         },

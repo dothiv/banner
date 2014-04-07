@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Responsive Design Testing</title>
+    <style>
+        * {
+            vertical-align: top;
+        }
+
+        body {
+            padding: 10px 20px 20px;
+            font-family: sans-serif;
+            overflow-y: scroll;
+        }
+
+        h2 {
+            margin: 0 0 20px 0;
+        }
+
+        #frames {
+            width: 100%;
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+        }
+
+        .frame {
+            margin-right: 20px;
+            float: left;
+        }
+
+        .frame:last-child {
+            margin-right: 0;
+        }
+
+        .frame img {
+            display: none;
+            vertical-align: middle;
+        }
+
+        #frames iframe {
+            border: solid 1px #000;
+        }
+    </style>
+</head>
+<body id="container">
+<div id="frames">
+        <div id="f1" class="frame">
+            <h2>240 x 320
+                <small>(small phone)</small>
+            </h2>
+            <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="255" height="320"
+                    src="test-page.html"></iframe>
+        </div>
+        <div id="f2" class="frame">
+            <h2>320 x 480
+                <small>(iPhone)</small>
+            </h2>
+            <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="335" height="480"
+                    src="test-page.html"></iframe>
+        </div>
+        <div id="f3" class="frame">
+            <h2>480 x 640
+                <small>(small tablet)</small>
+            </h2>
+            <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="495" height="640"
+                    src="test-page.html"></iframe>
+        </div>
+</div>
+</body>
+</html>
