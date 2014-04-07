@@ -112,7 +112,7 @@ module.exports = function(grunt) {
                     {expand: true, cwd: 'tmp/', src: ['banner-*.html'], dest: 'tmp/'},
                 ]
         }},
-        clean: ['tmp/','build/','src/js/*.processed.js']
+        clean: ['tmp/','build/','src/js/banner.js','src/js/banner-base.js']
     });
 
     // Load the plugin that provides the "less" task.
