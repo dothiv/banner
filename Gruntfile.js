@@ -3,6 +3,37 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        preprocess : {
+            debug: {
+                options: {
+                    context: {
+                        DEBUG: true
+                    }
+                },
+                files: [
+                    {
+                        src: 'src/js/banner.preprocessed.js',
+                        dest: 'src/js/banner.js'
+                    },
+                    {
+                        src: 'src/js/banner-base.preprocessed.js',
+                        dest: 'src/js/banner-base.js'
+                    }
+                ]
+            },
+            build: {
+                files: [
+                    {
+                        src: 'src/js/banner.preprocessed.js',
+                        dest: 'src/js/banner.js'
+                    },
+                    {
+                        src: 'src/js/banner-base.preprocessed.js',
+                        dest: 'src/js/banner-base.js'
+                    }
+                ]
+            }
+        },
         less: {
             development: {
                 options: {},
@@ -39,7 +70,7 @@ module.exports = function(grunt) {
             },
             debug: {
                 files: [
-                        {expand: true, cwd: 'src/', src: ['test-page.html'], dest: 'build/'}
+                        {expand: true, cwd: 'src/', src: ['test-page.html', 'demo.json'], dest: 'build/'}
                        ]
             }
         },
@@ -81,7 +112,7 @@ module.exports = function(grunt) {
                     {expand: true, cwd: 'tmp/', src: ['banner-*.html'], dest: 'tmp/'},
                 ]
         }},
-        clean: ['tmp/','build/']
+        clean: ['tmp/','build/','src/js/*.processed.js']
     });
 
     // Load the plugin that provides the "less" task.
@@ -108,9 +139,12 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "clean" task.
     grunt.loadNpmTasks('grunt-contrib-clean');
 
+    // Load the plugin that provides the "preprocess" task.
+    grunt.loadNpmTasks('grunt-preprocess');
+
     // Default tasks.
-    grunt.registerTask('default', ['clean','less','copy:tmp','imageEmbed','cssmin','uglify:libs','includereplace:internal','uglify:internal','includereplace:external','htmlmin','uglify:external','copy:build']);
+    grunt.registerTask('default', ['clean','preprocess:build','less','copy:tmp','imageEmbed','cssmin','uglify:libs','includereplace:internal','uglify:internal','includereplace:external','htmlmin','uglify:external','copy:build']);
 
     // Debug tasks.
-    grunt.registerTask('debug', ['clean','less','copy:tmp','imageEmbed','includereplace:internal','includereplace:external','copy:build','copy:debug']);
+    grunt.registerTask('debug', ['clean','preprocess:debug','less','copy:tmp','imageEmbed','cssmin','includereplace:internal','includereplace:external','copy:build','copy:debug']);
 };
