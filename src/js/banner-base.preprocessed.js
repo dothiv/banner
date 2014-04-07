@@ -3,6 +3,8 @@
  * banner variants.
  */
 
+var animateBannerInterval;
+
 domready(function () {
     if (!!window.postMessage) { // Prepare for messaging and request banner configuration, if browser is capable (>=IE8)
         var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
@@ -10,10 +12,23 @@ domready(function () {
         var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
         eventer(messageEvent, function(e) {
             var config = JSON.parse(e.data)
-            if (!(config.money == undefined))
+            if (!(config.money == undefined)) {
+                // @ifdef DEBUG
+                // This method animates the banner to show all possible values from 0 to 100
+                config.status = 0;
+                animateBannerInterval = window.setInterval(function() {
+                    config.status = (config.status + 1);
+                    if (config.status > 100) {
+                        config.status = 50;
+                        window.clearInterval(animateBannerInterval);
+                    }
+                    customizeBanner(config);
+                }, 35);
+                // @endif
                 customizeBanner(config);
-            else
+            } else {
               requestConfigAgain();
+            }
         }, false);
 
         window.parent.postMessage("get config","*");
