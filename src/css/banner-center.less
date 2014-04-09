@@ -91,8 +91,13 @@
     background: url('../img/twitter.png');
 }
 
-@media screen { // All sizes
+// We target three device widths:
+//  * >=480px (low-res smart phones)
+//  * >=720px (smart phones)
+//  * >=1000px (retina smart phones, desktops)
 
+@media screen {
+  // All sizes
   #dothiv-cb-right {
     display: none;
   }
@@ -116,7 +121,7 @@
 
   #dothiv-cb-h1 {
     background: url('../img/coin-medium.png') 15px no-repeat;
-    font-size: 20px;
+    font-size: 25px;
     margin: 0;
     padding-top: 20px;
   }
@@ -125,11 +130,43 @@
     right: 20px;
     top: -5px;
   }
+
+  #dothiv-cb-statusbar {
+    .dothiv-status-left, .dothiv-status-right {
+      padding-top: 4px;
+    }
+    span.rwd-line {
+      display: block;
+      font-size: 11px;
+      line-height: (36px - 8px) / 2;
+    }
+  }
 }
 
 @media screen and (min-width: 480px) {
   #dothiv-cb-h1 {
-    font-size: 35px;
+    font-size: 40px;
+  }
+
+  #dothiv-cb-statusbar {
+    .dothiv-status-left, .dothiv-status-right {
+      padding-top: 0;
+    }
+    span.rwd-line {
+      display: inline;
+      line-height: inherit;
+      font-size: 16px;
+    }
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .dothiv-coin {
+    background: url('../img/coin.png') left bottom no-repeat;
+  }
+
+  #dothiv-cb-h1 {
+    background: none;
   }
 }
 
@@ -137,6 +174,7 @@
   #dothiv-cb-container {
     height: 152px;
   }
+
   #dothiv-cb-left {
     float: left;
     margin-left: 83px;
@@ -161,12 +199,7 @@
     width: 960px;
   }
 
-  .dothiv-coin {
-    background: url('../img/coin.png') left bottom no-repeat;
-  }
-
   #dothiv-cb-h1 {
-    background: none;
     font-size: 45px;
     margin: 0;
     padding-top: 20px;
