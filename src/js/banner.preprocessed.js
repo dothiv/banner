@@ -118,6 +118,16 @@
      * done once the DOM is ready.
      */
     function manipulateDOM(config) {
+        // @ifdef DEBUG
+        switch(window.location.hash.substr(1)) {
+            case 'center':
+            case 'right':
+            case 'top':
+                firstVisit = true;
+                config.firstvisit = window.location.hash.substr(1);
+                break;
+        }
+        // @endif
         domready(function () {
             // Determine which of the three banner versions to render
             if (firstVisit || (config.secondvisit != 'top' && config.secondvisit != 'right' && config.secondvisit != 'center'))

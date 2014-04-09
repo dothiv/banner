@@ -14,8 +14,8 @@
             overflow-y: scroll;
         }
 
-        h2 {
-            margin: 0 0 20px 0;
+        h1 {
+            clear: both;
         }
 
         #frames {
@@ -45,6 +45,7 @@
 </head>
 <body id="container">
 <div id="frames">
+    <h1>Center</h1>
     <div id="f1" class="frame">
         <h2>320 x 480
             <small>(older iPhones)</small>
@@ -68,6 +69,56 @@
             <small>(Full-HD)</small>
         </h2>
         <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="1095" height="1920" src="test-page.html"></iframe>
+    </div>
+    <h1>Top</h1>
+    <div id="f1" class="frame">
+        <h2>320 x 480
+            <small>(older iPhones)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="335" height="480" src="test-page.html#top"></iframe>
+    </div>
+    <div id="f2" class="frame">
+        <h2>480 x 640
+            <small>(older Android phones, tablets)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="495" height="640" src="test-page.html#top"></iframe>
+    </div>
+    <div id="f3" class="frame">
+        <h2>720x1280
+            <small>(Android phones)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="735" height="1280" src="test-page.html#top"></iframe>
+    </div>
+    <div id="f4" class="frame">
+        <h2>1080x1920
+            <small>(Full-HD)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="1095" height="1920" src="test-page.html#top"></iframe>
+    </div>
+    <h1>Right</h1>
+    <div id="f1" class="frame">
+        <h2>320 x 480
+            <small>(older iPhones)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="335" height="480" src="test-page.html#right"></iframe>
+    </div>
+    <div id="f2" class="frame">
+        <h2>480 x 640
+            <small>(older Android phones, tablets)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="495" height="640" src="test-page.html#right"></iframe>
+    </div>
+    <div id="f3" class="frame">
+        <h2>720x1280
+            <small>(Android phones)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="735" height="1280" src="test-page.html#right"></iframe>
+    </div>
+    <div id="f4" class="frame">
+        <h2>1080x1920
+            <small>(Full-HD)</small>
+        </h2>
+        <iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless width="1095" height="1920" src="test-page.html#right"></iframe>
     </div>
 </div>
 </body>
