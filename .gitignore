@@ -3,4 +3,5 @@ node_modules
 build
 tmp
 web
-
+src/js/banner.js
+src/js/banner-base.js
