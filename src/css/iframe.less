@@ -49,6 +49,19 @@
     z-index: 2147483646;
 }
 
+// Reset styles which could have been applied to divs.
+// The outer div should not be visible when rendered.
+#dothiv-outer {
+  border: 0;
+  background: 0;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  display: block;
+  position: static;
+}
+
 * html #dothiv-background, * html #dothiv-clickcounter {
     position: absolute;
 }
