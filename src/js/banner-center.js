@@ -22,10 +22,13 @@
 
         // Configure pink status bar
         document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
-        if (shortBar)
+        if (shortBar) {
             document.getElementById("dothiv-cb-status-left").style.display = 'none';
-        else
-           document.getElementById("dothiv-cb-status-right").style.display = 'none';
+            document.getElementById("dothiv-cb-status-right").style.display = '';
+        } else {
+            document.getElementById("dothiv-cb-status-right").style.display = 'none';
+            document.getElementById("dothiv-cb-status-left").style.display = '';
+        }
 
         // Register events for pink bar
         document.getElementById("dothiv-cb-statusbar").onmouseover = function(){showClicks(shortBar);};

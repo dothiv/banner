@@ -3,7 +3,7 @@
  * banner variants.
  */
 
-var animateBannerInterval;
+var animateBannerHandle;
 
 domready(function () {
     if (!!window.postMessage) { // Prepare for messaging and request banner configuration, if browser is capable (>=IE8)
@@ -16,14 +16,14 @@ domready(function () {
                 // @ifdef DEBUG
                 // This method animates the banner to show all possible values from 0 to 100
                 config.status = 0;
-                animateBannerInterval = window.setInterval(function() {
+                animateBannerHandle = window.setInterval(function() {
                     config.status = (config.status + 1);
                     if (config.status > 100) {
-                        config.status = 50;
-                        window.clearInterval(animateBannerInterval);
+                        config.status = parseInt(Math.random() * 100);
+                        window.clearInterval(animateBannerHandle);
                     }
                     customizeBanner(config);
-                }, 35);
+                }, 15);
                 // @endif
                 customizeBanner(config);
             } else {
