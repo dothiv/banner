@@ -62,7 +62,7 @@
                 var frameDiv = $('<div class="frame"></div>');
                 f.append(frameDiv);
                 frameDiv.append($('<h3><a href="#' + bannerType + ':' + resolutions[j] + '">' + resolutions[j] + '</a></h3>'));
-                frameDiv.append($('<iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless src="test-page.html#' + bannerType + '" width="' + size[0] + '" height="' + size[1] + '"></iframe>'));
+                frameDiv.append($('<iframe sandbox="allow-same-origin allow-forms allow-scripts" seamless src="test-page.html#' + bannerType + '" width="' + (parseInt(size[0]) + 15) +  '" height="' + size[1] + '"></iframe>'));
             }
         }
         $('body').append(f);
