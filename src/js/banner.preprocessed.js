@@ -180,7 +180,7 @@
         bannerContainer.id = 'dothiv-clickcounter';
         bannerContainer.className = 'dothiv-clickcounter-' + position;
         // @ifdef DEBUG
-        bannerContainer.src = 'banner-' + position + '.html';
+        bannerContainer.src = 'banner-' + position + '.html?' + Date.now();
         // @endif
         // @ifndef DEBUG
         bannerContainer.src = 'https://dothiv-registry.appspot.com/static/banner-' + position + '.html';
