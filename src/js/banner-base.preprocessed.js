@@ -73,7 +73,6 @@ function requestConfigAgain() {
  *  - %SUBHEADING%:    config.subheading
  *  - %CLAIM%:         config.claim
  *  - %ABOUT%:         config.about
- *  - %VOTE%:          config.vote
  *  - %ACTIVATED%:     config.activated
  *  - %CURRENCY%:      config.currency
  *  - %CORRESPONDING%: config.corresponding
@@ -86,7 +85,6 @@ function parse(template, config) {
     template = template.replace(/%SUBHEADING%/g,config.subheading);
     template = template.replace(/%CLAIM%/g,config.claim);
     template = template.replace(/%ABOUT%/g,config.about);
-    template = template.replace(/%VOTE%/g,config.vote);
     template = template.replace(/%ACTIVATED%/g,config.activated);
     template = template.replace(/%CURRENCY%/g,config.currency);
     template = template.replace(/%CORRESPONDING%/g,config.corresponding);
