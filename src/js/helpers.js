@@ -6,7 +6,7 @@
  */
 function isTouchDevice() {
     return 'ontouchstart' in window // works on most browsers
-        || 'onmsgesturechange' in window; // works on ie10
+        || (navigator.MaxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0); // works on ie10, ie11
 }
 
 
