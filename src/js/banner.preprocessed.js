@@ -188,6 +188,9 @@
         bannerContainer.id = 'dothiv-clickcounter';
         bannerContainer.className = 'dothiv-clickcounter-' + position;
         // @ifdef DEBUG
+        if (typeof Date.now === "undefined") {
+            Date.now = Date.now || function() { return +new Date; };
+        }
         bannerContainer.src = 'banner-' + position + '.html?' + Date.now();
         // @endif
         // @ifndef DEBUG
