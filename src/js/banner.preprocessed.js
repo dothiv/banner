@@ -106,8 +106,8 @@
                 case 'remove':
                     if (document.getElementById('dothiv-outer'))
                         document.body.removeChild(document.getElementById('dothiv-outer'));
-                    if (iframe)
-                        document.body.removeChild(iframe);
+                    if (document.getElementById('dothiv-clickcounter'))
+                        document.body.removeChild(document.getElementById('dothiv-clickcounter'));
                     if (document.getElementById('dothiv-background'))
                         document.body.removeChild(document.getElementById('dothiv-background'));
                   break;
