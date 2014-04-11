@@ -5,6 +5,7 @@
     // These are grunt includes
     //@@include('domready.js')
     //@@include('json2.js')
+    //@@include('helpers.js')
     //@@include('banner-base.js')
 
     var moneyShowing = true;
