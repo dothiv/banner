@@ -5,6 +5,7 @@
     // These are grunt includes
     //@@include('domready.js')
     //@@include('json2.js')
+    //@@include('helpers.js')
     //@@include('banner-base.js')
 
     /**
@@ -32,8 +33,7 @@
         };
 
         // Remove box shadow if we have to deal with IE9
-        var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
-        if (msie == 9)
+        if (isIE(9)) {
             document.getElementById("dothiv-rb-container").style.boxShadow = 'none';
     }
 })();

@@ -5,6 +5,7 @@
     // These are grunt includes
     //@@include('domready.js')
     //@@include('json2.js')
+    //@@include('helpers.js')
 
     // -------- This is the main procedure -------- //
     // Check if this is the first visit and if we can set cookies
@@ -69,9 +70,9 @@
             var responseText = '{"secondvisit":"right","firstvisit":"right"}';
 
             // Use other default config for old IEs
-            var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
-            if (msie <= 8)
+            if (getIE() <= 8) {
                 responseText = '{"secondvisit":"center","firstvisit":"center"}';
+            }
             ajaxCallback(responseText);
         }
     }
@@ -212,8 +213,7 @@
             bannerContainer.style.position = 'absolute';
 
         // Specials for IE6 standard mode
-        var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
-        if (msie == 6 && document.compatMode=='CSS1Compat') {
+        if (isIE(6) && document.compatMode=='CSS1Compat') {
             bannerContainer.style.position = 'absolute';
             bannerBackground.style.height = '1200px';
         }
@@ -247,7 +247,7 @@
             bannerContainer.style.right = '0';
         }
 
-        var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
+        var msie = getIE();
         if (msie < 8 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '120px';
             bannerContainer.style.right = '20px';

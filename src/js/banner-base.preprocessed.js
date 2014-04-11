@@ -100,14 +100,3 @@ function parse(template, config) {
 function isShortBar(config) {
     return config.status < 50;
 }
-
-/**
- * Check of we are on a touch device.
- *
- * @see http://stackoverflow.com/a/4819886
- * @returns {boolean}
- */
-function isTouchDevice() {
-    return 'ontouchstart' in window // works on most browsers
-        || 'onmsgesturechange' in window; // works on ie10
-}
