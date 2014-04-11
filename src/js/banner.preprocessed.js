@@ -98,18 +98,25 @@
         var eventer = window[eventMethod];
         var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
         eventer(messageEvent, function(e) {
+            var iframe = document.getElementById('dothiv-clickcounter');
             switch (e.data) {
                 case 'get config':
-                    document.getElementById('dothiv-clickcounter').contentWindow.postMessage(JSON.stringify(config), "*");
+                    iframe.contentWindow.postMessage(JSON.stringify(config), "*");
                     break;
                 case 'remove':
                     if (document.getElementById('dothiv-outer'))
                         document.body.removeChild(document.getElementById('dothiv-outer'));
-                    if (document.getElementById('dothiv-clickcounter'))
-                        document.body.removeChild(document.getElementById('dothiv-clickcounter'));
+                    if (iframe)
+                        document.body.removeChild(iframe);
                     if (document.getElementById('dothiv-background'))
                         document.body.removeChild(document.getElementById('dothiv-background'));
                   break;
+                case 'expand':
+                    iframe.className += ' dothiv-expanded';
+                    break;
+                case 'compact':
+                    iframe.className = iframe.className.replace('dothiv-expanded', '');
+                    break;
             }
         }, false);
     }
@@ -269,13 +276,15 @@
                 bannerContainer.style.right = '-210px';
             };
         } else {
-            // Register event for mouseover on iframe
-            bannerContainer.onmouseover = function() {
-                bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
-            };
-            bannerContainer.onmouseout = function() {
-                bannerContainer.className = 'dothiv-clickcounter-right';
-            };
+            if (!isTouchDevice()) {
+                // Register event for mouseover on iframe
+                bannerContainer.onmouseover = function() {
+                    bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
+                };
+                bannerContainer.onmouseout = function() {
+                    bannerContainer.className = 'dothiv-clickcounter-right';
+                };
+            }
         }
     }
 

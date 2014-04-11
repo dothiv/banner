@@ -8,6 +8,8 @@
     //@@include('helpers.js')
     //@@include('banner-base.js')
 
+    var expanded = false;
+
     /**
      * Creates the 'right' version of the banner.
      */
@@ -18,22 +20,41 @@
         // Make banner body visible
         document.body.style.display = 'block';
 
-        // Determine whether the status bar is short
-        var shortBar = isShortBar(config);
-
         // Configure pink status bar
         document.getElementById("dothiv-rb-pinkbar").style.width = config.status + '%';
 
-        // Register events for mouseover
-        document.body.onmouseover = function() {
-            document.getElementById("dothiv-rb-container").className = 'dothiv-rb-mouseover';
-        };
-        document.body.onmouseout = function(){
-            document.getElementById("dothiv-rb-container").className = '';
-        };
+        if (isTouchDevice()) {
+            // Register events for click (simulate mouse over on mobile devices)
+            document.getElementById("dothiv-rb-container").onclick = function() {
+                if (expanded) {
+                    compact();
+                } else {
+                    expand();
+                }
+            }
+        } else {
+            // Register events for mouseover
+            document.body.onmouseover = expand;
+            document.body.onmouseout = compact;
+        }
 
         // Remove box shadow if we have to deal with IE9
         if (isIE(9)) {
             document.getElementById("dothiv-rb-container").style.boxShadow = 'none';
+        }
+    }
+
+    function expand()
+    {
+        expanded = true;
+        window.parent.postMessage("expand","*");
+        document.getElementById("dothiv-rb-container").className = 'dothiv-rb-mouseover';
+    }
+
+    function compact()
+    {
+        expanded = false;
+        window.parent.postMessage("compact","*");
+        document.getElementById("dothiv-rb-container").className = '';
     }
 })();
