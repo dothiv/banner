@@ -41,7 +41,12 @@ function requestConfigAgain() {
         }
     }
     // Send request
+    // @ifdef DEBUG
+    request.open("GET", "demo.json", true);
+    // @endif
+    // @ifndef DEBUG
     request.open("POST", "https://dothiv-registry.appspot.com/c?from=iframe&domain=" + document.domain, true);
+    // @endif
     request.send();
 }
 
