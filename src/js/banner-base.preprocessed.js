@@ -3,8 +3,6 @@
  * banner variants.
  */
 
-var animateBannerHandle;
-
 domready(function () {
     if (!!window.postMessage) { // Prepare for messaging and request banner configuration, if browser is capable (>=IE8)
         var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
