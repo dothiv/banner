@@ -78,12 +78,20 @@ module.exports = function(grunt) {
                 options: {
                     optimizationLevel: 7
                 },
-                files: [{
-                    expand: true,                  // Enable dynamic expansion
-                    cwd: 'src/img/',                   // Src matches are relative to this path
-                    src: ['**/*.{png,jpg,gif}'],   // Actual patterns to match
-                    dest: 'tmp/img/'                  // Destination path prefix
-                }]
+                files: [
+                    {
+                        expand: true,                  // Enable dynamic expansion
+                        cwd: 'src/img/',                   // Src matches are relative to this path
+                        src: ['*.{png,jpg,gif}'],   // Actual patterns to match
+                        dest: 'tmp/img/'                  // Destination path prefix
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src/img/dothiv-gfx/',
+                        src: ['{png,gif}/banner/*.{png,gif}'],
+                        dest: 'tmp/img/dothiv-gfx'
+                    }
+                ]
             }
         },
         imageEmbed: {

@@ -14,16 +14,7 @@ domready(function () {
             var config = JSON.parse(e.data)
             if (!(config.money == undefined)) {
                 // @ifdef DEBUG
-                // This method animates the banner to show all possible values from 0 to 100
-                config.status = 0;
-                animateBannerHandle = window.setInterval(function() {
-                    config.status = (config.status + 1);
-                    if (config.status > 100) {
-                        config.status = parseInt(Math.random() * 100);
-                        window.clearInterval(animateBannerHandle);
-                    }
-                    customizeBanner(config);
-                }, 15);
+                config.status = parseInt(Math.random() * 100);
                 // @endif
                 customizeBanner(config);
             } else {
@@ -71,24 +62,16 @@ function requestConfigAgain() {
  * Supported placeholders are:
  *  - %HEADING%:       config.heading
  *  - %SUBHEADING%:    config.subheading
- *  - %CLAIM%:         config.claim
  *  - %ABOUT%:         config.about
  *  - %ACTIVATED%:     config.activated
- *  - %CURRENCY%:      config.currency
- *  - %CORRESPONDING%: config.corresponding
- *  - %CLICKS%:        config.clicks
  *  - %CLICKCOUNT%:    config.clickcount
  *  - %MONEY%:         config.money
  */
 function parse(template, config) {
     template = template.replace(/%HEADING%/g,config.heading);
     template = template.replace(/%SUBHEADING%/g,config.subheading);
-    template = template.replace(/%CLAIM%/g,config.claim);
     template = template.replace(/%ABOUT%/g,config.about);
     template = template.replace(/%ACTIVATED%/g,config.activated);
-    template = template.replace(/%CURRENCY%/g,config.currency);
-    template = template.replace(/%CORRESPONDING%/g,config.corresponding);
-    template = template.replace(/%CLICKS%/g,config.clicks);
     template = template.replace(/%CLICKCOUNT%/g,config.clickcount);
     template = template.replace(/%MONEY%/g,config.money);
     return template;

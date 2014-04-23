@@ -1,3 +1,5 @@
+@color-text: #333;
+
 * {
     margin: 0;
     padding: 0;
@@ -8,19 +10,15 @@ body {
     display: none;
 }
 
-.dothiv-arrow {
-    background-image: url('../img/arrow.png');
-}
-
 .dothiv-close {
-    background-image: url('../img/x.png');
+    background-image: url('../img/dothiv-gfx/gif/banner/coin-close@2x.gif');
     cursor: pointer;
     display: block;
-    height: 34px;
+    height: 74px;
     position: absolute;
     right: 5px;
     top: 7px;
-    width: 34px;
+    width: 69px;
 }
 
 .dothiv-status-left {
@@ -35,26 +33,29 @@ body {
 #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
     background: #F7F7F7 url('../img/squairy-small.png');
     *background: #F7F7F7;
-    color: #333333;
-    font-family: Georgia, serif;
+    color: @color-text;
+    font-family: Arial, Helvetica, sans-serif;
 
-    font-style: italic;
     z-index: 2147483647;
     & a, a:visited {
-        color: #333333;
+        color: @color-text;
     }
     & h1 {
         display: block;
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
         font-style: normal;
         font-weight: bold;
     }
 }
 
+// All sizes.
+
+#dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
+  font-size: 16px;
+}
+
+/*
 @media screen { // All sizes
-  #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
-    font-size: 16px;
-  }
+
 }
 
 @media screen and (min-width: 1000px) {
@@ -62,3 +63,5 @@ body {
     font-size: 13px;
   }
 }
+
+*/
