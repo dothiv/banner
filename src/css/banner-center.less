@@ -28,8 +28,6 @@
     width: 57%;
 }
 
-
-
 #dothiv-cb-statusbar {
     background-color: @color-pinkbar-alt;
     font-size: 16px;
@@ -122,13 +120,13 @@
 }
 
 // Smartphones.
-@media screen and (max-width: 479px) {
+@media screen and (max-width: (@content-width - 1px)) {
   #dothiv-cb-content {
     width: 100%;
   }
 
   #dothiv-cb-left {
-    width: 100%;
+    width: auto;
   }
 
   #dothiv-cb-h1 {
@@ -155,5 +153,14 @@
   #dothiv-cb-links {
     display: none;
   }
+}
 
+// iPhone 3
+@media screen and (max-width: 320px) {
+  #dothiv-cb-close {
+    background-image: url('../img/dothiv-gfx/gif/banner/coin-close.gif');
+    height: 37px;
+    width: 35px;
+    right: 10px;
+  }
 }
