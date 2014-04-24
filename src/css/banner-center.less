@@ -1,13 +1,9 @@
 @import "common.less";
 @import "mixins.less";
 
-@content-height: 106px;
-@content-width: 660px;
-@content-width-wide: 960px;
-@ribbon-margin: 10px;
-@color-pink: #e20079;
-@color-pinkbar: #E00073;
-@color-pinkbar-alt: #FCE5F1;
+@center-height: 116px;
+@center-ribbon-margin: 10px;
+@dropshadow-size: 2px;
 
 // As we have to support IE8 we default to desktop styles. (800px)
 // We add some space for large screens (>=1000px)
@@ -20,16 +16,8 @@
   position: absolute;
   text-align: center;
   width: 100%;
-  height: 152px;
+  height: @center-height + @pinkbar-height;
   .box-shadow(~"0 -2px 4px #ECECEC,0 2px 2px #ECECEC");
-}
-
-.dothiv-cb-icon {
-    display: inline-block;
-    height: 24px;
-    margin-right: 10px;
-    vertical-align: bottom;
-    width: 24px;
 }
 
 #dothiv-cb-left-span {
@@ -40,49 +28,35 @@
 #dothiv-cb-pinkbar {
     background-color: @color-pinkbar;
     float: left;
-    height: 36px;
+    height: @pinkbar-height;
     width: 57%;
 }
 
-#dothiv-cb-status-left, #dothiv-cb-status-right {
 
-    font-style: normal;
-  line-height: 36px;
-}
-
-#dothiv-cb-status-right {
-    padding-left: 20px;
-  display: inline-block;
-}
-
-#dothiv-cb-status-left {
-  display: block;
-  padding-right: 20px;
-}
 
 #dothiv-cb-statusbar {
     background-color: @color-pinkbar-alt;
     font-size: 16px;
-    height: 36px;
+    height: @pinkbar-height;
     text-align: left;
     clear: both;
 }
 
 #dothiv-cb-close {
   right: 0px;
-  top: @ribbon-margin;
+  top: @center-ribbon-margin;
 }
 
 #dothiv-cb-content {
   position: relative;
-  height: @content-height + @ribbon-margin;
+  height: @center-height;
   margin: 0 auto;
   text-align: left;
   width: @content-width;
 }
 
 .dothiv-ribbon {
-  background: url('../img/dothiv-gfx/png/banner/ribbon@3x.png') @ribbon-margin @ribbon-margin no-repeat;
+  background: url('../img/dothiv-gfx/png/banner/ribbon@2x.png') @center-ribbon-margin @center-ribbon-margin no-repeat;
 }
 
 #dothiv-cb-left {
@@ -95,6 +69,9 @@
 
 #dothiv-cb-left-span {
   font-size: 24px;
+  a {
+    text-decoration: none;
+  }
 }
 
 #dothiv-cb-right {
@@ -109,16 +86,8 @@
 #dothiv-cb-movement {
   font-size: 12px;
   display: inline-block;
-  padding-top: @ribbon-margin;
+  padding-top: @center-ribbon-margin;
   padding-right: 0;
-  a, a:visited {
-    color: @color-text;
-    text-decoration: none;
-    strong {
-      color: @color-pink;
-      font-weight: bold;
-    }
-  }
 }
 
 #dothiv-cb-links {
@@ -133,17 +102,10 @@
   background: url('../img/dothiv-gfx/png/banner/twitter.png');
 }
 
-#dothiv-doublearrow-icon {
-  background: url('../img/double-arrow.png');
-  display: inline-block;
-  width: 17px;
-  height: 9px;
-}
-
 #dothiv-cb-h1 {
   margin: 0;
   font-size: 60px;
-  padding-top: @ribbon-margin;
+  padding-top: @center-ribbon-margin;
 }
 
 #dothiv-cb-statusbar {
@@ -171,40 +133,6 @@
   }
 }
 
-// Tablets.
-/*
-@media screen and (max-width: 719px) {
-  #dothiv-cb-content {
-    width: 100%;
-  }
-
-  #dothiv-cb-left {
-    width: 100%;
-  }
-
-  #dothiv-cb-h1 {
-    font-size: 30px;
-  }
-
-  #dothiv-cb-left-span {
-    font-size: 12px;
-  }
-
-  #dothiv-cb-statusbar {
-    font-size: 12px;
-  }
-
-  #dothiv-cb-right {
-    width: 100%;
-    position: relative;
-  }
-
-  #dothiv-cb-links {
-    display: none;
-  }
-}
-*/
-
 // Smartphones.
 @media screen and (max-width: 479px) {
   #dothiv-cb-content {
@@ -223,7 +151,7 @@
     font-size: 12px;
   }
 
-  #dothiv-cb-status-right, #dothiv-cb-status-left {
+  .dothiv-status-right, .dothiv-status-left {
     font-size: 12px;
     line-height: 18px;
     span {

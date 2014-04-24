@@ -1,83 +1,150 @@
 @import "common.less";
 @import "mixins.less";
 
+@top-ribbon-margin: 30px;
+@top-height: 48px;
+
+// As we have to support IE8 we default to desktop styles. (800px)
+// We add some space for large screens (>=1000px)
+// We remove stuff for small devices (<720px)
+// We remove stuff for extra small devices (<480px)
+
 #dothiv-tb-close {
-    right: 5px;
-    top: 7px;
+  right: 0;
+  top: 2px;
+  background-image: url('../img/dothiv-gfx/gif/banner/coin-close.gif');
+  height: 37px;
+  width: 35px;
 }
 
 #dothiv-tb-container {
-    .box-shadow(0 2px 2px #ECECEC);
+  .box-shadow(0 2px 2px #ECECEC);
 }
 
-#dothiv-tb-content {
-    background: url('../img/coin-medium.png') left 3px no-repeat;
-    height: 56px - 8px;
-    margin: 0 auto;
-    position: relative;
-    text-align: left;
-    width: 960px;
-}
-
-#dothiv-tb-fb-icon {
-    background: url('../img/dothiv-gfx/png/banner/facebook-small.png') no-repeat;
-}
-
-h1#dothiv-tb-h1 {
-    display: inline;
-    font-size: 20px;
-    margin: 0;
-}
-
-.dothiv-tb-icon {
-    display: inline-block;
-    height: 21px;
-    margin-left: 10px;
-    vertical-align: sub;
-    width: 23px;
-}
-
-#dothiv-tb-left {
-    line-height: 44px;
-    margin-left: 40px;
-}
-
-#dothiv-tb-links {
-    background-position-y: 2px;
-    background-repeat: no-repeat;
-    margin-left: 60px;
-    padding-left: 40px;
-}
-
-.dothiv-tb-mouseover #dothiv-tb-statusbar, .dothiv-tb-mouseover #dothiv-tb-pinkbar {
-    height: 38px;
-}
-
-#dothiv-tb-pinkbar {
-    background-color: #E00073;
-    float: left;
-    height: 8px;
-    width: 57%;
-}
-
-#dothiv-tb-status-right {
-    display: none;
-    font-style: normal;
-    line-height: 36px;
-    padding-left: 20px;
-}
-
-#dothiv-tb-statusbar {
-    background-color: #FCE5F1;
-    font-size: 14px;
-    height: 8px;
-    text-align: left;
+#dothiv-tb-h1 {
+  display: inline;
+  font-size: 40px;
+  margin: 0 10px 0 0;
+  line-height: @top-height;
+  float: left;
 }
 
 #dothiv-tb-subheading {
-    margin-left: 10px;
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 20%;
+  float: left;
+}
+
+#dothiv-tb-movement {
+  margin: 12px 10px 0 10px;
+  float: left;
+  font-size: 12px;
+}
+
+#dothiv-tb-content {
+  background: url('../img/dothiv-gfx/png/banner/ribbon.png') left 3px no-repeat;
+  height: @top-height;
+  margin: 0 auto;
+  position: relative;
+  text-align: left;
+  width: @content-width;
+}
+
+#dothiv-tb-links {
+  display: block;
+  float: left;
+  margin-top: @top-height - @icon-size - 8px;
+}
+
+#dothiv-tb-fb-icon {
+  background: url('../img/dothiv-gfx/png/banner/facebook.png') no-repeat;
 }
 
 #dothiv-tb-tw-icon {
-    background: url('../img/dothiv-gfx/png/banner/twitter-small.png') no-repeat;
+  background: url('../img/dothiv-gfx/png/banner/twitter.png') no-repeat;
+}
+
+#dothiv-tb-left {
+  margin-left: @top-ribbon-margin;
+}
+
+.dothiv-tb-mouseover #dothiv-tb-statusbar, .dothiv-tb-mouseover #dothiv-tb-pinkbar {
+  height: @pinkbar-height;
+}
+
+#dothiv-tb-status-left, #dothiv-tb-status-right {
+  display: none;
+}
+
+#dothiv-tb-pinkbar {
+  background-color: #E00073;
+  float: left;
+  height: 8px;
+  width: 57%;
+}
+
+#dothiv-tb-statusbar {
+  background-color: #FCE5F1;
+  font-size: 14px;
+  height: @pinkbar-height-compact;
+  text-align: left;
+}
+
+// Larger desktops.
+@media screen and (min-width: 1000px) {
+  #dothiv-tb-content {
+    width: @content-width-wide;
+  }
+
+  #dothiv-tb-h1 {
+    margin-left: 20px;
+  }
+
+  #dothiv-tb-subheading {
+    line-height: @top-height;
+    margin: 0 0 0 10px;
+  }
+
+  #dothiv-tb-movement, #dothiv-tb-links {
+    margin-left: 40px;
+  }
+}
+
+// Small desktops.
+@media screen and (max-width: (@content-width - 1px)) {
+  #dothiv-tb-content {
+    width: 100%;
+    background-position: 3px 3px;
+  }
+
+  #dothiv-tb-h1 {
+    font-size: 30px;
+  }
+
+  #dothiv-tb-subheading {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-right: 10px;
+  }
+
+  #dothiv-tb-movement {
+    margin-top: 10px;
+  }
+
+  #dothiv-tb-links {
+    display: none;
+  }
+}
+
+// Smartphones.
+@media screen and (max-width: 479px) {
+  #dothiv-tb-movement {
+    display: none;
+  }
+
+  #dothiv-tb-subheading {
+    width: 30%;
+    font-size: 12px;
+  }
 }

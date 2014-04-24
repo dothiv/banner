@@ -1,4 +1,12 @@
 @color-text: #333;
+@content-width: 660px;
+@content-width-wide: 960px;
+@color-pink: #e20079;
+@color-pinkbar: #E00073;
+@color-pinkbar-alt: #FCE5F1;
+@pinkbar-height: 36px;
+@pinkbar-height-compact: 8px;
+@icon-size: 24px;
 
 * {
     margin: 0;
@@ -22,12 +30,55 @@ body {
 }
 
 .dothiv-status-left {
-    color: white;
-    display: none;
-    font-style: normal;
-    line-height: 36px;
-    padding-right: 20px;
-    text-align: right;
+  color: white;
+  display: none;
+  font-style: normal;
+  line-height: @pinkbar-height;
+  padding-right: 20px;
+  text-align: right;
+  display: block;
+}
+
+.dothiv-status-right {
+  padding-left: 20px;
+  display: inline-block;
+  line-height: @pinkbar-height;
+}
+
+// Smartphones.
+@media screen and (max-width: 479px) {
+  .dothiv-status-right, .dothiv-status-left {
+    font-size: 12px;
+    line-height: 18px;
+    span {
+      display: block;
+    }
+  }
+}
+
+.dothiv-movement {
+  a, a:visited {
+    color: @color-text;
+    text-decoration: none;
+    strong {
+      color: @color-pink;
+      font-weight: bold;
+    }
+  }
+  .dothiv-doublearrow-icon {
+    background: url('../img/double-arrow.png');
+    display: inline-block;
+    width: 17px;
+    height: 9px;
+  }
+}
+
+.dothiv-tb-icon {
+  display: inline-block;
+  height: @icon-size;
+  margin-left: 10px;
+  vertical-align: sub;
+  width: @icon-size;
 }
 
 #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
