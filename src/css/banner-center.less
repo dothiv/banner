@@ -1,10 +1,6 @@
 @import "common.less";
 @import "mixins.less";
 
-@center-height: 116px;
-@center-ribbon-margin: 10px;
-@dropshadow-size: 2px;
-
 // As we have to support IE8 we default to desktop styles. (800px)
 // We add some space for large screens (>=1000px)
 // We remove stuff for small devices (<720px)
@@ -17,7 +13,7 @@
   text-align: center;
   width: 100%;
   height: @center-height + @pinkbar-height;
-  .box-shadow(~"0 -2px 4px #ECECEC,0 2px 2px #ECECEC");
+  .box-shadow(~"0 -@{dropshadow-size} 4px #ECECEC,0 @{dropshadow-size} @{dropshadow-size} #ECECEC");
 }
 
 #dothiv-cb-left-span {

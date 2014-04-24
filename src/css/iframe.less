@@ -1,4 +1,5 @@
 @import "mixins.less";
+@import "config.less";
 
 #dothiv-clickcounter.dothiv-clickcounter-center {
     border: none;
@@ -27,12 +28,16 @@
 }
 
 #dothiv-clickcounter.dothiv-clickcounter-top {
-    height: 60px;
+    height: @top-height + @pinkbar-height-compact + @dropshadow-size;
     left: 0;
     position: fixed;
     text-align: center;
     top: 0;
     width: 100%;
+}
+
+#dothiv-clickcounter.dothiv-clickcounter-top.dothiv-expanded {
+  height: @top-height + @pinkbar-height + @dropshadow-size;
 }
 
 #dothiv-background {

@@ -1,9 +1,6 @@
 @import "common.less";
 @import "mixins.less";
 
-@top-ribbon-margin: 30px;
-@top-height: 48px;
-
 // As we have to support IE8 we default to desktop styles. (800px)
 // We add some space for large screens (>=1000px)
 // We remove stuff for small devices (<720px)
@@ -18,7 +15,7 @@
 }
 
 #dothiv-tb-container {
-  .box-shadow(0 2px 2px #ECECEC);
+  .box-shadow(0 @dropshadow-size @dropshadow-size #ECECEC);
 }
 
 #dothiv-tb-h1 {
