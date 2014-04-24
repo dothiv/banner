@@ -73,12 +73,22 @@ body {
   }
 }
 
-.dothiv-tb-icon {
+.dothiv-icon {
   display: inline-block;
   height: @icon-size;
-  margin-left: 10px;
+  margin-right: 10px;
   vertical-align: sub;
   width: @icon-size;
+}
+
+.dothiv-fb-icon {
+  &:extend(.dothiv-icon);
+  background: url('../img/dothiv-gfx/png/banner/facebook.png');
+}
+
+.dothiv-tw-icon {
+  &:extend(.dothiv-icon);
+  background: url('../img/dothiv-gfx/png/banner/twitter.png');
 }
 
 #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
