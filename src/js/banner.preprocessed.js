@@ -264,7 +264,7 @@
             bannerContainer.style.display = 'block';
         } else if (msie <= 9 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '240px';
-            bannerContainer.style.right = '-210px';
+            bannerContainer.style.right = '-240px';
             bannerContainer.style.height = '150px';
         }
 
@@ -273,10 +273,10 @@
 
         if (msie <= 9 && document.compatMode==='CSS1Compat') {
             bannerContainer.onmouseover = function() {
-                bannerContainer.style.right = '-145px';
+                bannerContainer.style.right = '-212px';
             };
             bannerContainer.onmouseout = function() {
-                bannerContainer.style.right = '-210px';
+                bannerContainer.style.right = '-240px';
             };
         } else {
             if (!isTouchDevice()) {
