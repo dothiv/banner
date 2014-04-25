@@ -77,6 +77,7 @@ function parse(template, config) {
 
 /**
  * Determines whether the pink bar needs to be rendered in short version.
+ * FIXME: Rename.
  */
 function isShortBar(config) {
     return config.status < 50;

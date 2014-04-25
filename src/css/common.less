@@ -23,7 +23,6 @@ body {
 
 .dothiv-status-left {
   color: white;
-  display: none;
   font-style: normal;
   line-height: @pinkbar-height;
   padding-right: 20px;
@@ -37,14 +36,24 @@ body {
   line-height: @pinkbar-height;
 }
 
+.dothiv-status-right, .dothiv-status-left {
+  span {
+    white-space: nowrap;
+  }
+}
+
+.dothiv-status-small {
+  font-size: 12px;
+  line-height: @pinkbar-height / 2;
+  span {
+    display: block;
+  }
+}
+
 // Smartphones.
 @media screen and (max-width: 479px) {
   .dothiv-status-right, .dothiv-status-left {
-    font-size: 12px;
-    line-height: 18px;
-    span {
-      display: block;
-    }
+    &:extend(.dothiv-status-small);
   }
 }
 

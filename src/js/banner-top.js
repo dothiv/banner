@@ -41,13 +41,11 @@
             document.getElementById("dothiv-tb-container").onmouseover = function () {
                 expandPinkBar(shortBar);
             };
-            document.getElementById("dothiv-tb-container").onmouseout = function () {
-                compactPinkBar(shortBar);
-            };
+            document.getElementById("dothiv-tb-container").onmouseout = compactPinkBar;
         }
     }
 
-    function compactPinkBar(shortBar) {
+    function compactPinkBar() {
         topExpanded = false;
         window.parent.postMessage("compact","*");
         document.getElementById("dothiv-tb-container").className = '';

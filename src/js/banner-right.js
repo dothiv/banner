@@ -20,8 +20,21 @@
         // Make banner body visible
         document.body.style.display = 'block';
 
+        // Determine whether the status bar is short
+        var shortBar = isShortBar(config);
+
         // Configure pink status bar
         document.getElementById("dothiv-rb-pinkbar").style.width = config.status + '%';
+
+        // Register events for removing the banner, if supported by browser
+        if (!!window.postMessage) {
+            document.getElementById("dothiv-rb-close").onclick = function () {
+                window.parent.postMessage("remove", "*");
+            };
+        }
+        else {
+            document.getElementById("dothiv-rb-close").style.display = 'none';
+        }
 
         if (isTouchDevice()) {
             // Register events for click (simulate mouse over on mobile devices)
@@ -29,12 +42,14 @@
                 if (expanded) {
                     compact();
                 } else {
-                    expand();
+                    expand(shortBar, config);
                 }
             }
         } else {
             // Register events for mouseover
-            document.body.onmouseover = expand;
+            document.body.onmouseover = function() {
+                expand(shortBar);
+            };
             document.body.onmouseout = compact;
         }
 
@@ -44,11 +59,18 @@
         }
     }
 
-    function expand()
+    function expand(shortBar, config)
     {
         expanded = true;
         window.parent.postMessage("expand","*");
         document.getElementById("dothiv-rb-container").className = 'dothiv-rb-mouseover';
+        if (shortBar) {
+            document.getElementById("dothiv-rb-status-right").style.display = 'inline-block';
+            document.getElementById("dothiv-rb-status-left").style.display = 'none';
+        } else {
+            document.getElementById("dothiv-rb-status-left").style.display = 'inline-block';
+            document.getElementById("dothiv-rb-status-right").style.display = 'none';
+        }
     }
 
     function compact()
@@ -56,5 +78,7 @@
         expanded = false;
         window.parent.postMessage("compact","*");
         document.getElementById("dothiv-rb-container").className = '';
+        document.getElementById("dothiv-rb-status-right").style.display = 'none';
+        document.getElementById("dothiv-rb-status-left").style.display = 'none';
     }
 })();

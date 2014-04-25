@@ -12,17 +12,23 @@
     <body>
         <div id='dothiv-rb-container'>
             <div id='dothiv-rb-statusbar'>
-                <div id='dothiv-rb-pinkbar'></div>
-                <span id='dothiv-rb-status-left'>%ACTIVATED%<br/><b>231.345&nbsp;%CURRENCY%</b></span>
+                <div id='dothiv-rb-pinkbar'>
+                    <span id='dothiv-rb-status-left' class='dothiv-status-left'>
+                        <span>%CLICKCOUNT%</span><br>
+                        <span>= <strong>%MONEY%</strong></span>
+                    </span>
+                </div>
+                <div id='dothiv-rb-status-right' class='dothiv-status-right'>
+                    <span>%CLICKCOUNT%</span><br> <span>= <strong>%MONEY%</strong></span>
+                </div>
             </div>
 
-            <div id='dothiv-rb-right-content'>
+            <div id='dothiv-rb-content'>
                 <div id='dothiv-rb-left'>
                     <h1 id='dothiv-rb-h1'>%HEADING%</h1>
+                    <span id='dothiv-rb-subheading'><a href="http://dotHIV.org" target="_blank">%SUBHEADING%</a></span>
                 </div>
-                <div id='dothiv-rb-links'>
-                    <a href='http://dothiv.org' target='_blank'>%ABOUT%</a>
-                </div>
+                <span id='dothiv-rb-close' class='dothiv-close'></span>
             </div>
         </div>
     </body>
