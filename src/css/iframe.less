@@ -18,7 +18,7 @@
     position: fixed;
     width: @right-width;
     z-index: 2147483647;
-    right: -(@right-width / 2) + (@right-iframe-height / 2);
+    right: -(@right-width / 2) + (@right-iframe-height / 2) - @right-margin;
     bottom: @right-iframe-bottom + (@right-width / 2);
     .rotate(270);
 }
@@ -26,7 +26,7 @@
 #dothiv-clickcounter.dothiv-clickcounter-right.dothiv-rb-mouseover,
 #dothiv-clickcounter.dothiv-clickcounter-right.dothiv-expanded {
     height: @right-iframe-height-expanded;
-    right: -(@right-width / 2) + (@right-iframe-height-expanded / 2);
+    right: -(@right-width / 2) + (@right-iframe-height-expanded / 2) - @right-margin;
     bottom: @right-iframe-bottom + (@right-width / 2) + (@right-iframe-height - @right-iframe-height-expanded) / 2;
 }
 
