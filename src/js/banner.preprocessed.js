@@ -251,29 +251,31 @@
         document.body.insertBefore(bannerContainer, document.body.firstChild);
 
         // If we have to deal with IE and it's running in Quirks mode...
+        var msie = getIE();
         if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat') {
             bannerContainer.style.position = 'absolute';
             bannerContainer.style.bottom = '120px';
+            bannerContainer.style.height = '56px'; // 48 + 8
             bannerContainer.style.right = '0';
-        }
-
-        var msie = getIE();
-        if (msie < 8 && document.compatMode==='CSS1Compat') {
-            bannerContainer.style.bottom = '120px';
-            bannerContainer.style.right = '20px';
-            bannerContainer.style.display = 'block';
         } else if (msie <= 9 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '240px';
             bannerContainer.style.right = '-240px';
-            bannerContainer.style.height = '150px';
+            bannerContainer.style.height = '89px'; // 48 + 36 + 5
         }
 
         // Insert CSS rules
         includeCSS();
 
-        if (msie <= 9 && document.compatMode==='CSS1Compat') {
+        if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat') {
             bannerContainer.onmouseover = function() {
-                bannerContainer.style.right = '-212px';
+                bannerContainer.style.height = '84px'; // 48 + 36
+            };
+            bannerContainer.onmouseout = function() {
+                bannerContainer.style.height = '56px'; // 48 + 8
+            };
+        } else if (msie <= 9 && document.compatMode==='CSS1Compat') {
+            bannerContainer.onmouseover = function() {
+                bannerContainer.style.right = '-212px'; // 240px - (36 - 8)
             };
             bannerContainer.onmouseout = function() {
                 bannerContainer.style.right = '-240px';
