@@ -82,9 +82,20 @@
      */
     function ajaxCallback(responseText) {
         var config = JSON.parse(responseText);
-        if (!!window.postMessage)
+        if (hasMessaging()) {
             registerMessageHandling(config);
+        }
         manipulateDOM(config);
+    }
+
+    /**
+     * Returns whether window.postMessage is supported in this browser.
+     *
+     * @returns {boolean}
+     */
+    function hasMessaging()
+    {
+        return !!window.postMessage;
     }
 
     /**
@@ -282,13 +293,15 @@
             };
         } else {
             if (!isTouchDevice()) {
-                // Register event for mouseover on iframe
-                bannerContainer.onmouseover = function() {
-                    bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
-                };
-                bannerContainer.onmouseout = function() {
-                    bannerContainer.className = 'dothiv-clickcounter-right';
-                };
+                // Register event for mouseover on iframe if messaging is not supported
+                if (!hasMessaging()) {
+                    bannerContainer.onmouseover = function() {
+                        bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
+                    };
+                    bannerContainer.onmouseout = function() {
+                        bannerContainer.className = 'dothiv-clickcounter-right';
+                    };
+                }
             }
         }
     }
