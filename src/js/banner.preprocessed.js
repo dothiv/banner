@@ -5,6 +5,7 @@
     // These are grunt includes
     //@@include('domready.js')
     //@@include('json2.js')
+    //@@include('helpers.js')
 
     // -------- This is the main procedure -------- //
     // Check if this is the first visit and if we can set cookies
@@ -69,9 +70,9 @@
             var responseText = '{"secondvisit":"right","firstvisit":"right"}';
 
             // Use other default config for old IEs
-            var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
-            if (msie <= 8)
+            if (getIE() <= 8) {
                 responseText = '{"secondvisit":"center","firstvisit":"center"}';
+            }
             ajaxCallback(responseText);
         }
     }
@@ -81,9 +82,20 @@
      */
     function ajaxCallback(responseText) {
         var config = JSON.parse(responseText);
-        if (!!window.postMessage)
+        if (hasMessaging()) {
             registerMessageHandling(config);
+        }
         manipulateDOM(config);
+    }
+
+    /**
+     * Returns whether window.postMessage is supported in this browser.
+     *
+     * @returns {boolean}
+     */
+    function hasMessaging()
+    {
+        return !!window.postMessage;
     }
 
     /**
@@ -97,9 +109,10 @@
         var eventer = window[eventMethod];
         var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
         eventer(messageEvent, function(e) {
+            var iframe = document.getElementById('dothiv-clickcounter');
             switch (e.data) {
                 case 'get config':
-                    document.getElementById('dothiv-clickcounter').contentWindow.postMessage(JSON.stringify(config), "*");
+                    iframe.contentWindow.postMessage(JSON.stringify(config), "*");
                     break;
                 case 'remove':
                     if (document.getElementById('dothiv-outer'))
@@ -109,6 +122,12 @@
                     if (document.getElementById('dothiv-background'))
                         document.body.removeChild(document.getElementById('dothiv-background'));
                   break;
+                case 'expand':
+                    iframe.className += ' dothiv-expanded';
+                    break;
+                case 'compact':
+                    iframe.className = iframe.className.replace('dothiv-expanded', '');
+                    break;
             }
         }, false);
     }
@@ -118,6 +137,16 @@
      * done once the DOM is ready.
      */
     function manipulateDOM(config) {
+        // @ifdef DEBUG
+        switch(window.location.hash.substr(1)) {
+            case 'center':
+            case 'right':
+            case 'top':
+                firstVisit = true;
+                config.firstvisit = window.location.hash.substr(1);
+                break;
+        }
+        // @endif
         domready(function () {
             // Determine which of the three banner versions to render
             if (firstVisit || (config.secondvisit != 'top' && config.secondvisit != 'right' && config.secondvisit != 'center'))
@@ -170,7 +199,10 @@
         bannerContainer.id = 'dothiv-clickcounter';
         bannerContainer.className = 'dothiv-clickcounter-' + position;
         // @ifdef DEBUG
-        bannerContainer.src = 'banner-' + position + '.html';
+        if (typeof Date.now === "undefined") {
+            Date.now = Date.now || function() { return +new Date; };
+        }
+        bannerContainer.src = 'banner-' + position + '.html?' + Date.now();
         // @endif
         // @ifndef DEBUG
         bannerContainer.src = 'https://dothiv-registry.appspot.com/static/banner-' + position + '.html';
@@ -202,8 +234,7 @@
             bannerContainer.style.position = 'absolute';
 
         // Specials for IE6 standard mode
-        var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
-        if (msie == 6 && document.compatMode=='CSS1Compat') {
+        if (isIE(6) && document.compatMode=='CSS1Compat') {
             bannerContainer.style.position = 'absolute';
             bannerBackground.style.height = '1200px';
         }
@@ -231,41 +262,47 @@
         document.body.insertBefore(bannerContainer, document.body.firstChild);
 
         // If we have to deal with IE and it's running in Quirks mode...
+        var msie = getIE();
         if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat') {
             bannerContainer.style.position = 'absolute';
             bannerContainer.style.bottom = '120px';
+            bannerContainer.style.height = '56px'; // 48 + 8
             bannerContainer.style.right = '0';
-        }
-
-        var msie = parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
-        if (msie < 8 && document.compatMode==='CSS1Compat') {
-            bannerContainer.style.bottom = '120px';
-            bannerContainer.style.right = '20px';
-            bannerContainer.style.display = 'block';
         } else if (msie <= 9 && document.compatMode==='CSS1Compat') {
             bannerContainer.style.bottom = '240px';
-            bannerContainer.style.right = '-210px';
-            bannerContainer.style.height = '150px';
+            bannerContainer.style.right = '-240px';
+            bannerContainer.style.height = '89px'; // 48 + 36 + 5
         }
 
         // Insert CSS rules
         includeCSS();
 
-        if (msie <= 9 && document.compatMode==='CSS1Compat') {
+        if(navigator.appName.indexOf("Internet Explorer")!=-1 && document.compatMode!=='CSS1Compat') {
             bannerContainer.onmouseover = function() {
-                bannerContainer.style.right = '-145px';
+                bannerContainer.style.height = '84px'; // 48 + 36
             };
             bannerContainer.onmouseout = function() {
-                bannerContainer.style.right = '-210px';
+                bannerContainer.style.height = '56px'; // 48 + 8
+            };
+        } else if (msie <= 9 && document.compatMode==='CSS1Compat') {
+            bannerContainer.onmouseover = function() {
+                bannerContainer.style.right = '-212px'; // 240px - (36 - 8)
+            };
+            bannerContainer.onmouseout = function() {
+                bannerContainer.style.right = '-240px';
             };
         } else {
-            // Register event for mouseover on iframe
-            bannerContainer.onmouseover = function() {
-                bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
-            };
-            bannerContainer.onmouseout = function() {
-                bannerContainer.className = 'dothiv-clickcounter-right';
-            };
+            if (!isTouchDevice()) {
+                // Register event for mouseover on iframe if messaging is not supported
+                if (!hasMessaging()) {
+                    bannerContainer.onmouseover = function() {
+                        bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
+                    };
+                    bannerContainer.onmouseout = function() {
+                        bannerContainer.className = 'dothiv-clickcounter-right';
+                    };
+                }
+            }
         }
     }
 

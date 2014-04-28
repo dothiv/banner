@@ -1,0 +1,3 @@
+[submodule "src/img/dothiv-gfx"]
+	path = src/img/dothiv-gfx
+	url = git@github.com:dothiv/dothiv-gfx.git

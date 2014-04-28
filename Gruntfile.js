@@ -58,8 +58,7 @@ module.exports = function(grunt) {
             tmp: {
                 files: [
                         {expand: true, cwd: 'src/', src: ['banner-*.html'], dest: 'tmp/'},
-                        {expand: true, cwd: 'src/img/', src: ['*'], dest: 'tmp/img/'},
-                        {expand: true, cwd: 'src/js/', src: ['*'], dest: 'tmp/js/'},
+                        {expand: true, cwd: 'src/js/', src: ['*'], dest: 'tmp/js/'}
                        ]
             },
             build: {
@@ -70,8 +69,29 @@ module.exports = function(grunt) {
             },
             debug: {
                 files: [
-                        {expand: true, cwd: 'src/', src: ['test-page.html', 'demo.json'], dest: 'build/'}
+                        {expand: true, cwd: 'src/', src: ['test-page.html', 'demo.json', 'responsive.html'], dest: 'build/'}
                        ]
+            }
+        },
+        imagemin: {
+            dynamic: {
+                options: {
+                    optimizationLevel: 7
+                },
+                files: [
+                    {
+                        expand: true,                  // Enable dynamic expansion
+                        cwd: 'src/img/',                   // Src matches are relative to this path
+                        src: ['*.{png,jpg,gif}'],   // Actual patterns to match
+                        dest: 'tmp/img/'                  // Destination path prefix
+                    },
+                    {
+                        expand: true,
+                        cwd: 'src/img/dothiv-gfx/',
+                        src: ['{png,gif}/banner/*.{png,gif}'],
+                        dest: 'tmp/img/dothiv-gfx'
+                    }
+                ]
             }
         },
         imageEmbed: {
@@ -142,9 +162,12 @@ module.exports = function(grunt) {
     // Load the plugin that provides the "preprocess" task.
     grunt.loadNpmTasks('grunt-preprocess');
 
+    // Load the plugin that provides the "imagemin" task.
+    grunt.loadNpmTasks('grunt-contrib-imagemin');
+
     // Default tasks.
-    grunt.registerTask('default', ['clean','preprocess:build','less','copy:tmp','imageEmbed','cssmin','uglify:libs','includereplace:internal','uglify:internal','includereplace:external','htmlmin','uglify:external','copy:build']);
+    grunt.registerTask('default', ['clean','preprocess:build','less','copy:tmp','imagemin','imageEmbed','cssmin','uglify:libs','includereplace:internal','uglify:internal','includereplace:external','htmlmin','uglify:external','copy:build']);
 
     // Debug tasks.
-    grunt.registerTask('debug', ['clean','preprocess:debug','less','copy:tmp','imageEmbed','cssmin','includereplace:internal','includereplace:external','copy:build','copy:debug']);
+    grunt.registerTask('debug', ['clean','preprocess:debug','less','copy:tmp','imagemin','imageEmbed','cssmin','includereplace:internal','includereplace:external','copy:build','copy:debug']);
 };

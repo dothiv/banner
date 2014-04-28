@@ -16,6 +16,8 @@ The banner project is configured to build four files:
 
 The minified versions of these files can be built with `grunt` in the repo's root directory. An alternative, non-minified version for debugging purposes can be built with `grunt debug`. This version also generates a test page.
 
+For testing the three different layouts, append `#center`, `#right` or `#left` to the `build/test-page.html`.
+
 ## Deployment
 
 Internally, the banner project relies on resources placed in the following locations:

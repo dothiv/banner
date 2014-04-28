@@ -11,33 +11,35 @@
     </head>
     <body>
         <div id='dothiv-cb-container'>
-            <div id='dothiv-cb-content' class='dothiv-coin'>
-                <span id='dothiv-cb-close' class='dothiv-close'></span>
+            <div id='dothiv-cb-content' class='dothiv-ribbon'>
                 <div id='dothiv-cb-left'>
                     <h1 id='dothiv-cb-h1'>%HEADING%</h1>
-                    <span id='dothiv-cb-left-span'>%SUBHEADING%
-                        <a id='dothiv-cb-fb-icon' class='dothiv-cb-icon' href='https://www.facebook.com/dothiv'></a>
-                        <a id='dothiv-cb-tw-icon' class='dothiv-cb-icon' href='https://twitter.com/dotHIV'></a>
-                    </span>
+                    <span id='dothiv-cb-left-span'><a href="http://dotHIV.org" target="_blank">%SUBHEADING%</a></span>
+                    <div id='dothiv-cb-right'>
+                        <span id='dothiv-cb-links'>
+                            <a id='dothiv-cb-fb-icon' class='dothiv-fb-icon' href='https://www.facebook.com/dothiv' target='_blank'></a>
+                            <a id='dothiv-cb-tw-icon' class='dothiv-tw-icon' href='https://twitter.com/dotHIV' target='_blank'></a>
+                        </span>
+                        <span id='dothiv-cb-movement' class='dothiv-movement'>
+                            <a href='http://dotHIV.org/' target='_blank'>
+                                %ACTIVATED%<br>
+                                %ABOUT% <span class='dothiv-doublearrow-icon'></span>
+                            </a>
+                        </span>
+                    </div>
                 </div>
-                <div id='dothiv-cb-right'>
-                    <span id='dothiv-cb-movement' class='dothiv-arrow'>%CLAIM%&nbsp;
-                        <a href='http://dothiv.org' id='dothiv-cb-logo'></a>
-                    </span>
-                    <span id='dothiv-cb-links'>
-                         <a class='dothiv-cb-link' href='http://dothiv.org'>%ABOUT%</a>&nbsp;
-                       <a class='dothiv-cb-link' href='http://dothiv.org'>%VOTE%</a>
-                    </span>
-                </div>
+                <span id='dothiv-cb-close' class='dothiv-close'></span>
             </div>
             <div id='dothiv-cb-statusbar'>
                 <div id='dothiv-cb-pinkbar'>
-                    <span id='dothiv-cb-status-left' class='dothiv-status-left'>%ACTIVATED%&nbsp;<b>%MONEY%&nbsp;%CURRENCY%</b></span>
-                    <span id='dothiv-cb-status-left-secondary' class='dothiv-status-left'>%CORRESPONDING%&nbsp;<b>%CLICKCOUNT%&nbsp;%CLICKS%</b></span>
+                    <span id='dothiv-cb-status-left' class='dothiv-status-left'>
+                        <span>%CLICKCOUNT%</span>
+                        <span>= <strong>%MONEY%</strong></span>
+                    </span>
                 </div>
-                <div>
-                    <span id='dothiv-cb-status-right'>%ACTIVATED%&nbsp;<b>%MONEY%&nbsp;%CURRENCY%</b></span>
-                    <span id='dothiv-cb-status-right-secondary'>%CORRESPONDING%&nbsp;<b>%CLICKCOUNT%&nbsp;%CLICKS%</b></span>
+                <div id='dothiv-cb-status-right' class='dothiv-status-right'>
+                    <span>%CLICKCOUNT%</span>
+                    <span>= <strong>%MONEY%</strong></span>
                 </div>
             </div>
         </div>

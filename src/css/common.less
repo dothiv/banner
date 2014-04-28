@@ -1,3 +1,5 @@
+@import "config.less";
+
 * {
     margin: 0;
     padding: 0;
@@ -8,45 +10,121 @@ body {
     display: none;
 }
 
-.dothiv-arrow {
-    background-image: url('../img/arrow.png');
-}
-
 .dothiv-close {
-    background-image: url('../img/x.png');
+    background-image: url('../img/dothiv-gfx/gif/banner/coin-close@2x.gif');
     cursor: pointer;
     display: block;
-    height: 34px;
+    height: 74px;
     position: absolute;
     right: 5px;
     top: 7px;
-    width: 34px;
+    width: 69px;
 }
 
 .dothiv-status-left {
-    color: white;
-    display: none;
-    font-style: normal;
-    line-height: 36px;
-    padding-right: 20px;
-    text-align: right;
+  color: white;
+  font-style: normal;
+  line-height: @pinkbar-height;
+  padding-right: 20px;
+  text-align: right;
+  display: block;
+}
+
+.dothiv-status-right {
+  padding-left: 20px;
+  display: inline-block;
+  line-height: @pinkbar-height;
+}
+
+.dothiv-status-right, .dothiv-status-left {
+  span {
+    white-space: nowrap;
+  }
+}
+
+.dothiv-status-small {
+  font-size: 12px;
+  line-height: @pinkbar-height / 2;
+  span {
+    display: block;
+  }
+}
+
+// Smartphones.
+@media screen and (max-width: 479px) {
+  .dothiv-status-right, .dothiv-status-left {
+    &:extend(.dothiv-status-small);
+  }
+}
+
+.dothiv-movement {
+  a, a:visited {
+    color: @color-text;
+    text-decoration: none;
+    strong {
+      color: @color-pink;
+      font-weight: bold;
+    }
+  }
+  .dothiv-doublearrow-icon {
+    background: url('../img/double-arrow.png');
+    display: inline-block;
+    width: 17px;
+    height: 9px;
+  }
+}
+
+.dothiv-icon {
+  display: inline-block;
+  height: @icon-size;
+  margin-right: 10px;
+  vertical-align: sub;
+  width: @icon-size;
+}
+
+.dothiv-fb-icon {
+  &:extend(.dothiv-icon);
+  background: url('../img/dothiv-gfx/png/banner/facebook.png');
+}
+
+.dothiv-tw-icon {
+  &:extend(.dothiv-icon);
+  background: url('../img/dothiv-gfx/png/banner/twitter.png');
 }
 
 #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
     background: #F7F7F7 url('../img/squairy-small.png');
     *background: #F7F7F7;
-    color: #333333;
-    font-family: Georgia, serif;
-    font-size: 13px;
-    font-style: italic;
+    color: @color-text;
+    font-family: Arial, Helvetica, sans-serif;
+
     z-index: 2147483647;
     & a, a:visited {
-        color: #333333;
+        color: @color-text;
     }
     & h1 {
         display: block;
-        font-family: 'Trebuchet MS', Helvetica, sans-serif;
         font-style: normal;
         font-weight: bold;
     }
 }
+
+// All sizes.
+
+#dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
+  font-size: 16px;
+}
+
+/*
+@media screen { // All sizes
+
+}
+
+@media screen and (min-width: 1000px) {
+  #dothiv-cb-container, #dothiv-rb-container, #dothiv-tb-container {
+    font-size: 13px;
+  }
+}
+
+*/
+

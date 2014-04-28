@@ -5,7 +5,10 @@
     // These are grunt includes
     //@@include('domready.js')
     //@@include('json2.js')
+    //@@include('helpers.js')
     //@@include('banner-base.js')
+
+    var topExpanded = false;
 
     /**
      * Creates the 'top' version of the banner.
@@ -30,31 +33,42 @@
            document.getElementById("dothiv-tb-close").style.display = 'none';
 
         // Register events for mouseover
-        document.getElementById("dothiv-tb-container").onmouseover = function() {
-            document.getElementById("dothiv-tb-container").className = 'dothiv-tb-mouseover';
-            showLabel(shortBar);
-        };
-        document.getElementById("dothiv-tb-container").onmouseout = function(){
-            document.getElementById("dothiv-tb-container").className = '';
-            hideLabel();
-        };
+        if (isTouchDevice()) {
+            document.getElementById("dothiv-tb-statusbar").onclick = function () {
+                togglePinkBar(shortBar);
+            };
+        } else {
+            document.getElementById("dothiv-tb-container").onmouseover = function () {
+                expandPinkBar(shortBar);
+            };
+            document.getElementById("dothiv-tb-container").onmouseout = compactPinkBar;
+        }
     }
 
-    /**
-     * Label the pink bar according to its length.
-     */
-    function showLabel(shortBar) {
-        if (shortBar)
-            document.getElementById("dothiv-tb-status-right").style.display = 'inline-block';
-        else
-            document.getElementById("dothiv-tb-status-left").style.display = 'block';
-    }
-
-    /**
-     * Hide label of pink bar.
-     */
-    function hideLabel() {
+    function compactPinkBar() {
+        topExpanded = false;
+        window.parent.postMessage("compact","*");
+        document.getElementById("dothiv-tb-container").className = '';
         document.getElementById("dothiv-tb-status-right").style.display = 'none';
         document.getElementById("dothiv-tb-status-left").style.display = 'none';
+    }
+
+    function expandPinkBar(shortBar) {
+        topExpanded = true;
+        window.parent.postMessage("expand","*");
+        document.getElementById("dothiv-tb-container").className = 'dothiv-tb-mouseover';
+        if (shortBar) {
+            document.getElementById("dothiv-tb-status-right").style.display = 'inline-block';
+        } else {
+            document.getElementById("dothiv-tb-status-left").style.display = 'block';
+        }
+    }
+
+    function togglePinkBar(shortBar) {
+        if (topExpanded) {
+            compactPinkBar(shortBar);
+        } else {
+            expandPinkBar(shortBar);
+        }
     }
 })();

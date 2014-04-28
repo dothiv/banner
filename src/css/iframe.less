@@ -1,39 +1,46 @@
 @import "mixins.less";
+@import "config.less";
 
 #dothiv-clickcounter.dothiv-clickcounter-center {
     border: none;
-    height: 160px;
     left: 0;
     position: fixed;
-    top: 200px;
     width: 100%;
     z-index: 2147483647;
 }
 
+@right-iframe-height: @right-height + @pinkbar-height-compact + 2 * @right-margin;
+@right-iframe-height-expanded: @right-height + @pinkbar-height + 2 * @right-margin;
+
 #dothiv-clickcounter.dothiv-clickcounter-right {
     border: none;
-    bottom: 200px;
-    height: 86px;
+    height: @right-iframe-height;
     position: fixed;
-    right: -116px;
-    width: 270px;
+    width: @right-width;
     z-index: 2147483647;
+    right: -(@right-width / 2) + (@right-iframe-height / 2) - @right-margin;
+    bottom: @right-iframe-bottom + (@right-width / 2);
     .rotate(270);
 }
 
-#dothiv-clickcounter.dothiv-clickcounter-right.dothiv-rb-mouseover {
-    height: 129px;
-    bottom: 180px;
-    right: -70px;
+#dothiv-clickcounter.dothiv-clickcounter-right.dothiv-rb-mouseover,
+#dothiv-clickcounter.dothiv-clickcounter-right.dothiv-expanded {
+    height: @right-iframe-height-expanded;
+    right: -(@right-width / 2) + (@right-iframe-height-expanded / 2) - @right-margin;
+    bottom: @right-iframe-bottom + (@right-width / 2) + (@right-iframe-height - @right-iframe-height-expanded) / 2;
 }
 
 #dothiv-clickcounter.dothiv-clickcounter-top {
-    height: 60px;
+    height: @top-height + @pinkbar-height-compact + @dropshadow-size;
     left: 0;
     position: fixed;
     text-align: center;
     top: 0;
     width: 100%;
+}
+
+#dothiv-clickcounter.dothiv-clickcounter-top.dothiv-expanded {
+  height: @top-height + @pinkbar-height + @dropshadow-size;
 }
 
 #dothiv-background {
@@ -51,6 +58,43 @@
     z-index: 2147483646;
 }
 
+// Reset styles which could have been applied to divs.
+// The outer div should not be visible when rendered.
+#dothiv-outer {
+  border: 0;
+  background: 0;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  display: block;
+  position: static;
+}
+
 * html #dothiv-background, * html #dothiv-clickcounter {
     position: absolute;
+}
+
+
+@media screen {
+  #dothiv-clickcounter.dothiv-clickcounter-center {
+    height: 160px + 36px;
+    top: 100px;
+  }
+}
+
+@media screen and (min-height: 480px) {
+  #dothiv-clickcounter.dothiv-clickcounter-center {
+    top: 200px;
+  }
+}
+
+@media screen and (min-width: 720px) {
+
+}
+
+@media screen and (min-width: 1000px) {
+  #dothiv-clickcounter.dothiv-clickcounter-center {
+    height: 160px;
+  }
 }
