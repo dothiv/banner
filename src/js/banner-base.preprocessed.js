@@ -12,7 +12,7 @@ domready(function () {
             var config = JSON.parse(e.data)
             if (!(config.money == undefined)) {
                 // @ifdef DEBUG
-                config.percent = parseInt(Math.random() * 100);
+                config.percent = Math.random();
                 // @endif
                 customizeBanner(config);
             } else {
