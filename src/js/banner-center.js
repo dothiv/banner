@@ -22,7 +22,7 @@
         var shortBar = isShortBar(config);
 
         // Configure pink status bar
-        document.getElementById("dothiv-cb-pinkbar").style.width = config.status + '%';
+        document.getElementById("dothiv-cb-pinkbar").style.width = (config.percent * 100) + '%';
         if (shortBar) {
             document.getElementById("dothiv-cb-status-left").style.display = 'none';
             document.getElementById("dothiv-cb-status-right").style.display = '';

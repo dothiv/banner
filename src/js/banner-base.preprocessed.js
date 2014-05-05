@@ -12,7 +12,7 @@ domready(function () {
             var config = JSON.parse(e.data)
             if (!(config.money == undefined)) {
                 // @ifdef DEBUG
-                config.status = parseInt(Math.random() * 100);
+                config.percent = parseInt(Math.random() * 100);
                 // @endif
                 customizeBanner(config);
             } else {
@@ -80,5 +80,5 @@ function parse(template, config) {
  * FIXME: Rename.
  */
 function isShortBar(config) {
-    return config.status < 50;
+    return config.percent < 0.5;
 }

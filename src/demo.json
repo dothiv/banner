@@ -1,11 +1,16 @@
 {
-    "status":25,
+    "percent":0.25,
     "money":"36.294,28 &euro;",
     "clickcount":"36.294.280 Klicks",
     "firstvisit":"center",
-    "secondvisit":"center",
+    "secondvisit":"right",
     "heading":"Danke!",
     "subheading":"Jeder Klick hilft mit 0,1 ct",
     "about":"Mehr über die <strong>dotHIV</strong> Initiative",
-    "activated":"Bereits 2,37 Mio EUR gespendet:"
+    "activated":"Bereits 2,37 Mio &euro; gespendet:",
+    "locale":"de",
+    "unlocked":36294.28,
+    "clicks":36294280,
+    "donated":2370000.0,
+    "increment":0.001
 }

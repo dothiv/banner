@@ -24,7 +24,7 @@
         var shortBar = isShortBar(config);
 
         // Configure pink status bar
-        document.getElementById("dothiv-rb-pinkbar").style.width = config.status + '%';
+        document.getElementById("dothiv-rb-pinkbar").style.width = (config.percent * 100) + '%';
 
         // Register events for removing the banner, if supported by browser
         if (!!window.postMessage) {
