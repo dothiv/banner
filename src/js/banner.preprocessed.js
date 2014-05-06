@@ -67,12 +67,7 @@
             request.send();
         } catch(e) {
             // Use default config if request fails
-            var responseText = '{"secondvisit":"right","firstvisit":"right"}';
-
-            // Use other default config for old IEs
-            if (getIE() <= 8) {
-                responseText = '{"secondvisit":"center","firstvisit":"center"}';
-            }
+            var responseText = '{"secondvisit":"top","firstvisit":"top"}';
             ajaxCallback(responseText);
         }
     }
@@ -163,14 +158,14 @@
                 }
             else
                switch(config.secondvisit) {
-                     case 'top':
-                         createTopBanner(config);
+                     case 'right':
+                         createRightBanner(config);
                          break;
                      case 'center':
                          createCenterBanner(config);
                          break;
                      default:
-                         createRightBanner(config);
+                         createTopBanner(config);
                          break;
     }});}
 
