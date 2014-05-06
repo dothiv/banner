@@ -62,7 +62,7 @@
             request.open("GET", "demo.json", true);
             // @endif
             // @ifndef DEBUG
-            request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&firstvisit=" + firstVisit + "&domain=" + document.domain, true);
+            request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&&domain=" + document.domain, true);
             // @endif
             request.send();
         } catch(e) {
