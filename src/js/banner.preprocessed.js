@@ -34,7 +34,6 @@
      * already seen the banner. Returns 'true' on success and 'false' otherwise.
      */
     function setCookie() {
-        var value=escape(value);
         document.cookie='dothivstatus=returning';
         return getCookie() ? true : false;
     }
