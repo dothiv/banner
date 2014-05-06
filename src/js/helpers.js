@@ -29,3 +29,10 @@ function getIE()
 {
     return parseInt((/msie (\d+)/.exec(navigator.userAgent.toLowerCase()) || [])[1], 10);
 }
+
+/**
+ * Add Date.now() if not present.
+ */
+if (typeof Date.now === "undefined") {
+    Date.now = Date.now || function() { return +new Date; };
+}

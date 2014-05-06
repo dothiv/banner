@@ -61,7 +61,10 @@
             request.open("GET", "demo.json", true);
             // @endif
             // @ifndef DEBUG
-            request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&&domain=" + document.domain, true);
+            var pt = getPreviousVisit();
+            var ct = Date.now();
+            setPreviousVisit(ct);
+            request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&domain=" + document.domain + '&pt=' + pt + '&ct=' + ct, true);
             // @endif
             request.send();
         } catch(e) {
@@ -69,6 +72,34 @@
             var responseText = '{"secondvisit":"top","firstvisit":"top"}';
             ajaxCallback(responseText);
         }
+    }
+
+    /**
+     * Saves time t as time last visited in a cookie.
+     * 
+     * @param t
+     */
+    function setPreviousVisit(t)
+    {
+        var lifetime = 2592000;
+        var d = new Date();
+        var expires = d.setTime(d.getTime() + lifetime * 1000);
+        document.cookie = "dothivpt=" + t + ";path=/;max-age=" + lifetime + ";expires=" + d.toGMTString() + ";";
+    }
+
+    /**
+     * Returns the timestamp in milliseconds of the previous visit (as stored in a cookie) or an empty string.
+     * 
+     * @return ''|int
+     */
+    function getPreviousVisit() 
+    {
+        var pt = '';
+        var ptmatch = document.cookie.match('dothivpt=([0-9]{13})');
+        if (ptmatch) {
+            pt = ptmatch[1];
+        }
+        return pt;
     }
 
     /**
@@ -195,9 +226,6 @@
         bannerContainer.id = 'dothiv-clickcounter';
         bannerContainer.className = 'dothiv-clickcounter-' + position;
         // @ifdef DEBUG
-        if (typeof Date.now === "undefined") {
-            Date.now = Date.now || function() { return +new Date; };
-        }
         bannerContainer.src = 'banner-' + position + '.html?' + Date.now();
         // @endif
         // @ifndef DEBUG
