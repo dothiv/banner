@@ -69,6 +69,7 @@ module.exports = function(grunt) {
             },
             debug: {
                 files: [
+                        {'build/banner.js': 'tmp/js/banner.js'},
                         {expand: true, cwd: 'src/', src: ['test-page.html', 'demo.json', 'responsive.html'], dest: 'build/'}
                        ]
             }

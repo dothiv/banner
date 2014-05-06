@@ -242,7 +242,7 @@
         outerContainer.appendChild(bannerBackground);
         outerContainer.appendChild(bannerContainer);
 
-        document.body.insertBefore(outerContainer, document.body.firstChild);
+        document.body.insertBefore(outerContainer, null);
 
         // Insert CSS rules
         includeCSS();
@@ -259,7 +259,7 @@
     function createRightBanner(config) {
         // Create banner iframe
         var bannerContainer = createIframeElement('right');
-        document.body.insertBefore(bannerContainer, document.body.firstChild);
+        document.body.insertBefore(bannerContainer, null);
 
         // If we have to deal with IE and it's running in Quirks mode...
         var msie = getIE();
@@ -309,7 +309,7 @@
     function createTopBanner(config) {
         // Create banner iframe
         var bannerContainer = createIframeElement('top');
-        document.body.insertBefore(bannerContainer, document.body.firstChild);
+        document.body.insertBefore(bannerContainer, null);
 
         // Insert CSS rules
         includeCSS();
