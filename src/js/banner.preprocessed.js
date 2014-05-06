@@ -132,16 +132,18 @@
      * done once the DOM is ready.
      */
     function manipulateDOM(config) {
-        // @ifdef DEBUG
-        switch(window.location.hash.substr(1)) {
-            case 'center':
-            case 'right':
-            case 'top':
-                firstVisit = true;
-                config.firstvisit = window.location.hash.substr(1);
-                break;
+        // Enable a switch to force the rendering of a specific format.
+        // Use #dothiv:{format} in the hash.
+        if (window.location.hash.substr(1,7) == "dothiv:") {
+            var forceFormat = window.location.hash.substr(8);
+            switch(forceFormat) {
+                case 'center':
+                case 'right':
+                case 'top':
+                    config.firstvisit = config.secondvisit = forceFormat;
+                    break;
+            }
         }
-        // @endif
         domready(function () {
             // Determine which of the three banner versions to render
             if (firstVisit || (config.secondvisit != 'top' && config.secondvisit != 'right' && config.secondvisit != 'center'))
