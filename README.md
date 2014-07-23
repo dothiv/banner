@@ -10,7 +10,7 @@ After cloning the repo, `npm install` in the repo's root directory installs all 
 
 ## Building
 
-The banner project is configured to build four files:
+The click counter project is configured to build four files:
  - `banner.js`, the javascript file that needs to be included into target website
  - `banner-center.html`, the HTML file that will be loaded for the *center* banner
  - `banner-top.html`, the HTML file that will be loaded for the *top* banner
@@ -22,7 +22,7 @@ An alternative, non-minified version for debugging purposes can be built with `.
 
 ## Deployment
 
-Internally, the banner project relies on resources placed in the following locations:
+Internally, the click counter project relies on resources placed in the following locations:
  - `banner.js` must be available at http://dothiv-registry.appspot.com/static/banner.min.js
  - `banner-*.html` files must be available at http://dothiv-registry.appspot.com/static/banner-*.html
 
@@ -61,6 +61,6 @@ See [this sample config object](src/demo.json) for reference.
 
 ### Communication
 
-Each time the target website is visited, the banner javascript sends a POST request to http://dothiv-registry.appspot.com/c.
+Each time the target website is visited, the click counter javascript sends a POST request to http://dothiv-registry.appspot.com/c.
 
 See the [clickcounter-backend's README](https://github.com/dothiv/clickcounter-backend/blob/master/README.md ) for more information.
