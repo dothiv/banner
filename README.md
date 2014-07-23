@@ -2,7 +2,7 @@
 
 Source code for the overlays providing visual feedback to visitors of .HIV domains.
 
-See http://dothiv.github.io/banner/ for a demo.
+See http://clickcounter.hiv/ for a demo.
 
 ## Installation
 
