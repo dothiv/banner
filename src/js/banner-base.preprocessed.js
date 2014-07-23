@@ -66,11 +66,6 @@ function requestConfigAgain() {
  *  - %MONEY%:         config.money
  */
 function parse(template, config) {
-    // @ifndef DEBUG
-    // Test-Mode.
-    // FIXME: Use regular heading when out of test mode. Remove next line.
-    config.heading = '<a href="https://dothiv.github.io/banner/" target="_blank" style="text-decoration: none;"><abbr title="We are currently testing the click counters. So every number you see on the counter is not real but test data.">TEST!</abbr></a>';
-    // @endif
     template = template.replace(/%HEADING%/g,config.heading);
     template = template.replace(/%SUBHEADING%/g,config.subheading);
     template = template.replace(/%ABOUT%/g,config.about);
