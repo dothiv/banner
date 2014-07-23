@@ -90,7 +90,7 @@ module.exports = function(grunt) {
                         expand: true,
                         cwd: 'src/img/dothiv-gfx/',
                         src: ['{png,gif}/banner/*.{png,gif}'],
-                        dest: 'tmp/img/dothiv-gfx'
+                        dest: 'tmp/img/dothiv-gfx/'
                     }
                 ]
             }
@@ -112,7 +112,7 @@ module.exports = function(grunt) {
         },
         includereplace: {
             options: {
-                prefix: '//@@',
+                prefix: '//@@'
             },
             internal: {
                 files: [{expand: true, cwd: 'tmp/', src: ['js/banner-*.js'], dest: 'tmp/'}]
