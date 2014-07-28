@@ -11,9 +11,6 @@ domready(function () {
         eventer(messageEvent, function(e) {
             var config = JSON.parse(e.data)
             if (!(config.money == undefined)) {
-                // @ifdef DEBUG
-                config.percent = Math.random();
-                // @endif
                 customizeBanner(config);
             } else {
               requestConfigAgain();
