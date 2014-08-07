@@ -51,9 +51,8 @@ See [this sample config object](src/demo.json) for reference.
 <tr><td><code>subheading</code></td><td><code>string</code></td><td><code>Jeder Klick hilft mit 0,1 ct</code></td><td>This string will be the subheading of the banner</td></tr>
 <tr><td><code>about</code></td><td><code>string</code></td><td><code>Dieses Projekt wird unterstützt</code></td><td>String for project info</td></tr>
 <tr><td><code>activated</code></td><td><code>string</code></td><td><code>Mehr über die &lt;strong&gt;dotHIV&lt;/strong&gt; Initiative</code></td><td>String for project info</td></tr>
-<tr><td><code>locale</code></td><td><code>string</code></td><td><code>de</code></td><td>Locale setting of the domain</td></tr>
 <tr><td><code>unlocked</code></td><td><code>float</code></td><td><code>36294.28</code></td><td>Amount of money unlocked in current stretch</td></tr>
-<tr><td><code>clicks</code></td><td><code>float</code></td><td><code>36294280</code></td><td>Amount of clicks in current stretch</td></tr>
+<tr><td><code>clicks</code></td><td><code>integer</code></td><td><code>36294280</code></td><td>Amount of clicks in current stretch</td></tr>
 <tr><td><code>donated</code></td><td><code>float</code></td><td><code>2370000.0</code></td><td>Amount of money donated in previous stretches</td></tr>
 <tr><td><code>increment</code></td><td><code>float</code></td><td><code>0.001</code></td><td>Increment per click</td></tr>
 </tbody>
