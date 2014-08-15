@@ -23,6 +23,8 @@ module.exports = function (grunt) {
                 globals: {
                     'topbottom-width': 500,
                     'topbottom-height': 110,
+                    'premium-width': 600,
+                    'premium-height': 150,
                     'leftright-width': 290,
                     'leftright-height': 160,
                     'shadow-size': 20,
