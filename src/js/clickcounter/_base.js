@@ -42,9 +42,11 @@ var showClickCounter = function (config) {
     var clickCounter = $('#clickcounter');
     var pinkbar = clickCounter.find('.pinkbar');
     var barWidth = initPinkBar(clickCounter, pinkbar, config);
-    animateClickCounterEntry(clickCounter, function () {
+    // easeOutBack
+    // easeOutElastic, 1000
+    animateClickCounterEntry(clickCounter, 400, 'easeOutBack', function () {
         animateBar(pinkbar, barWidth * config.percent, function () {
-            animateClickCounterExit(clickCounter, close);
+            animateClickCounterExit(clickCounter, 300, 'linear', close);
         });
     });
 };
