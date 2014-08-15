@@ -287,7 +287,7 @@
      * Remove all clickcounter elements
      */
     function close() {
-        if (develop()) {
+        if (getOverride('reload', false)) {
             var currentPos = document.getElementById('dothiv-clickcounter-iframe').className;
         }
         if (document.getElementById('dothiv-clickcounter-outer')) {
@@ -300,9 +300,14 @@
             document.body.removeChild(document.getElementById('dothiv-clickcounter-background'));
         }
         // Rotate to the next clickcounter
-        if (develop()) {
+        if (getOverride('reload', false)) {
             var nextPosMap = {'top': 'right','right':'bottom', 'bottom': 'left', 'left':'premium', 'premium':'top'};
-            document.location.search = '?dothivclickcounter[position]=' + nextPosMap[currentPos];
+            var rotate = getOverride('rotate', false);
+            var s = '?dothivclickcounter[position]=' + (rotate ? nextPosMap[currentPos] : currentPos) + '&dothivclickcounter[reload]=1';
+            if (rotate) {
+                s += '&dothivclickcounter[rotate]=1';
+            }
+            document.location.search = s;
         }
     }
 
