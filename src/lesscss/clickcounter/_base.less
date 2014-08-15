@@ -11,6 +11,33 @@ body {
 
 .clickcounter {
   box-shadow: 0px 0px @shadow-size rgba(0, 0, 0, 0.3);
-  background-color: #ff1ed1;
+  background-color: #fff;
   position: absolute;
+}
+
+.pinkbar {
+  background-color: @color-pinkbar-alt; // Overrideable
+  height: @pinkbar-height;
+  position: absolute;
+  bottom: @pinkbar-margin;
+  left: @pinkbar-margin;
+  .inner {
+    display: none;
+  }
+  .bar {
+    background-color: @color-pinkbar; // Overrideable
+    height: @pinkbar-height;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .money {
+    line-height: @pinkbar-height;
+    position: absolute;
+    color: contrast(@color-pinkbar); // Overrideable
+    font-family: Arial, Helvetica, sans-serif; // Overrideable
+    font-weight: bold; // Overrideable
+    font-size: 14px;
+    left: @pinkbar-margin / 2;
+  }
 }

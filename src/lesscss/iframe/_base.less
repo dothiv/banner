@@ -1,0 +1,38 @@
+// Defines common styles for all clickcounter iframes
+.iframe {
+  border: none;
+  position: fixed;
+  z-index: 2147483647;
+}
+
+#dothiv-clickcounter-background {
+  background-color: @color-pinkbar;
+  -ms-filter: 'progid:DXImageTransform.Microsoft.Alpha(Opacity=70)';
+  filter: alpha(opacity=70);
+  left: 0px;
+  height: 100%;
+  margin: 0px;
+  opacity: 0.7;
+  padding: 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  z-index: 2147483646;
+}
+
+// Reset styles which could have been applied to divs.
+// The outer div should not be visible when rendered.
+#dothiv-clickcounter-outer {
+  border: 0;
+  background: 0;
+  padding: 0;
+  margin: 0;
+  width: auto;
+  height: auto;
+  display: block;
+  position: static;
+}
+
+* html #dothiv-clickcounter-background, * html #dothiv-clickcounter-iframe {
+  position: absolute;
+}

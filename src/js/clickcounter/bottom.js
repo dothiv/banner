@@ -7,18 +7,20 @@
     var clickcounterWidth = parseInt('{{topbottom-width}}', 10);
     var clickcounterHeight = parseInt('{{topbottom-height}}', 10);
     var shadowSize = parseInt('{{shadow-size}}', 10);
+    var windowWidth = $(window).width();
 
-    function animate(clickcounter) {
-        var windowWidth = $(window).width();
-        $('body').css('display', 'block');
+    function animateClickCounterEntry(clickcounter, completeFunc) {
         clickcounter.css({
             left: (windowWidth - clickcounterWidth) / 2,
             bottom: (-clickcounterHeight + shadowSize) * 2
         });
-        clickcounter.animate({bottom: 0}, 1000, 'easeOutElastic');
+        clickcounter.animate({bottom: 0}, 1000, 'easeOutElastic', completeFunc);
     }
 
-    $(function () {
-        animate($('#clickcounter-bottom'));
-    });
+    function animateClickCounterExit(clickcounter, completeFunc) {
+        clickcounter.animate({bottom: (-clickcounterHeight + shadowSize) * 2}, 500, 'linear', completeFunc);
+    }
+
+    // These are grunt includes
+    {{include('clickcounter/_base.js')}}
 })();

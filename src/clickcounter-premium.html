@@ -6,18 +6,18 @@
     <script type='text/javascript'>
         {{include('vendor/jquery-1.11.1.js')}}
         {{include('vendor/jquery-ui-easing-1.11.1.js')}}
-        {{include('js/clickcounter/left.js')}}
+        {{include('js/clickcounter/premium.js')}}
     </script>
     <style type="text/css">
-        {{include('css/clickcounter/left.css')}}
-        #clickcounter.left {
-            width: {{leftright-width}}px;
-            height: {{leftright-height}}px;
+        {{include('css/clickcounter/premium.css')}}
+        #clickcounter.premium {
+            width: {{topbottom-width}}px;
+            height: {{topbottom-height}}px;
         }
     </style>
 </head>
 <body>
-    <div id="clickcounter" class="left">
+    <div id="clickcounter" class="premium">
         {{include('partial/inner.html')}}
     </div>
 </body>
