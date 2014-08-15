@@ -4,18 +4,16 @@
  * Controls the premium clickcounter
  */
 (function () {
-    var clickcounterWidth = parseInt('{{topbottom-width}}', 10);
     var shadowSize = parseInt('{{shadow-size}}', 10);
     var animationOverflow = parseInt('{{animation-overflow}}', 10);
     var windowHeight = $(window).height();
-    var windowWidth = $(window).width();
 
     function animateClickCounterEntry(clickcounter, completeFunc) {
         clickcounter.css({
-            left: (windowWidth - clickcounterWidth) / 2,
+            left: ($(window).width() - clickcounter.width()) / 2,
             bottom: windowHeight + shadowSize
         });
-        clickcounter.animate({bottom: shadowSize + animationOverflow}, 1000, 'easeOutElastic', completeFunc);
+        clickcounter.animate({bottom: Math.min(windowHeight - clickcounter.height() - shadowSize, shadowSize + animationOverflow)}, 1000, 'easeOutElastic', completeFunc);
     }
 
     function animateClickCounterExit(clickcounter, completeFunc) {

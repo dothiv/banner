@@ -1,7 +1,11 @@
 // Stylesheet for the bottom clickcounter
 @import "../_variables";
 @import "_base";
-@import "_topbottom";
 #clickcounter.premium {
-  &:extend(.topbottom);
+  &:extend(.clickcounter);
+  width: @premium-width;
+  height: @premium-height;
+  @media (max-width: @premium-width) {
+    width: 100%;
+  }
 }

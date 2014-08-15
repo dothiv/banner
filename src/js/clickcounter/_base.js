@@ -28,9 +28,9 @@ var animateBar = function (pinkbar, targetWidth, completeFunc) {
     pinkbar.find('.bar').animate({width: targetWidth}, 750, 'easeOutQuint');
 }
 
-function initPinkBar(pinkbar, config) {
+function initPinkBar(clickcounter, pinkbar, config) {
     var pinkbarMargin = parseInt('{{pinkbar-margin}}', 10);
-    var barWidth = clickcounterWidth - (2 * pinkbarMargin);
+    var barWidth = clickcounter.width() - (2 * pinkbarMargin);
     pinkbar.css({
         width: barWidth
     });
@@ -39,9 +39,9 @@ function initPinkBar(pinkbar, config) {
 
 var showClickCounter = function (config) {
     $('body').css('display', 'block');
-    var pinkbar = $('.pinkbar');
-    var barWidth = initPinkBar(pinkbar, config);
     var clickCounter = $('#clickcounter');
+    var pinkbar = clickCounter.find('.pinkbar');
+    var barWidth = initPinkBar(clickCounter, pinkbar, config);
     animateClickCounterEntry(clickCounter, function () {
         animateBar(pinkbar, barWidth * config.percent, function () {
             animateClickCounterExit(clickCounter, close);
