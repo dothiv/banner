@@ -1,15 +1,7 @@
 {
-    "percent":0.25,
-    "money":"36.294,28 &euro;",
-    "clickcount":"36.294.280 Klicks",
-    "firstvisit":"top",
-    "secondvisit":"top",
-    "heading":"Danke!",
-    "subheading":"Jeder Klick hilft mit 0,1 ct",
-    "about":"Dieses Projekt wird unterstützt",
-    "activated":"Mehr über die <strong>dotHIV</strong> Initiative",
-    "unlocked":36294.28,
-    "clicks":36294280,
-    "donated":2370000.0,
-    "increment":0.001
+    "percent": 0.25,
+    "money": "12.345,67 &euro;",
+    "firstvisit": "top",
+    "secondvisit": "top",
+    "heading": "Vielen Dank für deinen Klick"
 }

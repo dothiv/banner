@@ -9,22 +9,65 @@
             padding: 5%;
         }
     </style>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 </head>
 <body>
 <div>
     <h1>Test Page</h1>
 
-    <h2>You can launch the banners by clicking these links:</h2>
+    <h2>You can configure the banner to show here:</h2>
 
-    <ul>
-        <li><a href="?dothivclickcounter[position]=top">Top</a></li>
-        <li><a href="?dothivclickcounter[position]=bottom">Bottom</a></li>
-        <li><a href="?dothivclickcounter[position]=left">Left</a></li>
-        <li><a href="?dothivclickcounter[position]=right">Right</a></li>
-        <li><a href="?dothivclickcounter[position]=premium">Premium</a></li>
-        <li><a href="?dothivclickcounter[position]=top&amp;dothivclickcounter[reload]=1&amp;dothivclickcounter[rotate]=1">rotate all versions</a></li>
-    </ul>
+    <form method="GET" action="">
+        <fieldset>
+            <legend>Position</legend>
+            <p>
+                <label>
+                    <input type="radio" name="dothivclickcounter[position]" value="top"> Top
+                </label>
+                <label>
+                    <input type="radio" name="dothivclickcounter[position]" value="bottom"> Bottom
+                </label>
+                <label>
+                    <input type="radio" name="dothivclickcounter[position]" value="right"> Left
+                </label>
+                <label>
+                    <input type="radio" name="dothivclickcounter[position]" value="right"> Right
+                </label>
+                <label>
+                    <input type="radio" name="dothivclickcounter[position]" value="premium"> Premium
+                </label>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Options</legend>
+            <p>
+                <label>
+                    <input type="checkbox" name="dothivclickcounter[reload]" value="1"> Reload
+                </label>
+            </p>
+
+            <p>
+                <label>
+                    <input type="checkbox" name="dothivclickcounter[rotate]" value="1"> rotate all versions
+                </label>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Config</legend>
+            <p>
+                <label>
+                    <input type="radio" name="dothivclickcounter[config]" value="demo.json"> Regular
+                </label>
+            </p>
+            <p>
+                <label>
+                    <input type="radio" name="dothivclickcounter[config]" value="demo-premium.json"> Premium
+                </label>
+            </p>
+
+        </fieldset>
+        <button type="submit">OK</button>
+    </form>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam gravida blandit augue eget gravida. Maecenas id
         ultricies metus, et dignissim odio. Cras rutrum ipsum felis, sed varius libero mollis sed. Ut sit amet rhoncus

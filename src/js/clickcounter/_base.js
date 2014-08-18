@@ -2,7 +2,7 @@
 
 var close = function () {
     window.parent.postMessage("remove", "*");
-}
+};
 
 /**
  * Send a message to the parent to request the closing of the clickcounter.
@@ -11,41 +11,159 @@ var registerClickHandler = function () {
     document.body.parentElement.onclick = close;
 };
 
+// Config handing
+
 var fetchConfig = function (completeFunc) {
     var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
     var eventer = window[eventMethod];
     var messageEvent = eventMethod == "attachEvent" ? "onmessage" : "message";
     eventer(messageEvent, function (e) {
         var config = JSON.parse(e.data);
-        completeFunc(config);
+        completeFunc(new ClickCounterConfig(config));
     }, false);
 
     window.parent.postMessage("get config", "*");
 };
 
-var animateBar = function (pinkbar, targetWidth, completeFunc) {
+var ClickCounterConfig = function ClickCounterConfig(config) {
+    this.bgColor = '{{color-bg}}';
+    this.barColor = '{{color-pinkbar}}';
+    this.fontColor = '{{color-font}}';
+    this.pinkBarMargin = parseInt('{{pinkbar-margin}}', 10);
+    this.premium = false;
+    this.visual = null;
+    this.bg = null;
+    this.headlineFont = null;
+    this.headlineFontWeight = null;
+    this.textFont = null;
+    this.textFontWeight = null;
+    for (var k in config) {
+        if (!config.hasOwnProperty(k)) {
+            continue;
+        }
+        this[k] = config[k];
+    }
+};
+ClickCounterConfig.prototype.parseColor = function (color) {
+    return [color.substr(1, 2), color.substr(3, 2), color.substr(5, 2)];
+};
+ClickCounterConfig.prototype.getBarBgColor = function () {
+    var bgCols = this.parseColor(this.getBgColor());
+    var barCols = this.parseColor(this.getBarColor());
+    var barBgCols = [];
+    for (var i = 0; i < bgCols.length; i++) {
+        barBgCols[i] = Math.round(parseInt(bgCols[i], 16) * 0.8 + parseInt(barCols[i], 16) * 0.2);
+    }
+    var barBgColor = ((1 << 24) + (barBgCols[0] << 16) + (barBgCols[1] << 8) + barBgCols[2]).toString(16).substr(1);
+    return '#' + barBgColor;
+};
+ClickCounterConfig.prototype.getBarColor = function () {
+    return this.barColor;
+};
+ClickCounterConfig.prototype.getFontColor = function () {
+    return this.fontColor;
+};
+ClickCounterConfig.prototype.getBgColor = function () {
+    return this.bgColor;
+};
+ClickCounterConfig.prototype.getPercent = function () {
+    return this.percent;
+};
+ClickCounterConfig.prototype.getPinkBarMargin = function () {
+    return this.pinkBarMargin;
+};
+ClickCounterConfig.prototype.isPremium = function () {
+    return this.premium;
+};
+ClickCounterConfig.prototype.getVisual = function () {
+    return this.visual;
+};
+ClickCounterConfig.prototype.getBg = function () {
+    return this.bg;
+};
+ClickCounterConfig.prototype.getHeadlineFont = function () {
+    return [this.headlineFont, this.headlineFontWeight];
+};
+ClickCounterConfig.prototype.getTextFont = function () {
+    return [this.textFont, this.textFontWeight];
+};
+
+// /Config handing
+
+var animateBar = function (pinkbar, barWidth, config, completeFunc) {
+    var targetWidth = barWidth * config.getPercent();
     pinkbar.find('.inner').fadeIn(500).delay(1250).fadeOut(500, completeFunc);
     pinkbar.find('.bar').animate({width: targetWidth}, 750, 'easeOutQuint');
-}
+    var money = pinkbar.find('.money:first');
+    if (money.width() + config.getPinkBarMargin() > targetWidth) {
+        money.addClass('right');
+        money.css({'color': config.getBarColor()});
+    }
+};
 
 function initPinkBar(clickcounter, pinkbar, config) {
-    var pinkbarMargin = parseInt('{{pinkbar-margin}}', 10);
-    var barWidth = clickcounter.width() - (2 * pinkbarMargin);
+    if (config.isPremium()) {
+        pinkbar.css({'background-color': config.getBarBgColor(), 'color': config.getBgColor()});
+        pinkbar.find('.bar:first').css({'background-color': config.getBarColor()});
+    }
+    var barWidth = clickcounter.width() - (2 * config.getPinkBarMargin());
     pinkbar.css({
         width: barWidth
     });
     return barWidth;
 }
 
+function initClickcounter(clickcounter, config) {
+    if (!config.isPremium()) {
+        return;
+    }
+    var css = {
+        'color': config.getFontColor(),
+        'background-color': config.getBgColor()
+    };
+    var bg = config.getBg();
+    if (bg) {
+        css['background-image'] = "url('" + bg + "')";
+    }
+    var visual = config.getVisual();
+    if (visual) {
+        clickcounter.find('.logo').css('background-image', "url('" + visual + "')");
+    }
+    clickcounter.css(css);
+}
+
+function insertFonts(config) {
+    if (!config.isPremium()) {
+        return;
+    }
+    var fontResources = [];
+    var hlFont = config.getHeadlineFont();
+    var tFont = config.getTextFont();
+    if (hlFont) {
+        fontResources.push(encodeURIComponent(hlFont[0]) + ":" + encodeURIComponent(hlFont[1]));
+        $('head').append('<style type="text/css">.headlineFont { font-family: "' + hlFont[0] + '", Arial, Helvetia, sans-serif; font-weight: "' + hlFont[1] + '"; }</style>');
+    }
+    if (tFont) {
+        fontResources.push(encodeURIComponent(tFont[0]) + ":" + encodeURIComponent(tFont[1]));
+        $('head').append('<style type="text/css">.textFont { font-family: "' + tFont[0] + '", Arial, Helvetia, sans-serif; font-weight: "' + tFont[1] + '"; }</style>');
+    }
+    if (fontResources.length > 0) {
+        var fontUrl = 'http://fonts.googleapis.com/css?family=' + fontResources.join('|');
+        $('head').append('<link rel="stylesheet" href="' + fontUrl + '" type="text/css">');
+    }
+}
+
 var showClickCounter = function (config) {
+    insertFonts(config);
     $('body').css('display', 'block');
     var clickCounter = $('#clickcounter');
-    var pinkbar = clickCounter.find('.pinkbar');
+    initClickcounter(clickCounter, config);
+    var pinkbar = clickCounter.find('.pinkbar:first');
     var barWidth = initPinkBar(clickCounter, pinkbar, config);
     // easeOutBack
     // easeOutElastic, 1000
     animateClickCounterEntry(clickCounter, 400, 'easeOutBack', function () {
-        animateBar(pinkbar, barWidth * config.percent, function () {
+        animateBar(pinkbar, barWidth, config, function () {
             animateClickCounterExit(clickCounter, 300, 'linear', close);
         });
     });

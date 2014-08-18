@@ -1,8 +1,15 @@
 .topbottom {
   &:extend(.clickcounter);
   width: @topbottom-width;
-  height: @topbottom-height;
   @media (max-width: @topbottom-width) {
     width: 100%;
+  }
+  .header {
+    .logo {
+      .dothiv-icon;
+    }
+    p {
+      margin-right: @icon-size;
+    }
   }
 }

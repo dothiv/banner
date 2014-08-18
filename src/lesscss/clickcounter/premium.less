@@ -2,10 +2,17 @@
 @import "../_variables";
 @import "_base";
 #clickcounter.premium {
-  &:extend(.clickcounter);
+  &:extend(.clickcounter all);
   width: @premium-width;
-  height: @premium-height;
   @media (max-width: @premium-width) {
     width: 100%;
+  }
+  .header {
+    .logo {
+      .dothiv-icon;
+    }
+    p {
+      margin-right: @icon-size;
+    }
   }
 }

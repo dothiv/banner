@@ -22,17 +22,18 @@ module.exports = function (grunt) {
                 suffix: '}}',
                 globals: {
                     'topbottom-width': 500,
-                    'topbottom-height': 110,
                     'premium-width': 600,
-                    'premium-height': 150,
                     'leftright-width': 290,
-                    'leftright-height': 160,
                     'shadow-size': 20,
                     'pinkbar-height': 40,
                     'pinkbar-margin': 15,
                     'animation-overflow': 100,
+                    'icon-size': 45,
+                    'headline-fontsize': 22,
+                    'text-fontsize': 14,
+                    'color-font': '#000',
+                    'color-bg': '#fff',
                     'color-pinkbar': '#E00073',
-                    'color-pinkbar-alt': '#FCE5F1',
                     'develop': '0'
                 }
             },
@@ -87,6 +88,11 @@ module.exports = function (grunt) {
             }
         },
         copy: {
+            common:  {
+                files: [
+                    {expand: true, cwd: 'src/img/', src: ['*'], dest: 'tmp/img/'}
+                ]
+            },
             develop: {
                 files: [
                     {'build/iframe.js': 'tmp/js/iframe.js'}
@@ -113,8 +119,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default tasks.
-    grunt.registerTask('default', ['clean', 'uglify:libs', 'includereplace:less', 'less', 'cssmin', 'includereplace:js', 'includereplace:html']);
+    grunt.registerTask('default', ['clean', 'copy:common', 'uglify:libs', 'includereplace:less', 'less', 'cssmin', 'includereplace:js', 'includereplace:html']);
 
     // Debug tasks.
-    grunt.registerTask('develop', ['clean', 'uglify:libs', 'includereplace:less', 'less', 'cssmin', 'includereplace:js@develop', 'includereplace:html', 'copy:develop']);
+    grunt.registerTask('develop', ['clean', 'copy:common', 'uglify:libs', 'includereplace:less', 'less', 'cssmin', 'includereplace:js@develop', 'includereplace:html', 'copy:develop']);
 };

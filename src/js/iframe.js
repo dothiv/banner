@@ -3,9 +3,9 @@
  */
 (function () {
     // These are grunt includes
-    {{include('domready.js')}}
-    {{include('json2.js')}}
-    {{include('helpers.js')}}
+    {{include('iframe/domready.js')}}
+    {{include('iframe/develop.js')}}
+    {{include('iframe/helpers.js')}}
 
     // -------- This is the main procedure -------- //
     // Check if this is the first visit and if we can set cookies
@@ -13,6 +13,9 @@
     if (!getCookie()) {
         firstVisit = setCookie() ? true : false;
     }
+
+    // Init overrides
+    var override = new Override();
 
     // Fetch banner configuration from dotHIV server and add banner to DOM
     requestConfig(firstVisit);
@@ -40,25 +43,6 @@
     }
 
     /**
-     * returns true if in development mode
-     */
-    function develop() {
-        return '{{develop}}';
-    }
-
-    /**
-     * Logs msg to the console of in development mode and console is available.
-     *
-     * @param msg
-     */
-    function debugLog(msg) {
-        if (!develop()) {
-            return;
-        }
-        window.console && console.log(msg);
-    }
-
-    /**
      * Sends a POST request to the server and receive banner configuration.
      */
     function requestConfig() {
@@ -80,7 +64,7 @@
             }
             // Send request.
             if (develop()) {
-                request.open("GET", "demo.json", true);
+                request.open("GET", override.get('config', 'demo.json'), true);
             } else {
                 var pt = getPreviousVisit();
                 var ct = Date.now();
@@ -156,7 +140,11 @@
             debugLog('Message received: ' + e.data);
             switch (e.data) {
                 case 'get config':
-                    iframe.contentWindow.postMessage(JSON.stringify(config), "*");
+                    if (develop()) {
+                        iframe.contentWindow.postMessage(JSON.stringify(override.overrideConfig(config)), "*");
+                    } else {
+                        iframe.contentWindow.postMessage(JSON.stringify(config), "*");
+                    }
                     break;
                 case 'remove':
                     close();
@@ -173,35 +161,11 @@
         domready(function () {
             // Determine which of the three banner versions to render
             if (firstVisit) {
-                createClickCounter(getOverride('position', config.firstvisit), config);
+                createClickCounter(override.get('position', config.firstvisit), config);
             } else {
-                createClickCounter(getOverride('position', config.secondvisit), config);
+                createClickCounter(override.get('position', config.secondvisit), config);
             }
         });
-    }
-
-    /**
-     * returns the value of the override switch
-     *
-     * @param name
-     * @param defaultValue
-     */
-    function getOverride(name, defaultValue)
-    {
-        if (window.location.search.length < 1) {
-            return defaultValue;
-        }
-        var q = {};
-        for (var aItKey, nKeyId = 0, aCouples = window.location.search.substr(1).split("&"); nKeyId < aCouples.length; nKeyId++) {
-            aItKey = aCouples[nKeyId].split("=");
-            q[decodeURIComponent(aItKey[0])] = aItKey.length > 1 ? decodeURIComponent(aItKey[1]) : "";
-        }
-        var k = 'dothivclickcounter[' + name + ']';
-        if (q.hasOwnProperty(k)) {
-            debugLog('Override for ' + name + ' used: ' + q[k]);
-            return q[k];
-        }
-        return defaultValue;
     }
 
     /**
@@ -287,7 +251,7 @@
      * Remove all clickcounter elements
      */
     function close() {
-        if (getOverride('reload', false)) {
+        if (override.get('reload', false)) {
             var currentPos = document.getElementById('dothiv-clickcounter-iframe').className;
         }
         if (document.getElementById('dothiv-clickcounter-outer')) {
@@ -300,134 +264,25 @@
             document.body.removeChild(document.getElementById('dothiv-clickcounter-background'));
         }
         // Rotate to the next clickcounter
-        if (getOverride('reload', false)) {
-            var nextPosMap = {'top': 'right','right':'bottom', 'bottom': 'left', 'left':'premium', 'premium':'top'};
-            var rotate = getOverride('rotate', false);
-            var s = '?dothivclickcounter[position]=' + (rotate ? nextPosMap[currentPos] : currentPos) + '&dothivclickcounter[reload]=1';
-            if (rotate) {
-                s += '&dothivclickcounter[rotate]=1';
-            }
-            document.location.search = s;
+        if (override.get('reload', false)) {
+            var nextPosMap = {'top': 'right', 'right': 'bottom', 'bottom': 'left', 'left': 'premium', 'premium': 'top'};
+            var rotate = override.get('rotate', false);
+            override.set('position', rotate ? nextPosMap[currentPos] : currentPos);
+            document.location.search = override.getQuery();
         }
     }
 
-    function registerClickHandler()
-    {
+    function registerClickHandler() {
         // Register event for removing the banner when clicking on background or iframe
-        document.getElementById("dothiv-clickcounter-background").onclick = close;
-    }
-
-    function isPremium(config)
-    {
-        return config.hasOwnProperty('premium');
-    }
-
-    /**
-     * Creates the 'center' version of the banner and inserts it into the DOM.
-     */
-    function createCenterBanner(config) {
-        var outerContainer = document.createElement('div');
-        outerContainer.id = 'dothiv-outer';
-        outerContainer.style.zIndex = 1;
-
-        // Create banner iframe
-        var bannerContainer = createIframeElement('center');
-
-        // Create background HTML structure
-        var bannerBackground = document.createElement('div');
-        bannerBackground.id = 'dothiv-background';
-
-        // If we have to deal with IE and it's running in Quirks mode...
-        if (navigator.appName.indexOf("Internet Explorer") != -1 && document.compatMode !== 'CSS1Compat')
-            bannerContainer.style.position = 'absolute';
-
-        // Specials for IE6 standard mode
-        if (isIE(6) && document.compatMode == 'CSS1Compat') {
-            bannerContainer.style.position = 'absolute';
-            bannerBackground.style.height = '1200px';
-        }
-
-        outerContainer.appendChild(bannerBackground);
-        outerContainer.appendChild(bannerContainer);
-
-        document.body.insertBefore(outerContainer, null);
-
-        // Insert CSS rules
-        includeCSS();
-
-        // Register event for removing the banner when clicking on background
-        document.getElementById("dothiv-background").onclick = function () {
-            document.body.removeChild(document.getElementById('dothiv-outer'));
-        };
-    }
-
-    /**
-     * Creates the 'right' version of the banner and inserts it into the DOM.
-     */
-    function createRightBanner(config) {
-        // Create banner iframe
-        var bannerContainer = createIframeElement('right');
-        document.body.insertBefore(bannerContainer, null);
-
-        // If we have to deal with IE and it's running in Quirks mode...
-        var msie = getIE();
-        if (navigator.appName.indexOf("Internet Explorer") != -1 && document.compatMode !== 'CSS1Compat') {
-            bannerContainer.style.position = 'absolute';
-            bannerContainer.style.bottom = '120px';
-            bannerContainer.style.height = '56px'; // 48 + 8
-            bannerContainer.style.right = '0';
-        } else if (msie <= 9 && document.compatMode === 'CSS1Compat') {
-            bannerContainer.style.bottom = '240px';
-            bannerContainer.style.right = '-240px';
-            bannerContainer.style.height = '89px'; // 48 + 36 + 5
-        }
-
-        // Insert CSS rules
-        includeCSS();
-
-        if (navigator.appName.indexOf("Internet Explorer") != -1 && document.compatMode !== 'CSS1Compat') {
-            bannerContainer.onmouseover = function () {
-                bannerContainer.style.height = '84px'; // 48 + 36
-            };
-            bannerContainer.onmouseout = function () {
-                bannerContainer.style.height = '56px'; // 48 + 8
-            };
-        } else if (msie <= 9 && document.compatMode === 'CSS1Compat') {
-            bannerContainer.onmouseover = function () {
-                bannerContainer.style.right = '-212px'; // 240px - (36 - 8)
-            };
-            bannerContainer.onmouseout = function () {
-                bannerContainer.style.right = '-240px';
-            };
-        } else {
-            if (!isTouchDevice()) {
-                // Register event for mouseover on iframe if messaging is not supported
-                if (!hasMessaging()) {
-                    bannerContainer.onmouseover = function () {
-                        bannerContainer.className = 'dothiv-clickcounter-right dothiv-rb-mouseover';
-                    };
-                    bannerContainer.onmouseout = function () {
-                        bannerContainer.className = 'dothiv-clickcounter-right';
-                    };
-                }
+        document.getElementById("dothiv-clickcounter-background").onclick = function() {
+            if (develop()) {
+                override.set('reload', 0);
             }
-        }
+            close();
+        };
     }
 
-    function createTopBanner(config) {
-        // Create banner iframe
-        var bannerContainer = createIframeElement('top');
-        document.body.insertBefore(bannerContainer, null);
-
-        // Insert CSS rules
-        includeCSS();
-
-        // Register event for mouseover on iframe
-        bannerContainer.onmouseover = function () {
-            bannerContainer.style.height = '90px';
-        };
-        bannerContainer.onmouseout = function () {
-            bannerContainer.style.height = '60px';
-        };
+    function isPremium(config) {
+        return config.hasOwnProperty('premium') && config.premium;
     }
 })();

@@ -1,0 +1,17 @@
+{
+    "percent": 0.25,
+    "money": "&euro;12,345.67",
+    "firstvisit": "premium",
+    "secondvisit": "top",
+    "heading": "Thank you for your click",
+    "premium": true,
+    "fontColor": "#ffffff",
+    "bgColor": "#ffffff",
+    "barColor": "#3482ab",
+    "bg": "../develop/premium/carbon.png",
+    "visual": "../develop/premium/bwm.png",
+    "headlineFont": "Source Sans Pro",
+    "headlineFontWeight": "300",
+    "textFont": "Source Sans Pro",
+    "textFontWeight": "700"
+}
