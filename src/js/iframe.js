@@ -181,6 +181,9 @@
             case 'left':
             case 'right':
             case 'premium':
+            case 'topleft-micro':
+            case 'topright-micro':
+            case 'top-micro':
                 return position;
                 break;
             default:
@@ -190,8 +193,8 @@
     }
 
     function createClickCounter(position, config) {
-        format = getPosition(position);
-        createIframeElement(position, config);
+        var format = getPosition(position);
+        createIframeElement(format, config);
         includeCSS();
         registerClickHandler();
     }
@@ -232,6 +235,7 @@
 
         var background = document.createElement('div');
         background.id = 'dothiv-clickcounter-background';
+        background.className = position;
 
         if (isPremium(config)) {
             background.style.backgroundColor = config.barColor;
@@ -251,8 +255,10 @@
      * Remove all clickcounter elements
      */
     function close() {
-        if (override.get('reload', false)) {
-            var currentPos = document.getElementById('dothiv-clickcounter-iframe').className;
+        if (develop()) {
+            if (override.get('reload', false) == '1') {
+                var currentPos = document.getElementById('dothiv-clickcounter-iframe').className;
+            }
         }
         if (document.getElementById('dothiv-clickcounter-outer')) {
             document.body.removeChild(document.getElementById('dothiv-clickcounter-outer'));
@@ -263,12 +269,18 @@
         if (document.getElementById('dothiv-clickcounter-background')) {
             document.body.removeChild(document.getElementById('dothiv-clickcounter-background'));
         }
-        // Rotate to the next clickcounter
-        if (override.get('reload', false)) {
-            var nextPosMap = {'top': 'right', 'right': 'bottom', 'bottom': 'left', 'left': 'premium', 'premium': 'top'};
-            var rotate = override.get('rotate', false);
-            override.set('position', rotate ? nextPosMap[currentPos] : currentPos);
-            document.location.search = override.getQuery();
+
+        if (develop()) {
+            // Rotate to the next clickcounter
+            if (override.get('reload', false) == '1') {
+                var nextPosMap = {
+                    'top': 'right', 'right': 'bottom', 'bottom': 'left', 'left': 'premium',
+                    'premium': 'topleft-micro',
+                    'topleft-micro': 'top-micro', 'top-micro': 'topright-micro', 'topright-micro': 'top'};
+                var rotate = override.get('rotate', false);
+                override.set('position', rotate == '1' ? nextPosMap[currentPos] : currentPos);
+                document.location.search = override.getQuery();
+            }
         }
     }
 

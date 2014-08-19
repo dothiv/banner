@@ -32,6 +32,7 @@ var ClickCounterConfig = function ClickCounterConfig(config) {
     this.pinkBarMargin = parseInt('{{pinkbar-margin}}', 10);
     this.premium = false;
     this.visual = null;
+    this['visual@micro'] = null;
     this.bg = null;
     this.headlineFont = null;
     this.headlineFontWeight = null;
@@ -76,7 +77,7 @@ ClickCounterConfig.prototype.isPremium = function () {
     return this.premium;
 };
 ClickCounterConfig.prototype.getVisual = function () {
-    return this.visual;
+    return [this.visual, this['visual@micro']];
 };
 ClickCounterConfig.prototype.getBg = function () {
     return this.bg;
@@ -91,9 +92,14 @@ ClickCounterConfig.prototype.getTextFont = function () {
 // /Config handing
 
 var animateBar = function (pinkbar, barWidth, config, completeFunc) {
+    var bar = pinkbar.find('.bar');
+    if (bar.length == 0) { // No bar to animate (possible in micro): wait 1,5secs
+        setTimeout(completeFunc, 1500);
+        return;
+    }
     var targetWidth = barWidth * config.getPercent();
     pinkbar.find('.inner').fadeIn(500).delay(1250).fadeOut(500, completeFunc);
-    pinkbar.find('.bar').animate({width: targetWidth}, 750, 'easeOutQuint');
+    bar.animate({width: targetWidth}, 750, 'easeOutQuint');
     var money = pinkbar.find('.money:first');
     if (money.width() + config.getPinkBarMargin() > targetWidth) {
         money.addClass('right');
@@ -144,7 +150,8 @@ function initClickcounterPremiumStyle(clickcounter, config) {
     }
     var visual = config.getVisual();
     if (visual) {
-        clickcounter.find('.logo').css('background-image', "url('" + visual + "')");
+        clickcounter.find('.premiumVisual').css('background-image', "url('" + visual[0] + "')");
+        clickcounter.find('.premiumVisualMicro').css('background-image', "url('" + visual[1] + "')");
     }
     clickcounter.css(css);
 }
@@ -158,11 +165,11 @@ function insertFonts(config) {
     var tFont = config.getTextFont();
     if (hlFont) {
         fontResources.push(encodeURIComponent(hlFont[0]) + ":" + encodeURIComponent(hlFont[1]));
-        $('head').append('<style type="text/css">.headlineFont { font-family: "' + hlFont[0] + '", Arial, Helvetia, sans-serif; font-weight: "' + hlFont[1] + '"; }</style>');
+        $('head').append('<style type="text/css">.headlineFont { font-family: "' + hlFont[0] + '", Arial, Helvetia, sans-serif; font-weight: ' + hlFont[1] + '; }</style>');
     }
     if (tFont) {
         fontResources.push(encodeURIComponent(tFont[0]) + ":" + encodeURIComponent(tFont[1]));
-        $('head').append('<style type="text/css">.textFont { font-family: "' + tFont[0] + '", Arial, Helvetia, sans-serif; font-weight: "' + tFont[1] + '"; }</style>');
+        $('head').append('<style type="text/css">.textFont { font-family: "' + tFont[0] + '", Arial, Helvetia, sans-serif; font-weight: ' + tFont[1] + '; }</style>');
     }
     if (fontResources.length > 0) {
         var fontUrl = 'http://fonts.googleapis.com/css?family=' + fontResources.join('|');

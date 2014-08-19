@@ -12,6 +12,9 @@ module.exports = function (grunt) {
                     "tmp/css/clickcounter/left.css": "tmp/lesscss/clickcounter/left.less",
                     "tmp/css/clickcounter/right.css": "tmp/lesscss/clickcounter/right.less",
                     "tmp/css/clickcounter/premium.css": "tmp/lesscss/clickcounter/premium.less",
+                    "tmp/css/clickcounter/topleft-micro.css": "tmp/lesscss/clickcounter/topleft-micro.less",
+                    "tmp/css/clickcounter/topright-micro.css": "tmp/lesscss/clickcounter/topright-micro.less",
+                    "tmp/css/clickcounter/top-micro.css": "tmp/lesscss/clickcounter/top-micro.less",
                     "tmp/css/iframe.css": "tmp/lesscss/iframe/iframe.less"
                 }
             }
@@ -28,8 +31,9 @@ module.exports = function (grunt) {
                     'pinkbar-height': 40,
                     'pinkbar-margin': 15,
                     'animation-overflow': 100,
-                    'icon-size': 45,
+                    'icon-size': 44,
                     'headline-fontsize': 22,
+                    'headline-fontsize-micro': 18,
                     'text-fontsize': 14,
                     'color-font': '#000',
                     'color-bg': '#fff',
