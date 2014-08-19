@@ -184,6 +184,7 @@
             case 'topleft-micro':
             case 'topright-micro':
             case 'top-micro':
+            case 'invisible':
                 return position;
                 break;
             default:
@@ -194,6 +195,10 @@
 
     function createClickCounter(position, config) {
         var format = getPosition(position);
+        if (format == 'invisible') {
+            debugLog("Nothing to do, invisible counter.");
+            return;
+        }
         createIframeElement(format, config);
         includeCSS();
         registerClickHandler();
