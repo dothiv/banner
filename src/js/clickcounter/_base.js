@@ -113,7 +113,24 @@ function initPinkBar(clickcounter, pinkbar, config) {
     return barWidth;
 }
 
-function initClickcounter(clickcounter, config) {
+/**
+ * Updates the html to contain the values from the config.
+ *
+ * @param clickcounter
+ * @param config
+ */
+function initClickcounterData(clickcounter, config) {
+    var html = clickcounter.html();
+    for (var k in config) {
+        if (!config.hasOwnProperty(k)) {
+            continue;
+        }
+        html = html.split("%%" + k + "%%").join(config[k]);
+    }
+    clickcounter.html(html);
+}
+
+function initClickcounterPremiumStyle(clickcounter, config) {
     if (!config.isPremium()) {
         return;
     }
@@ -155,11 +172,12 @@ function insertFonts(config) {
 
 var showClickCounter = function (config) {
     insertFonts(config);
-    $('body').css('display', 'block');
     var clickCounter = $('#clickcounter');
-    initClickcounter(clickCounter, config);
+    initClickcounterData(clickCounter, config);
+    initClickcounterPremiumStyle(clickCounter, config);
     var pinkbar = clickCounter.find('.pinkbar:first');
     var barWidth = initPinkBar(clickCounter, pinkbar, config);
+    $('body').css('display', 'block');
     // easeOutBack
     // easeOutElastic, 1000
     animateClickCounterEntry(clickCounter, 400, 'easeOutBack', function () {
