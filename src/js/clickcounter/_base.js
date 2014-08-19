@@ -26,18 +26,20 @@ var fetchConfig = function (completeFunc) {
 };
 
 var ClickCounterConfig = function ClickCounterConfig(config) {
-    this.bgColor = '{{color-bg}}';
-    this.barColor = '{{color-pinkbar}}';
-    this.fontColor = '{{color-font}}';
-    this.pinkBarMargin = parseInt('{{pinkbar-margin}}', 10);
+    this.bgColor = '#fff';
+    this.barColor = '#E00073';
+    this.fontColor = '#000';
+    this.pinkBarMargin = parseInt('15', 10);
     this.premium = false;
     this.visual = null;
     this['visual@micro'] = null;
     this.bg = null;
     this.headlineFont = null;
     this.headlineFontWeight = null;
+    this.headlineFontSize = null;
     this.textFont = null;
     this.textFontWeight = null;
+    this.textFontSize = null;
     for (var k in config) {
         if (!config.hasOwnProperty(k)) {
             continue;
@@ -83,10 +85,10 @@ ClickCounterConfig.prototype.getBg = function () {
     return this.bg;
 };
 ClickCounterConfig.prototype.getHeadlineFont = function () {
-    return [this.headlineFont, this.headlineFontWeight];
+    return [this.headlineFont, this.headlineFontWeight, this.headlineFontSize];
 };
 ClickCounterConfig.prototype.getTextFont = function () {
-    return [this.textFont, this.textFontWeight];
+    return [this.textFont, this.textFontWeight, this.textFontSize];
 };
 
 // /Config handing
@@ -156,6 +158,16 @@ function initClickcounterPremiumStyle(clickcounter, config) {
     clickcounter.css(css);
 }
 
+function addFontStyle(name, fontDef) {
+    var size = parseInt(fontDef[2], 10);
+    var s = '.' + name + ' { font-family: "' + fontDef[0] + '", Arial, Helvetia, sans-serif; font-weight: ' + fontDef[1] + ';';
+    if (size > 0) {
+        s += 'font-size: ' + size + 'px; ';
+    }
+    s += '}';
+    $('head').append('<style type="text/css">' + s + '</style>');
+}
+
 function insertFonts(config) {
     if (!config.isPremium()) {
         return;
@@ -165,11 +177,11 @@ function insertFonts(config) {
     var tFont = config.getTextFont();
     if (hlFont) {
         fontResources.push(encodeURIComponent(hlFont[0]) + ":" + encodeURIComponent(hlFont[1]));
-        $('head').append('<style type="text/css">.headlineFont { font-family: "' + hlFont[0] + '", Arial, Helvetia, sans-serif; font-weight: ' + hlFont[1] + '; }</style>');
+        addFontStyle('headlineFont', hlFont);
     }
     if (tFont) {
         fontResources.push(encodeURIComponent(tFont[0]) + ":" + encodeURIComponent(tFont[1]));
-        $('head').append('<style type="text/css">.textFont { font-family: "' + tFont[0] + '", Arial, Helvetia, sans-serif; font-weight: ' + tFont[1] + '; }</style>');
+        addFontStyle('textFont', tFont);
     }
     if (fontResources.length > 0) {
         var fontUrl = 'http://fonts.googleapis.com/css?family=' + fontResources.join('|');
@@ -198,5 +210,3 @@ $(function () {
     registerClickHandler();
     fetchConfig(showClickCounter);
 });
-
-

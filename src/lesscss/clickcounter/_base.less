@@ -61,25 +61,25 @@ p {
   .inner {
     display: none;
   }
-  .bar {
-    background-color: @color-pinkbar; // Overrideable
-    height: @pinkbar-height;
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .money {
-    color: @color-bg;
-    display: block;
-    line-height: @pinkbar-height;
-    position: absolute;
-    font-weight: bold; // Overrideable
-    font-size: @text-fontsize;
-    left: @pinkbar-margin / 2;
-    &.right {
-      color: @color-pinkbar;
-      left: auto;
-      right: @pinkbar-margin / 2;
-    }
+}
+.bar {
+  background-color: @color-pinkbar; // Overrideable
+  height: @pinkbar-height;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.money {
+  color: @color-bg;
+  display: block;
+  line-height: @pinkbar-height;
+  position: absolute;
+  font-weight: bold; // Overrideable
+  font-size: @text-fontsize; // Overrideable
+  left: @pinkbar-margin / 2;
+  &.right {
+    color: @color-pinkbar;
+    left: auto;
+    right: @pinkbar-margin / 2;
   }
 }
