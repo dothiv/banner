@@ -199,6 +199,10 @@
             debugLog("Nothing to do, invisible counter.");
             return;
         }
+        if (!isSupportedBrowser()) {
+            debugLog("Unsupported browser.");
+            return;
+        }
         createIframeElement(format, config);
         includeCSS();
         registerClickHandler();
