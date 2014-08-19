@@ -34,6 +34,7 @@ module.exports = function (grunt) {
                     'color-font': '#000',
                     'color-bg': '#fff',
                     'color-pinkbar': '#E00073',
+                    'color-overlay': '#000000',
                     'develop': '0'
                 }
             },
