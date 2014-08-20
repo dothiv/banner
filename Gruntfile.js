@@ -86,9 +86,14 @@ module.exports = function (grunt) {
                     {expand: true, cwd: 'vendor/', src: ['*.js'], dest: 'tmp/vendor/'}
                 ]
             },
-            src: {
+            clickcounter: {
                 files: [
                     {expand: true, cwd: 'tmp/js/', src: ['*/*.js'], dest: 'tmp/js/'}
+                ]
+            },
+            iframe: {
+                files: [
+                    {'build/clickcounter.min.js': 'tmp/js/iframe.js'}
                 ]
             }
         },
@@ -97,20 +102,22 @@ module.exports = function (grunt) {
                 files: [
                     {expand: true, cwd: 'src/img/', src: ['*'], dest: 'tmp/img/'}
                 ]
-            },
-            develop: {
-                files: [
-                    {'build/iframe.js': 'tmp/js/iframe.js'}
-                ]
             }
         },
         cssmin: {
-            minify: {
+            iframe: {
                 expand: true,
                 cwd: 'tmp/css/',
-                src: ['*.css', '!*.min.css'],
+                src: ['*.css'],
                 dest: 'tmp/css/',
-                ext: '.min.css'
+                ext: '.css'
+            },
+            clickcounter: {
+                expand: true,
+                cwd: 'tmp/css/clickcounter/',
+                src: ['*.css'],
+                dest: 'tmp/css/clickcounter/',
+                ext: '.css'
             }
         },
         clean: ['tmp/', 'build/']
@@ -124,8 +131,8 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
 
     // Default tasks.
-    grunt.registerTask('default', ['clean', 'copy:common', 'uglify:libs', 'includereplace:less', 'less', 'cssmin', 'includereplace:js', 'includereplace:html']);
+    grunt.registerTask('default', ['clean', 'copy:common', 'uglify:libs', 'includereplace:less', 'less', 'cssmin:iframe', 'cssmin:clickcounter', 'includereplace:js', 'uglify:clickcounter', 'includereplace:html', 'uglify:iframe']);
 
     // Debug tasks.
-    grunt.registerTask('develop', ['clean', 'copy:common', 'uglify:libs', 'includereplace:less', 'less', 'cssmin', 'includereplace:js@develop', 'includereplace:html', 'copy:develop']);
+    grunt.registerTask('develop', ['clean', 'copy:common', 'uglify:libs', 'includereplace:less', 'less', 'cssmin:iframe', 'cssmin:clickcounter', 'includereplace:js@develop', 'uglify:clickcounter', 'includereplace:html', 'uglify:iframe']);
 };

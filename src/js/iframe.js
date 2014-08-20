@@ -213,7 +213,7 @@
      */
     function includeCSS() {
         var styleElement = document.createElement('style');
-        var styleRules = "{{include('../css/iframe.min.css')}}";
+        var styleRules = "{{include('../css/iframe.css')}}";
         styleElement.type = 'text/css';
         if (styleElement.styleSheet) {
             styleElement.styleSheet.cssText = styleRules;
