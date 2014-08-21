@@ -1,0 +1,14 @@
+.leftright {
+  &:extend(.clickcounter);
+  width: @leftright-width;
+  @media (max-width: @leftright-width) {
+    width: 100%;
+  }
+  .footer {
+    height: @icon-size;
+    margin-bottom: @pinkbar-margin;
+    .logo {
+      .dothiv-icon;
+    }
+  }
+}

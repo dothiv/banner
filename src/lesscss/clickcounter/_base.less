@@ -1,0 +1,85 @@
+// Defines common styles for all clickcounters
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: transparent;
+  display: none;
+  color: @color-font; // Overrideable
+  font-family: Arial, Helvetica, sans-serif; // Overrideable
+}
+
+.clickcounter {
+  box-shadow: 0px 0px @shadow-size rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  position: absolute;
+}
+
+.ok {
+  top: 0;
+  left: 0;
+  background: data-uri('../../img/green-tick@2x.png') no-repeat 0 0;
+  position: absolute;
+  display: block;
+  width: @icon-size;
+  height: @icon-size;
+}
+
+.dothiv-icon {
+  top: 0;
+  right: 0;
+  background: data-uri('../../img/logo.png') no-repeat 0 0;
+  position: absolute;
+  display: block;
+  height: @icon-size;
+  width: @icon-size;
+}
+
+.header {
+  margin: @pinkbar-margin @pinkbar-margin 0 @pinkbar-margin;
+  position: relative;
+  min-height: @icon-size;
+}
+.footer {
+  margin: 0 @pinkbar-margin 0 @pinkbar-margin;
+  position: relative;
+}
+p {
+  font-size: @headline-fontsize;
+  line-height: @icon-size / 2;
+  margin-left: @icon-size + @pinkbar-margin;
+  padding-top: (@icon-size - (@icon-size / 2)) / 2;
+}
+
+.pinkbar {
+  background-color: @color-pinkbar-alt; // Overrideable
+  margin: @pinkbar-margin;
+  height: @pinkbar-height;
+  position: relative;
+  .inner {
+    display: none;
+  }
+}
+.bar {
+  background-color: @color-pinkbar; // Overrideable
+  height: @pinkbar-height;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.money {
+  color: @color-bg;
+  display: block;
+  line-height: @pinkbar-height;
+  position: absolute;
+  font-weight: bold; // Overrideable
+  font-size: @text-fontsize; // Overrideable
+  left: @pinkbar-margin / 2;
+  &.right {
+    color: @color-pinkbar;
+    left: auto;
+    right: @pinkbar-margin / 2;
+  }
+}

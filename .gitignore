@@ -1,7 +1,5 @@
-node_modules
-.project
-build
-tmp
-web
-src/js/banner.js
-src/js/banner-base.js
+/node_modules
+/build
+/tmp
+/src/js/banner.js
+/src/js/banner-base.js
