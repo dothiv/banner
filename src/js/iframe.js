@@ -64,7 +64,7 @@
             }
             // Send request.
             if (develop()) {
-                request.open("GET", override.get('config', 'demo.json'), true);
+                request.open("GET", override.get('config', '//{{demo-host}}/develop/demo.json'), true);
             } else {
                 var pt = getPreviousVisit();
                 var ct = Date.now();
@@ -233,7 +233,7 @@
         iframe.id = 'dothiv-clickcounter-iframe';
         iframe.className = position;
         if (develop()) {
-            iframe.src = '../build/clickcounter-' + position + '.html?' + Date.now();
+            iframe.src = '//{{demo-host}}/build/clickcounter-' + position + '.html?' + Date.now();
         } else {
             iframe.src = 'https://dothiv-registry.appspot.com/static/clickcounter-' + position + '.html';
         }

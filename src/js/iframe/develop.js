@@ -2,7 +2,7 @@
  * returns true if in development mode
  */
 function develop() {
-    return '{{develop}}';
+    return '{{develop}}' == '1';
 }
 
 /**

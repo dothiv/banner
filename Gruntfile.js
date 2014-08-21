@@ -63,7 +63,10 @@ module.exports = function (grunt) {
             'js@develop': {
                 options: {
                     includesDir: 'tmp/js/',
-                    'develop': '1'
+                    globals: {
+                        'develop': '1',
+                        'demo-host': grunt.option('demo-host') || 'localhost'
+                    }
                 },
                 files: [
                     {expand: true, cwd: 'src/js/', src: ['*/*.js'], dest: 'tmp/js/'},
