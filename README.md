@@ -47,7 +47,6 @@ See [this sample config object](src/demo.json) for reference.
 <tbody>
 <tr><td><code>percent</code></td><td><code>float</code></td><td><code>0.25</code></td><td>The donation status in percent between 0 and 1. Rendered as width of the pink bar (as percentage)</td></tr>
 <tr><td><code>money</code></td><td><code>string</code></td><td><code>36.294,28 &euro;</code></td><td>The current amount of donated/activated money</td></tr>
-<tr><td><code>clickcount</code></td><td><code>string</code></td><td><code>36.294.280 Klicks</code></td><td>The current count of clicks</td></tr>
 <tr><td><code>firstvisit</code></td><td><code>string</code></td><td><code>center</code></td><td>The position of the clickcounter (<code>center</code>, <code>top</code> or <code>right</code>) on the first visit of the target website</td></tr>
 <tr><td><code>secondvisit</code></td><td><code>string</code></td><td><code>right</code></td><td>The position of the clickcounter on subsequent visits of the target website</td></tr>
 <tr><td><code>heading</code></td><td><code>string</code></td><td><code>Vielen Dank für deinen Klick</code></td><td>This string will be rendered on the clickcounter</td></tr>
