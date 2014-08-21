@@ -69,7 +69,7 @@
                 var pt = getPreviousVisit();
                 var ct = Date.now();
                 setPreviousVisit(ct);
-                request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&domain=" + document.domain + '&pt=' + pt + '&ct=' + ct, true);
+                request.open("POST", "//dothiv-registry.appspot.com/c?from=outside&domain=" + document.domain + '&pt=' + pt + '&ct=' + ct, true);
             }
             request.send();
         } catch (e) {
@@ -235,7 +235,7 @@
         if (develop()) {
             iframe.src = '//{{demo-host}}/build/clickcounter-' + position + '.html?' + Date.now();
         } else {
-            iframe.src = 'https://dothiv-registry.appspot.com/static/clickcounter-' + position + '.html';
+            iframe.src = '//dothiv-registry.appspot.com/static/clickcounter-' + position + '.html';
         }
         iframe.scrolling = 'no';
         iframe.frameBorder = 0;
