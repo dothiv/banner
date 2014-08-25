@@ -65,7 +65,8 @@ module.exports = function (grunt) {
                     includesDir: 'tmp/js/',
                     globals: {
                         'develop': '1',
-                        'demo-host': grunt.option('demo-host') || 'localhost'
+                        'config-url': grunt.option('config-url') || '//localhost/develop/demo.json',
+                        'html-folder-url': grunt.option('html-folder-url') || '//localhost/build'
                     }
                 },
                 files: [
