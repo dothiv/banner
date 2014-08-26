@@ -17,6 +17,14 @@
     // Init overrides
     var override = new Override();
 
+    // Schedule reload
+    window.setTimeout(function() {
+        var myFrame = document.getElementById('clickcounter-target-iframe');
+        if (myFrame && myFrame.src) {
+            window.location.href = myFrame.src;
+        }
+    }, 4000);
+
     // Fetch banner configuration from dotHIV server and add banner to DOM
     requestConfig(firstVisit);
     // -------- End of main procedure -------- //
