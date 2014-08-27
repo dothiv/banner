@@ -39,6 +39,7 @@ module.exports = function (grunt) {
                     'color-bg': '#fff',
                     'color-pinkbar': '#E00073',
                     'color-overlay': '#000000',
+                    'reshow-after': 60 * 30,
                     'develop': '0'
                 }
             },
@@ -64,6 +65,7 @@ module.exports = function (grunt) {
                 options: {
                     includesDir: 'tmp/js/',
                     globals: {
+                        'reshow-after': 0,
                         'develop': '1',
                         'config-url': grunt.option('config-url') || '//localhost/develop/demo.json',
                         'html-folder-url': grunt.option('html-folder-url') || '//localhost/build'

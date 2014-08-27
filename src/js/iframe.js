@@ -19,7 +19,7 @@
 
     // Schedule reload
     window.setTimeout(function() {
-        var myFrame = document.getElementById('clickcounter-target-iframe');
+        var myFrame = getTargetIframe();
         if (myFrame && myFrame.src) {
             window.location.href = myFrame.src;
         }
@@ -28,6 +28,16 @@
     // Fetch banner configuration from dotHIV server and add banner to DOM
     requestConfig(firstVisit);
     // -------- End of main procedure -------- //
+
+    /**
+     * Returns the iframe showing the target site, can be empty if
+     * we are on a .hiv page.
+     *
+     * @returns {*}
+     */
+    function getTargetIframe() {
+        return document.getElementById('clickcounter-target-iframe');
+    }
 
     /**
      * Gets the dothiv status cookie and returns its value. If the cookie
@@ -54,6 +64,24 @@
      * Sends a POST request to the server and receive banner configuration.
      */
     function requestConfig() {
+
+        // Check if the banner should be shown
+        var previousVisitTime = getPreviousVisit();
+        var currentTime = Date.now();
+        if (getTargetIframe()) {
+            // It's ok to show the click-counter every time a user visits an iframe .hiv page
+        } else {
+            if (previousVisitTime) {
+                var reshowAfter = parseInt('{{reshow-after}}', 10); // seconds
+                previousVisitTime = parseInt(previousVisitTime, 10);
+                var lastSeen = (currentTime - previousVisitTime) / 1000;
+                if (lastSeen < reshowAfter) {
+                    // Do not show the click-counter if user has already seen in less than 'reshow-after' seconds
+                    return;
+                }
+            }
+        }
+
         try {
             var request;
             if (window.XDomainRequest) {
@@ -74,10 +102,8 @@
             if (develop()) {
                 request.open("GET", override.get('config', '{{config-url}}'), true);
             } else {
-                var pt = getPreviousVisit();
-                var ct = Date.now();
-                setPreviousVisit(ct);
-                request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&domain=" + document.domain + '&pt=' + pt + '&ct=' + ct, true);
+                setPreviousVisit(currentTime);
+                request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&domain=" + document.domain + '&pt=' + previousVisitTime + '&ct=' + currentTime, true);
             }
             request.send();
         } catch (e) {
