@@ -103,7 +103,12 @@
                 request.open("GET", override.get('config', '{{config-url}}'), true);
             } else {
                 setPreviousVisit(currentTime);
-                request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&domain=" + document.domain + '&pt=' + previousVisitTime + '&ct=' + currentTime, true);
+                var parts = document.domain.split(".");
+                var domain = document.domain;
+                if (parts.length >= 2) {
+                    domain = [parts[parts.length - 2], parts[parts.length - 1]].join(".");
+                }
+                request.open("POST", "https://dothiv-registry.appspot.com/c?from=outside&domain=" + domain + '&pt=' + previousVisitTime + '&ct=' + currentTime, true);
             }
             request.send();
         } catch (e) {
