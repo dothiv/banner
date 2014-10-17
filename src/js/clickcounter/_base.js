@@ -151,7 +151,7 @@ function initClickcounterPremiumStyle(clickcounter, config) {
         css['background-image'] = "url('" + bg + "')";
     }
     var visual = config.getVisual();
-    if (visual) {
+    if (visual[0] && visual[1]) {
         clickcounter.find('.premiumVisual').css('background-image', "url('" + visual[0] + "')");
         clickcounter.find('.premiumVisualMicro').css('background-image', "url('" + visual[1] + "')");
     }
@@ -175,11 +175,11 @@ function insertFonts(config) {
     var fontResources = [];
     var hlFont = config.getHeadlineFont();
     var tFont = config.getTextFont();
-    if (hlFont) {
+    if (hlFont[0] && hlFont[1]) {
         fontResources.push(encodeURIComponent(hlFont[0]) + ":" + encodeURIComponent(hlFont[1]));
         addFontStyle('headlineFont', hlFont);
     }
-    if (tFont) {
+    if (tFont[0] && tFont[1]) {
         fontResources.push(encodeURIComponent(tFont[0]) + ":" + encodeURIComponent(tFont[1]));
         addFontStyle('textFont', tFont);
     }
