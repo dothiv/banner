@@ -27,6 +27,12 @@ You can then access `develop/test-page.html` to test the different versions.
 Internally, the click-counter project relies on resources placed in the following locations:
  - `clickcounter.js` must be available at `//dothiv-registry.appspot.com/static/clickcounter.min.js`
  - `clickcounter-*.html` files must be available at `https://dothiv-registry.appspot.com/static/clickcounter-*.html`
+ 
+### Premium configurator
+
+The development mode is used to display a preview of the click-counter on the premium configurator. It needs to be build with these options:
+
+    ./node_modules/grunt-cli/bin/grunt develop --config-url=config.json --html-folder-url=.
 
 ## Configuration
 
