@@ -191,12 +191,12 @@ function insertFonts(config) {
 
 var showClickCounter = function (config) {
     insertFonts(config);
+    $('body').css('display', 'block');
     var clickCounter = $('#clickcounter');
     initClickcounterData(clickCounter, config);
     initClickcounterPremiumStyle(clickCounter, config);
     var pinkbar = clickCounter.find('.pinkbar:first');
     var barWidth = initPinkBar(clickCounter, pinkbar, config);
-    $('body').css('display', 'block');
     // easeOutBack
     // easeOutElastic, 1000
     animateClickCounterEntry(clickCounter, 400, 'easeOutBack', function () {
