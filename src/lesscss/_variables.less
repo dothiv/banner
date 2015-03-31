@@ -4,20 +4,22 @@
 @leftright-width: {{leftright-width}}px;
 @shadow-size: {{shadow-size}}px;
 @animation-overflow: {{animation-overflow}}px;
-@pinkbar-height: {{pinkbar-height}}px;
-@pinkbar-margin: {{pinkbar-margin}}px;
-@icon-size: {{icon-size}}px;
+@icon-width: {{icon-size}}px;
+@icon-height: {{icon-size}}px * {{icon-aspect}};
+@logo-width: 45px;
+@logo-height: @logo-width;
 @headline-fontsize: {{headline-fontsize}}px;
 @text-fontsize: {{text-fontsize}}px;
+@margin: {{margin}}px;
 
 // Default values
-@color-pinkbar: {{color-pinkbar}};
 @color-font: {{color-font}};
 @color-bg: {{color-bg}};
 @color-overlay: {{color-overlay}};
-@color-pinkbar-alt: mix(@color-pinkbar, @color-bg, 20%);
+@color-link: {{color-link}};
 
 // Micro sizes
-@icon-size-micro: {{icon-size}}px / 2;
-@pinkbar-margin-micro: {{pinkbar-margin}}px / 2;
+@icon-width-micro: {{icon-size}}px / 2;
+@icon-height-micro: {{icon-size}}px / 2 * {{icon-aspect}};
+@margin-micro: {{margin}}px / 2;
 @headline-fontsize-micro: {{headline-fontsize-micro}}px;

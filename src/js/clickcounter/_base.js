@@ -93,34 +93,6 @@ ClickCounterConfig.prototype.getTextFont = function () {
 
 // /Config handing
 
-var animateBar = function (pinkbar, barWidth, config, completeFunc) {
-    var bar = pinkbar.find('.bar');
-    if (bar.length == 0) { // No bar to animate (possible in micro): wait 1,5secs
-        setTimeout(completeFunc, 1500);
-        return;
-    }
-    var targetWidth = barWidth * config.getPercent();
-    pinkbar.find('.inner').fadeIn(500).delay(1250).fadeOut(500, completeFunc);
-    bar.animate({width: targetWidth}, 750, 'easeOutQuint');
-    var money = pinkbar.find('.money:first');
-    if (money.width() + config.getPinkBarMargin() > targetWidth) {
-        money.addClass('right');
-        money.css({'color': config.getBarColor()});
-    }
-};
-
-function initPinkBar(clickcounter, pinkbar, config) {
-    if (config.isPremium()) {
-        pinkbar.css({'background-color': config.getBarBgColor(), 'color': config.getBgColor()});
-        pinkbar.find('.bar:first').css({'background-color': config.getBarColor()});
-    }
-    var barWidth = clickcounter.width() - (2 * config.getPinkBarMargin());
-    pinkbar.css({
-        width: barWidth
-    });
-    return barWidth;
-}
-
 /**
  * Updates the html to contain the values from the config.
  *
@@ -195,14 +167,12 @@ var showClickCounter = function (config) {
     var clickCounter = $('#clickcounter');
     initClickcounterData(clickCounter, config);
     initClickcounterPremiumStyle(clickCounter, config);
-    var pinkbar = clickCounter.find('.pinkbar:first');
-    var barWidth = initPinkBar(clickCounter, pinkbar, config);
     // easeOutBack
     // easeOutElastic, 1000
     animateClickCounterEntry(clickCounter, 400, 'easeOutBack', function () {
-        animateBar(pinkbar, barWidth, config, function () {
+        setTimeout(function() {
             animateClickCounterExit(clickCounter, 300, 'linear', close);
-        });
+        }, 1000);
     });
 };
 

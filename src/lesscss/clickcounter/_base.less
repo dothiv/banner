@@ -28,67 +28,42 @@ a {
 
 .ok {
   top: 0;
-  left: 0;
-  background: data-uri('../../img/green-tick@2x.png') no-repeat 0 0;
+  left: @margin / 2;
+  background: data-uri('../../img/ribbon-dots@2x.png') no-repeat 0 0;
   position: absolute;
   display: block;
-  width: @icon-size;
-  height: @icon-size;
+  width: @icon-width;
+  height: @icon-height;
 }
 
 .dothiv-icon {
-  top: 0;
+  top: @icon-height - @logo-height;
   right: 0;
   background: data-uri('../../img/logo.png') no-repeat 0 0;
   position: absolute;
   display: block;
-  height: @icon-size;
-  width: @icon-size;
+  height: @logo-height;
+  width: @logo-width;
 }
 
 .header {
-  margin: @pinkbar-margin @pinkbar-margin 0 @pinkbar-margin;
+  margin: @margin;
   position: relative;
-  min-height: @icon-size;
+  min-height: @icon-height;
 }
 .footer {
-  margin: 0 @pinkbar-margin 0 @pinkbar-margin;
+  margin: 0 @margin 0 @margin;
   position: relative;
 }
 p {
   font-size: @headline-fontsize;
-  line-height: @icon-size / 2;
-  margin-left: @icon-size + @pinkbar-margin;
-  padding-top: (@icon-size - (@icon-size / 2)) / 2;
+  margin-left: @icon-width + @margin;
 }
-
-.pinkbar {
-  background-color: @color-pinkbar-alt; // Overrideable
-  margin: @pinkbar-margin;
-  height: @pinkbar-height;
-  position: relative;
-  .inner {
-    display: none;
-  }
+p.info {
+  font-size: @text-fontsize;
 }
-.bar {
-  background-color: @color-pinkbar; // Overrideable
-  height: @pinkbar-height;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-.money {
-  color: @color-bg;
-  display: block;
-  line-height: @pinkbar-height;
-  position: absolute;
-  font-weight: bold; // Overrideable
-  font-size: @text-fontsize; // Overrideable
-  left: @pinkbar-margin / 2;
-  &.right {
-    color: @color-pinkbar;
-    left: auto;
-    right: @pinkbar-margin / 2;
-  }
+span.link {
+  text-decoration: underline;
+  color: @color-link;
+  white-space: nowrap;
 }

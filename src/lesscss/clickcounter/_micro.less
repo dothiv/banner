@@ -1,16 +1,19 @@
 .micro {
   .header {
-    margin: @pinkbar-margin-micro @pinkbar-margin-micro * 2 0 @pinkbar-margin-micro;
+    margin: @margin-micro @margin-micro * 2 0 @margin-micro;
   }
   .ok {
-    background: data-uri('../../img/green-tick.png') no-repeat 0 0;
-    width: @icon-size-micro;
-    height: @icon-size-micro;
+    background: data-uri('../../img/ribbon-dots.png') no-repeat 0 0;
+    width: @icon-width-micro;
+    height: @icon-height-micro;
+    left: 0;
+  }
+  .ok.premiumVisualMicro {
+    top: @margin;
   }
   p {
     font-size: @headline-fontsize-micro;
-    line-height: @icon-size-micro / 2;
-    margin-left: @icon-size-micro + @pinkbar-margin-micro;
-    padding-top: (@icon-size-micro - (@icon-size-micro / 2)) / 2;
+    margin-left: @icon-width-micro + @margin-micro;
+    padding-top: @margin;
   }
 }
