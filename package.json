@@ -14,6 +14,7 @@
     "grunt-contrib-cssmin": "^0.10.0",
     "grunt-contrib-less": "^0.11.4",
     "grunt-contrib-uglify": "^0.5.1",
-    "grunt-include-replace": "^2.0.0"
+    "grunt-include-replace": "^2.0.0",
+    "node-static": "^0.7.7"
   }
 }

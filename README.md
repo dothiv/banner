@@ -25,6 +25,11 @@ You can then access `develop/test-page.html` to test the different versions.
 If you are developing on a host other than `localhost`, this is the command for you (and for me to remember):
 
     ./node_modules/grunt-cli/bin/grunt develop --config-url=http://127.0.0.1:8081/develop/demo.json --html-folder-url=http://127.0.0.1:8081/build/
+    
+You can use node-static to run the development server:
+
+    ./node_modules/node-static/bin/cli.js ./
+    # Now open http://127.0.0.1:8080/develop/test-page.html in your browser
 
 ## Deployment
 
