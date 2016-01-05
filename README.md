@@ -2,8 +2,6 @@
 
 Source code for the overlays providing visual feedback to visitors of .HIV domains.
 
-See http://clickcounter.hiv/ for a demo.
-
 ## Installation
 
 After cloning the repo, `npm install` in the repo's root directory installs all required *node* dependencies.
