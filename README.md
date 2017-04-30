@@ -1,5 +1,7 @@
 # dotHIV Click-Counters
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/dothiv/clickcounter.svg)](https://greenkeeper.io/)
+
 Source code for the overlays providing visual feedback to visitors of .HIV domains.
 
 ## Installation
